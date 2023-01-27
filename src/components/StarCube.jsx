@@ -6,9 +6,15 @@ import React, { useRef } from "react";
 import { useGLTF } from "@react-three/drei";
 
 export function Model(props) {
-  const { nodes, materials } = useGLTF("/models/Star_Web_3.glb");
+  const { nodes, materials } = useGLTF("/models/Star_Web_3cd.glb", true);
   return (
     <group {...props} dispose={null}>
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={nodes.Wall.geometry}
+        material={materials.Wall}
+      />
       <mesh
         castShadow
         receiveShadow
@@ -16,6 +22,105 @@ export function Model(props) {
         material={materials.Stage}
         position={[0, 0.42, -0.02]}
       />
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={nodes.Elements.geometry}
+        material={materials.Elements}
+        position={[-8.34, 0.02, -1.61]}
+        scale={0.64}
+      />
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={nodes.Floor.geometry}
+        material={materials.Floor}
+        position={[0, -0.01, 0]}
+      />
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={nodes.Star_Logo_4.geometry}
+        material={materials.Star_Logo}
+        position={[-0.11, 2, 0]}
+      >
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.Star_Art_Gallery.geometry}
+          material={materials.Star_Art_Gallery}
+          position={[0.42, 0.28, -0.92]}
+          onClick={props?.star_art_gallery?.onClick}
+        />
+      </mesh>
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={nodes.Star_Logo_5.geometry}
+        material={materials.Star_Logo}
+        position={[-0.11, 2, 0]}
+      >
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.Star_Office.geometry}
+          material={materials.Star_Office}
+          position={[1.17, -0.4, 0.27]}
+          rotation={[Math.PI / 2, 0, -1.63]}
+          scale={0.26}
+          onClick={props?.star_office.onClick}
+        />
+      </mesh>
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={nodes.Star_Logo_1.geometry}
+        material={materials.Star_Logo}
+        position={[-0.11, 2, 0]}
+      >
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.Star_Arena.geometry}
+          material={materials["Star Arena"]}
+          position={[-0.03, -0.1, 1.27]}
+          onClick={props.star_arena.onClick}
+        />
+      </mesh>
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={nodes.Star_Logo_2.geometry}
+        material={materials.Star_Logo}
+        position={[-0.11, 2, 0]}
+      >
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.Star_Stadium.geometry}
+          material={materials.Star_Stadium}
+          position={[-0.9, 0.48, 0.37]}
+          onClick={props?.star_stadium?.onClick}
+        />
+      </mesh>
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={nodes.Star_Logo_3.geometry}
+        material={materials.Star_Logo}
+        position={[-0.11, 2, 0]}
+      >
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.Star_Jewerly_Store.geometry}
+          material={materials.Star_Jewerly_Store}
+          position={[-0.65, -0.41, -1.02]}
+          onClick={props?.star_jewellery.onClick}
+          onPointerOver={props.star_jewellery.onPointerOver}
+          onPointerOut={props.star_jewellery.onPointerOut}
+        />
+      </mesh>
       <mesh
         castShadow
         receiveShadow
@@ -51,106 +156,8 @@ export function Model(props) {
         material={materials.Star}
         position={[0, 2.47, 0.27]}
       />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.Wall.geometry}
-        material={materials.Wall}
-      />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.Elements.geometry}
-        material={materials.Elements}
-        position={[-8.34, 0.02, -1.61]}
-        scale={0.64}
-      />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.Star_Logo_4.geometry}
-        material={materials.Star_Logo}
-        position={[-0.11, 2, 0]}
-      >
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Star_Art_Gallery.geometry}
-          material={materials.Star_Art_Gallery}
-          position={[0.42, 0.28, -0.92]}
-        />
-      </mesh>
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.Star_Logo_5.geometry}
-        material={materials.Star_Logo}
-        position={[-0.11, 2, 0]}
-      >
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Star_Office.geometry}
-          material={materials.Star_Office}
-          position={[1.17, -0.4, 0.27]}
-          rotation={[Math.PI / 2, 0, -1.63]}
-          scale={0.26}
-        />
-      </mesh>
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.Star_Logo_1.geometry}
-        material={materials.Star_Logo}
-        position={[-0.11, 2, 0]}
-      >
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Star_Arena.geometry}
-          material={materials["Star Arena"]}
-          position={[-0.03, -0.1, 1.27]}
-        />
-      </mesh>
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.Star_Logo_2.geometry}
-        material={materials.Star_Logo}
-        position={[-0.11, 2, 0]}
-      >
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Star_Stadium.geometry}
-          material={materials.Star_Stadium}
-          position={[-0.9, 0.48, 0.37]}
-        />
-      </mesh>
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.Star_Logo_3.geometry}
-        material={materials.Star_Logo}
-        position={[-0.11, 2, 0]}
-      >
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Star_Jewerly_Store.geometry}
-          material={materials.Star_Jewerly_Store}
-          position={[-0.65, -0.41, -1.02]}
-        />
-      </mesh>
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.Floor.geometry}
-        material={materials.Floor}
-        position={[0, -0.01, 0]}
-      />
     </group>
   );
 }
 
-useGLTF.preload("/models/Star_Web_3.glb");
+useGLTF.preload("/models/Star_Web_3cd.glb",true);

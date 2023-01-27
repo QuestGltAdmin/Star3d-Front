@@ -4,11 +4,13 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls, Stars, useCubeTexture } from "@react-three/drei";
 import * as THREE from "three";
 import MiniApp, { Lights } from "./components/Lights";
-import { Model as StarCube1 } from "./components/StarCube1";
-import { Model as StarCube2 } from "./components/StarCube2";
-import { Model as StarDom1 } from "./components/StarDom1";
-import { Model as StarDom2 } from "./components/StarDom2";
-import Buttons from "./components/arena/Buttons";
+import { Model as StarCube } from "./components/StarCube";
+import Buttons from "./components/star_stage/Buttons";
+import StarJewelleryDetail from "./components/star_jewellery/StarJewelleryDetail";
+import StarArtGalleryDetail from "./components/star_art_gallery/StarArtGalleryDetail";
+import StarStadiumDetail from "./components/star_stadium/StarStadiumDetail";
+import StarOfficeDetail from "./components/star_office/StarOfficeDetail";
+import StarArenaDetail from "./components/star_arena/StarArenaDetail";
 
 function Star(props) {
   // This reference gives us direct access to the THREE.Mesh object
@@ -60,6 +62,7 @@ function StarEvent(props) {
 }
 
 export default function App() {
+  const [hoveredStar, hoverStar] = useState("DEFAULT");
   let texture_path = "textures/cubemaps/";
   const envMap = useCubeTexture(
     ["px.png", "nx.png", "py.png", "ny.png", "pz.png", "nz.png"],
@@ -158,10 +161,18 @@ export default function App() {
             </span>
           </div>
         </div>
+        {/* Stars Info */}
+        <div className="absolute z-10 p-3 right-28 top-48">
+          {hoveredStar==="JEWELLERY"&&<StarJewelleryDetail/>}
+          {hoveredStar==="GALLERY"&&<StarArtGalleryDetail/>}
+          {hoveredStar==="STADIUM"&&<StarStadiumDetail/>}
+          {hoveredStar==="OFFICE"&&<StarOfficeDetail/>}
+          {hoveredStar==="ARENA"&&<StarArenaDetail/>}
+        </div>
         <Canvas
           className=""
           camera={{
-            position: [6, 1, 1],
+            position: [8, 0, 0],
             fov: 75,
             near: 0.1,
             far: 100,
@@ -171,24 +182,34 @@ export default function App() {
           <ambientLight intensity={0.5} />
           {/* <directionalLight castShadow={true} /> */}
           <spotLight
-            map={envMap}
+            // map={envMap}
             position={[1, 10, 1]}
             angle={0.15}
             penumbra={1}
           />
           {/* <Lights/> */}
-          <StarCube1 />
-          {/* <StarCube2/> */}
+          <StarCube
+            star_art_gallery={{onClick:()=>console.log("star gallery")}}
+            star_office={{onClick:()=>console.log("star office")}}
+            star_arena={{onClick:()=>console.log("star arena")}}
+            star_stadium={{onClick:()=>console.log("star stadium")}}
+            star_jewellery={{onClick:()=>console.log("star jewelry"),onPointerOver:()=>hoverStar("JEWELLERY"),onPointerOut:()=>hoverStar("DEFAULT")}}
+           />
           <pointLight position={[1, 1, 1]} />
           {/* <Star position={[4, 1, 0]} /> */}
           {/* <StarEvent position={[-1.2, 0, 0]} /> */}
           {/* <StarEvent position={[1.2, 0, 0]} /> */}
           <OrbitControls
-            minDistance={5}
+            minDistance={6}
             maxDistance={8}
+            autoRotate={true}
+            autoRotateSpeed={0.5}
+            enableDamping={true}
+            dampingFactor={0.05}
+            
             // minAzimuthAngle={-Math.PI}
             // maxAzimuthAngle={Math.PI}
-            minPolarAngle={Math.PI - Math.PI / 1.5}
+            minPolarAngle={Math.PI - Math.PI / 1.6}
             maxPolarAngle={Math.PI - Math.PI / 1.6}
           />
         </Canvas>
