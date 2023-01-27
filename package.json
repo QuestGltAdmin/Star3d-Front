@@ -13,9 +13,10 @@
     "three": "^0.148.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "CI=true react-scripts build",
-    "test": "react-scripts test",
+    "start": "cross-env PORT=3000 react-scripts start",
+    "dev": "cross-env PORT=3001 react-scripts start",
+    "build": "cross-env CI= GENERATE_SOURCEMAP=false react-scripts build",
+    "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -37,6 +38,7 @@
     ]
   },
   "devDependencies": {
+    "cross-env": "^7.0.3",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
