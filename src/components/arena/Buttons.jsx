@@ -11,6 +11,8 @@ export default function Buttons(props) {
       return <LayerButton {...props} />;
     case "SLIDER":
       return <SliderButton {...props} />;
+      default:
+        return <></>
   }
 }
 

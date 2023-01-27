@@ -84,7 +84,7 @@ export default function App() {
         <Buttons name="music class" type="MUSIC"/>
         </h1>
       </div>
-      <div className=" h-screen relative max-w-full">
+      <div className="relative h-screen max-w-full ">
         <button
           id="music_button"
           class="absolute w-10 z-10 h-10 border-2 border-orange-100 rounded-full left-5 top-20 hover:border-orange-200"
@@ -159,7 +159,6 @@ export default function App() {
           </div>
         </div>
         <Canvas
-          
           className=""
           camera={{
             position: [6, 1, 1],
