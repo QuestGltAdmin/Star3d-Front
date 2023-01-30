@@ -88,7 +88,7 @@ export default function App() {
   const [parentVal, setParentVal] = useState(50);
 
   const sliderValueChanged = useCallback(val => {
-    console.log("NEW VALUE", val);
+    // console.log("NEW VALUE", val);
     setParentVal(val);
   });
 

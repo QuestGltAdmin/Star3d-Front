@@ -1,6 +1,6 @@
 import { OrbitControls } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import { Model as StarCube } from "../StarCube";
 
 export default function StarStage({ onStarHovered, onStarClicked, sliderVal, ...starStageProps }) {
@@ -29,9 +29,11 @@ export default function StarStage({ onStarHovered, onStarClicked, sliderVal, ...
       setRotate({speed:sliderVal/20,reverse:true})
     }
   },[sliderVal])
-  console.log("model");
+  // console.log("model");
   return (
     <>
+    <Suspense fallback={<></>}>
+
       <Canvas
         className=""
         camera={{
@@ -80,6 +82,7 @@ export default function StarStage({ onStarHovered, onStarClicked, sliderVal, ...
           maxPolarAngle={Math.PI - Math.PI / 1.6}
         />
       </Canvas>
+    </Suspense>
     </>
   );
 }

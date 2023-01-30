@@ -131,9 +131,9 @@ const LayerButton = (props) => {
             fill="none"
             className="text-white"
             stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           >
             <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
             <polyline points="2 17 12 22 22 17"></polyline>
@@ -147,10 +147,10 @@ const LayerButton = (props) => {
             props.className
           )}
         >
-          <div class="flex flex-col justify-between">
+          <div className="flex flex-col justify-between">
             <button
               id="layers_menu_close"
-              class="flex justify-center self-center h-5 w-5 py-2 text-white cursor-pointer hover:text-orange-200"
+              className="flex justify-center self-center h-5 w-5 py-2 text-white cursor-pointer hover:text-orange-200"
               onClick={() => click(false)}
             >
               <svg
@@ -161,16 +161,16 @@ const LayerButton = (props) => {
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               >
                 <polyline points="6 9 12 15 18 9"></polyline>
               </svg>
             </button>
             <Link to={"/star-arena"}>
 
-            <div class="flex items-center justify-between p-3 text-white cursor-pointer gap-x-3 hover:text-orange-200 hover:underline">
+            <div className="flex items-center justify-between p-3 text-white cursor-pointer gap-x-3 hover:text-orange-200 hover:underline">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -178,23 +178,23 @@ const LayerButton = (props) => {
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               >
                 <path d="m14 5-3 3 2 7 8-8-7-2Z"></path>
                 <path d="m14 5-3 3-3-3 3-3 3 3Z"></path>
                 <path d="M9.5 6.5 4 12l3 6"></path>
                 <path d="M3 22v-2c0-1.1.9-2 2-2h4a2 2 0 0 1 2 2v2H3Z"></path>
               </svg>
-              <h2 class="text-xl font-normal">STAR ARENA</h2>
-              {/* <p class="text-xl font-normal">-1</p> */}
+              <h2 className="text-xl font-normal">STAR ARENA</h2>
+              {/* <p className="text-xl font-normal">-1</p> */}
             </div>
             </Link>
 
             <Link to={"/star-stadium"}>
 
-            <div class="flex items-center justify-between p-3 text-white cursor-pointer gap-x-3 hover:text-orange-200 hover:underline">
+            <div className="flex items-center justify-between p-3 text-white cursor-pointer gap-x-3 hover:text-orange-200 hover:underline">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -202,9 +202,9 @@ const LayerButton = (props) => {
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               >
                 <path d="m14 5-3 3 2 7 8-8-7-2Z"></path>
                 <path d="m14 5-3 3-3-3 3-3 3 3Z"></path>
@@ -212,14 +212,14 @@ const LayerButton = (props) => {
                 <path d="M3 22v-2c0-1.1.9-2 2-2h4a2 2 0 0 1 2 2v2H3Z"></path>
               </svg>
 
-              <h2 class="text-xl font-normal">STAR STADIUM</h2>
-              {/* <p class="text-xl font-normal">0</p> */}
+              <h2 className="text-xl font-normal">STAR STADIUM</h2>
+              {/* <p className="text-xl font-normal">0</p> */}
             </div>
             </Link>
 
             <Link to={"/star-jewellery"}>
 
-            <div class="flex items-center justify-between p-3 text-white cursor-pointer gap-x-3 hover:text-orange-200 hover:underline">
+            <div className="flex items-center justify-between p-3 text-white cursor-pointer gap-x-3 hover:text-orange-200 hover:underline">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -227,9 +227,9 @@ const LayerButton = (props) => {
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               >
                 <path d="m14 5-3 3 2 7 8-8-7-2Z"></path>
                 <path d="m14 5-3 3-3-3 3-3 3 3Z"></path>
@@ -237,14 +237,14 @@ const LayerButton = (props) => {
                 <path d="M3 22v-2c0-1.1.9-2 2-2h4a2 2 0 0 1 2 2v2H3Z"></path>
               </svg>
 
-              <h2 class="text-xl font-normal">STAR JEWELLERY</h2>
-              {/* <p class="text-xl font-normal">1</p> */}
+              <h2 className="text-xl font-normal">STAR JEWELLERY</h2>
+              {/* <p className="text-xl font-normal">1</p> */}
             </div>
             </Link>
 
             <Link to={"/star-office"}>
 
-            <div class="flex items-center justify-between p-3 text-white cursor-pointer gap-x-3 hover:text-orange-200 hover:underline">
+            <div className="flex items-center justify-between p-3 text-white cursor-pointer gap-x-3 hover:text-orange-200 hover:underline">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -252,9 +252,9 @@ const LayerButton = (props) => {
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               >
                 <path d="m14 5-3 3 2 7 8-8-7-2Z"></path>
                 <path d="m14 5-3 3-3-3 3-3 3 3Z"></path>
@@ -262,14 +262,14 @@ const LayerButton = (props) => {
                 <path d="M3 22v-2c0-1.1.9-2 2-2h4a2 2 0 0 1 2 2v2H3Z"></path>
               </svg>
 
-              <h2 class="text-xl font-normal">STAR OFFICE</h2>
-              {/* <p class="text-xl font-normal">2</p> */}
+              <h2 className="text-xl font-normal">STAR OFFICE</h2>
+              {/* <p className="text-xl font-normal">2</p> */}
             </div>
             </Link>
 
             <Link to={"/star-art-gallery"}>
 
-            <div class="flex items-center justify-between p-3 text-white cursor-pointer gap-x-3 hover:text-orange-200 hover:underline">
+            <div className="flex items-center justify-between p-3 text-white cursor-pointer gap-x-3 hover:text-orange-200 hover:underline">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -277,9 +277,9 @@ const LayerButton = (props) => {
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               >
                 <path d="m14 5-3 3 2 7 8-8-7-2Z"></path>
                 <path d="m14 5-3 3-3-3 3-3 3 3Z"></path>
@@ -287,8 +287,8 @@ const LayerButton = (props) => {
                 <path d="M3 22v-2c0-1.1.9-2 2-2h4a2 2 0 0 1 2 2v2H3Z"></path>
               </svg>
 
-              <h2 class="text-xl font-normal">STAR ART GALLERY</h2>
-              {/* <p class="text-xl font-normal">3</p> */}
+              <h2 className="text-xl font-normal">STAR ART GALLERY</h2>
+              {/* <p className="text-xl font-normal">3</p> */}
             </div>
             </Link>
           </div>
@@ -323,13 +323,13 @@ const SliderButton = memo(({ className, label, onChange, value, ...sliderProps }
 
   return (
     <div
-      class={cn(
+      className={cn(
         "z-10 p-3 border-2 border-orange-100 rounded-full hover:border-orange-200",
         className
       )}
     >
-      <div class="flex items-center justify-between gap-x-3">
-        <span class="">
+      <div className="flex items-center justify-between gap-x-3">
+        <span className="">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -352,7 +352,6 @@ const SliderButton = memo(({ className, label, onChange, value, ...sliderProps }
           value={sliderVal}
           onChange={changeCallback}
           onClick={()=>setMouseState("click")}
-          onM
           onMouseUp={()=>setMouseState("up")}
           onMouseDown={()=>setMouseState("down")}
           // className=" bg-orange-100 rounded-lg cursor-pointer dark:bg-gray-200"
@@ -360,7 +359,7 @@ const SliderButton = memo(({ className, label, onChange, value, ...sliderProps }
           {...sliderProps}
         />
 
-        <span class="">
+        <span className="">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
