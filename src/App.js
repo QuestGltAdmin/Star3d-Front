@@ -12,6 +12,12 @@ import StarStadiumDetail from "./components/star_stadium/StarStadiumDetail";
 import StarOfficeDetail from "./components/star_office/StarOfficeDetail";
 import StarArenaDetail from "./components/star_arena/StarArenaDetail";
 import StarStage from "./components/star_stage";
+import { Link, Route, Routes } from "react-router-dom";
+import StarStadium from "./components/star_stadium";
+import StarArtGallery from "./components/star_art_gallery";
+import StarOffice from "./components/star_office";
+import StarArena from "./components/star_arena";
+import StarJewellery from "./components/star_jewellery";
 
 function Star(props) {
   // This reference gives us direct access to the THREE.Mesh object
@@ -102,9 +108,12 @@ export default function App() {
     <div className="flex flex-col overflow-hidden bg-black">
       {/* <MiniApp /> */}
       <div className="fixed z-10 flex justify-center w-full py-3 bg-black">
+      <Link to={"/"}>
+
         <h1 className="z-10 text-3xl font-bold text-center text-white underline">
           Star Arena
         </h1>
+      </Link>
       </div>
       <div className="relative h-screen max-w-full ">
         {/* Music Button */}
@@ -128,7 +137,16 @@ export default function App() {
           {hoveredStar==="OFFICE"&&<StarOfficeDetail/>}
           {hoveredStar==="ARENA"&&<StarArenaDetail/>}
         </div>
-        <StarStage sliderVal={parentVal} />
+        {/* <StarStage sliderVal={parentVal} /> */}
+        <Routes>
+          <Route path="/" element={<StarStage sliderVal={parentVal} />}/>
+          <Route path="/star-stadium" element={<StarStadium/>} />
+          <Route path="/star-art-gallery" element={<StarArtGallery/>}/>
+          <Route path="/star-office" element={<StarOffice/>}/>
+          <Route path="/star-arena" element={<StarArena/>}/>
+          <Route path="/star-jewellery" element={<StarJewellery/>}/>
+        </Routes>
+
       </div>
     </div>
   );

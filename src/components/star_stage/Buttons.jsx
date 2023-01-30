@@ -1,4 +1,5 @@
 import React, { memo, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { cn } from "../../utilities/classname";
 
 export default function Buttons(props) {
@@ -167,6 +168,8 @@ const LayerButton = (props) => {
                 <polyline points="6 9 12 15 18 9"></polyline>
               </svg>
             </button>
+            <Link to={"/star-arena"}>
+
             <div class="flex items-center justify-between p-3 text-white cursor-pointer gap-x-3 hover:text-orange-200 hover:underline">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -187,6 +190,9 @@ const LayerButton = (props) => {
               <h2 class="text-xl font-normal">STAR ARENA</h2>
               {/* <p class="text-xl font-normal">-1</p> */}
             </div>
+            </Link>
+
+            <Link to={"/star-stadium"}>
 
             <div class="flex items-center justify-between p-3 text-white cursor-pointer gap-x-3 hover:text-orange-200 hover:underline">
               <svg
@@ -209,6 +215,10 @@ const LayerButton = (props) => {
               <h2 class="text-xl font-normal">STAR STADIUM</h2>
               {/* <p class="text-xl font-normal">0</p> */}
             </div>
+            </Link>
+
+            <Link to={"/star-jewellery"}>
+
             <div class="flex items-center justify-between p-3 text-white cursor-pointer gap-x-3 hover:text-orange-200 hover:underline">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -230,6 +240,10 @@ const LayerButton = (props) => {
               <h2 class="text-xl font-normal">STAR JEWELLERY</h2>
               {/* <p class="text-xl font-normal">1</p> */}
             </div>
+            </Link>
+
+            <Link to={"/star-office"}>
+
             <div class="flex items-center justify-between p-3 text-white cursor-pointer gap-x-3 hover:text-orange-200 hover:underline">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -251,6 +265,9 @@ const LayerButton = (props) => {
               <h2 class="text-xl font-normal">STAR OFFICE</h2>
               {/* <p class="text-xl font-normal">2</p> */}
             </div>
+            </Link>
+
+            <Link to={"/star-art-gallery"}>
 
             <div class="flex items-center justify-between p-3 text-white cursor-pointer gap-x-3 hover:text-orange-200 hover:underline">
               <svg
@@ -273,6 +290,7 @@ const LayerButton = (props) => {
               <h2 class="text-xl font-normal">STAR ART GALLERY</h2>
               {/* <p class="text-xl font-normal">3</p> */}
             </div>
+            </Link>
           </div>
         </div>
       )}
