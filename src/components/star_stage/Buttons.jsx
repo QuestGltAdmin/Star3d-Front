@@ -1,8 +1,8 @@
-import React from "react";
+import React, { memo, useEffect, useState } from "react";
+import { cn } from "../../utilities/classname";
 
 export default function Buttons(props) {
- 
-  switch (props.type) {
+  switch (props.component) {
     case "MUSIC":
       return <MusicButton {...props} />;
     case "HELP":
@@ -11,22 +11,29 @@ export default function Buttons(props) {
       return <LayerButton {...props} />;
     case "SLIDER":
       return <SliderButton {...props} />;
-      default:
-        return <></>
+    default:
+      return <></>;
   }
 }
 
 const MusicButton = (props) => {
+  const [clicked, click] = useState(false);
   return (
-    <div>
-      {props.status ? (
+    <button
+      className={cn(
+        "w-10 z-10 h-10 p-1 border-2 border-orange-100 rounded-full hover:border-orange-200",
+        props.className
+      )}
+      onClick={() => click(!clicked)}
+    >
+      {!clicked ? (
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"
           strokeWidth={1.5}
           stroke="currentColor"
-          className="w-6 h-6"
+          className=" text-white "
         >
           <path
             strokeLinecap="round"
@@ -41,7 +48,7 @@ const MusicButton = (props) => {
           viewBox="0 0 24 24"
           strokeWidth={1.5}
           stroke="currentColor"
-          className="w-6 h-6"
+          className=" text-white"
         >
           <path
             strokeLinecap="round"
@@ -50,26 +57,35 @@ const MusicButton = (props) => {
           />
         </svg>
       )}
-    </div>
+    </button>
   );
 };
 
 const HelpButton = (props) => {
+  const [clicked, click] = useState(false);
+
   return (
-    <div>
-      {props.status ? (
+    <button
+      className={cn(
+        "w-10 z-10 h-10 border-2 border-orange-100 rounded-full hover:border-orange-200",
+        props.className
+      )}
+      onClick={() => click(!clicked)}
+    >
+      {!clicked ? (
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"
           strokeWidth={1.5}
           stroke="currentColor"
-          className="w-6 h-6"
+          className="text-white"
         >
           <path
             strokeLinecap="round"
             strokeLinejoin="round"
-            d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z"
+            d="M 9.879 7.519 c 1.171 -1.025 3.071 -1.025 4.242 0 c 1.172 1.025 1.172 2.687 0 3.712 c -0.203 0.179 -0.43 0.326 -0.67 0.442 c -0.745 0.361 -1.45 0.999 -1.45 1.827 v 0.75 M 12 17 z m 0 0 z"
+            // d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z"
           />
         </svg>
       ) : (
@@ -79,23 +95,270 @@ const HelpButton = (props) => {
           viewBox="0 0 24 24"
           strokeWidth={1.5}
           stroke="currentColor"
-          className="w-6 h-6"
+          className="text-white"
         >
           <path
             strokeLinecap="round"
             strokeLinejoin="round"
-            d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+            d="M 9.75 9.75 l 4.5 4.5 m 0 -4.5 l -4.5 4.5 M 12 12 z"
+            // d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
           />
         </svg>
       )}
-    </div>
+    </button>
   );
 };
 
 const LayerButton = (props) => {
-  return <div>{props.name}</div>;
+  const [clicked, click] = useState(false);
+
+  return (
+    <>
+      {!clicked ? (
+        <button
+          className={cn(
+            " z-10 border-2 p-2 w-12 h-12 rounded-full border-orange-100  hover:border-orange-200",
+            props.className
+          )}
+          onClick={() => click(true)}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            // width="24"
+            // height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            className="text-white"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+            <polyline points="2 17 12 22 22 17"></polyline>
+            <polyline points="2 12 12 17 22 12"></polyline>
+          </svg>
+        </button>
+      ) : (
+        <div
+          className={cn(
+            "z-10 border-2 border-orange-100  hover:border-orange-200 rounded-tr-3xl rounded-bl-3xl",
+            props.className
+          )}
+        >
+          <div class="flex flex-col justify-between">
+            <button
+              id="layers_menu_close"
+              class="flex justify-center self-center h-5 w-5 py-2 text-white cursor-pointer hover:text-orange-200"
+              onClick={() => click(false)}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                // width="24"
+                // height="24"
+                className="text-white"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </button>
+            <div class="flex items-center justify-between p-3 text-white cursor-pointer gap-x-3 hover:text-orange-200 hover:underline">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="m14 5-3 3 2 7 8-8-7-2Z"></path>
+                <path d="m14 5-3 3-3-3 3-3 3 3Z"></path>
+                <path d="M9.5 6.5 4 12l3 6"></path>
+                <path d="M3 22v-2c0-1.1.9-2 2-2h4a2 2 0 0 1 2 2v2H3Z"></path>
+              </svg>
+              <h2 class="text-xl font-normal">STAR ARENA</h2>
+              {/* <p class="text-xl font-normal">-1</p> */}
+            </div>
+
+            <div class="flex items-center justify-between p-3 text-white cursor-pointer gap-x-3 hover:text-orange-200 hover:underline">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="m14 5-3 3 2 7 8-8-7-2Z"></path>
+                <path d="m14 5-3 3-3-3 3-3 3 3Z"></path>
+                <path d="M9.5 6.5 4 12l3 6"></path>
+                <path d="M3 22v-2c0-1.1.9-2 2-2h4a2 2 0 0 1 2 2v2H3Z"></path>
+              </svg>
+
+              <h2 class="text-xl font-normal">STAR STADIUM</h2>
+              {/* <p class="text-xl font-normal">0</p> */}
+            </div>
+            <div class="flex items-center justify-between p-3 text-white cursor-pointer gap-x-3 hover:text-orange-200 hover:underline">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="m14 5-3 3 2 7 8-8-7-2Z"></path>
+                <path d="m14 5-3 3-3-3 3-3 3 3Z"></path>
+                <path d="M9.5 6.5 4 12l3 6"></path>
+                <path d="M3 22v-2c0-1.1.9-2 2-2h4a2 2 0 0 1 2 2v2H3Z"></path>
+              </svg>
+
+              <h2 class="text-xl font-normal">STAR JEWELLERY</h2>
+              {/* <p class="text-xl font-normal">1</p> */}
+            </div>
+            <div class="flex items-center justify-between p-3 text-white cursor-pointer gap-x-3 hover:text-orange-200 hover:underline">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="m14 5-3 3 2 7 8-8-7-2Z"></path>
+                <path d="m14 5-3 3-3-3 3-3 3 3Z"></path>
+                <path d="M9.5 6.5 4 12l3 6"></path>
+                <path d="M3 22v-2c0-1.1.9-2 2-2h4a2 2 0 0 1 2 2v2H3Z"></path>
+              </svg>
+
+              <h2 class="text-xl font-normal">STAR OFFICE</h2>
+              {/* <p class="text-xl font-normal">2</p> */}
+            </div>
+
+            <div class="flex items-center justify-between p-3 text-white cursor-pointer gap-x-3 hover:text-orange-200 hover:underline">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="m14 5-3 3 2 7 8-8-7-2Z"></path>
+                <path d="m14 5-3 3-3-3 3-3 3 3Z"></path>
+                <path d="M9.5 6.5 4 12l3 6"></path>
+                <path d="M3 22v-2c0-1.1.9-2 2-2h4a2 2 0 0 1 2 2v2H3Z"></path>
+              </svg>
+
+              <h2 class="text-xl font-normal">STAR ART GALLERY</h2>
+              {/* <p class="text-xl font-normal">3</p> */}
+            </div>
+          </div>
+        </div>
+      )}
+    </>
+  );
 };
 
-const SliderButton = (props) => {
-  return <div>{props.name}</div>;
-};
+const SliderButton = memo(({ className, label, onChange, value, ...sliderProps }) => {
+  const [sliderVal, setSliderVal] = useState(50);
+    const [mouseState, setMouseState] = useState(null);
+
+    // useEffect(() => {
+    //   setSliderVal(value);
+    // }, [value]);
+
+    const changeCallback = e => {
+      setSliderVal(e.target.value);
+      onChange(sliderVal);
+    };
+
+    useEffect(() => {
+      onChange(50);
+      setSliderVal(50);
+      // if (mouseState === "up") {
+      //   onChange(50);
+      //   setSliderVal(50);
+      // }
+    }, [mouseState]);
+
+
+  return (
+    <div
+      class={cn(
+        "z-10 p-3 border-2 border-orange-100 rounded-full hover:border-orange-200",
+        className
+      )}
+    >
+      <div class="flex items-center justify-between gap-x-3">
+        <span class="">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            className="text-white"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+        </span>
+
+        <input
+          id="range_slider"
+          type="range"
+          value={sliderVal}
+          onChange={changeCallback}
+          onClick={()=>setMouseState("click")}
+          onM
+          onMouseUp={()=>setMouseState("up")}
+          onMouseDown={()=>setMouseState("down")}
+          // className=" bg-orange-100 rounded-lg cursor-pointer dark:bg-gray-200"
+          className="slider w-24 h-[1px] bg-orange-100 rounded-lg appearance-none cursor-pointer dark:bg-gray-200"
+          {...sliderProps}
+        />
+
+        <span class="">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            className="text-white"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </span>
+      </div>
+    </div>
+  );
+});

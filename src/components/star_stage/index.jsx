@@ -1,0 +1,85 @@
+import { OrbitControls } from "@react-three/drei";
+import { Canvas } from "@react-three/fiber";
+import React, { useEffect, useState } from "react";
+import { Model as StarCube } from "../StarCube";
+
+export default function StarStage({ onStarHovered, onStarClicked, sliderVal, ...starStageProps }) {
+  // Hold state for hovered and clicked events
+  const [hovered, hover] = useState(false);
+  const [clicked, click] = useState(false);
+  const [rotate, setRotate] = useState({speed:0.5,reverse:false})
+
+  useEffect(() => {
+    if(onStarHovered){
+      onStarHovered(hovered)
+    };
+  }, [hovered]);
+
+  useEffect(() => {
+    if(onStarClicked){
+      onStarClicked(clicked)
+    };
+  }, [clicked]);
+
+  useEffect(()=>{
+    if(sliderVal>50){
+      setRotate({speed:sliderVal/10,reverse:false})
+    }
+    if(sliderVal<50){
+      setRotate({speed:sliderVal/20,reverse:true})
+    }
+  },[sliderVal])
+  console.log("model");
+  return (
+    <>
+      <Canvas
+        className=""
+        camera={{
+          position: [8, 0, 0],
+          fov: 75,
+          near: 0.1,
+          far: 100,
+        }}
+      >
+        {/* <perspectiveCamera position={[2,3,4]} /> */}
+        <ambientLight intensity={0.5} />
+        {/* <directionalLight castShadow={true} /> */}
+        <spotLight
+          // map={envMap}
+          position={[1, 10, 1]}
+          angle={0.15}
+          penumbra={1}
+        />
+        {/* <Lights/> */}
+        <StarCube
+          star_art_gallery={{ onClick: () => console.log("star gallery") }}
+          star_office={{ onClick: () => console.log("star office") }}
+          star_arena={{ onClick: () => console.log("star arena") }}
+          star_stadium={{ onClick: () => console.log("star stadium") }}
+          star_jewellery={{
+            onClick: () => console.log("star jewelry"),
+            onPointerOver: () => hover("JEWELLERY"),
+            onPointerOut: () => hover("DEFAULT"),
+          }}
+        />
+        <pointLight position={[1, 1, 1]} />
+        {/* <Star position={[4, 1, 0]} /> */}
+        {/* <StarEvent position={[-1.2, 0, 0]} /> */}
+        {/* <StarEvent position={[1.2, 0, 0]} /> */}
+        <OrbitControls
+          minDistance={6}
+          maxDistance={8}
+          autoRotate={true}
+          autoRotateSpeed={rotate.speed}
+          enableDamping={true}
+          dampingFactor={0.05}
+          reverseOrbit={rotate.reverse}
+          // minAzimuthAngle={-Math.PI}
+          // maxAzimuthAngle={Math.PI}
+          minPolarAngle={Math.PI - Math.PI / 1.6}
+          maxPolarAngle={Math.PI - Math.PI / 1.6}
+        />
+      </Canvas>
+    </>
+  );
+}
