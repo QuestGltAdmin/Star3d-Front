@@ -7,12 +7,14 @@ import { useGLTF,Bounds, useBounds } from "@react-three/drei";
 
 export function Model(props) {
   const { nodes, materials } = useGLTF("/models/Star_Web_3cd.glb", true);
-  const api = useBounds();
+  const bound = useBounds();
+  const ref = useRef()
 
   return (
     <group {...props} 
-    // onClick={(e) => (e.stopPropagation(), e.delta <= 2 && api.refresh(e.object).fit())} 
-    onPointerMissed={(e) => e.button === 0 && api.refresh().fit()} 
+    ref={ref}
+    // onClick={(e) => (e.stopPropagation(), e.delta <= 2 && bound.refresh(e.object).fit())} 
+    onPointerMissed={(e) => e.button === 0 && bound.refresh().fit()} 
     dispose={null}>
       <mesh
         castShadow
@@ -48,7 +50,6 @@ export function Model(props) {
         geometry={nodes.Star_Logo_4.geometry}
         material={materials.Star_Logo}
         position={[-0.11, 2, 0]}
-        onClick={(e) => (e.stopPropagation(), e.delta <= 2 && api.refresh(e.object).fit())} 
       >
         <mesh
           castShadow
@@ -56,7 +57,9 @@ export function Model(props) {
           geometry={nodes.Star_Art_Gallery.geometry}
           material={materials.Star_Art_Gallery}
           position={[0.42, 0.28, -0.92]}
-          onClick={props?.star_art_gallery?.onClick}
+          onClick={(e) => (e.stopPropagation(), e.delta <= 2 && bound.refresh(e.object).fit())} 
+          onDoubleClick={(e)=> {bound.to({position: [8, 0, -30], target: [0, 0, 0]})}}//done
+          // onClick={(e)=>{props?.star_art_gallery?.onClick} 
         />
       </mesh>
       <mesh
@@ -65,7 +68,7 @@ export function Model(props) {
         geometry={nodes.Star_Logo_5.geometry}
         material={materials.Star_Logo}
         position={[-0.11, 2, 0]}
-        onClick={(e) => (e.stopPropagation(), e.delta <= 2 && api.refresh(e.object).fit())} 
+        // onClick={(e) => (e.stopPropagation(), e.delta <= 2 && bound.refresh(e.object).fit())} 
       >
         <mesh
           castShadow
@@ -75,7 +78,11 @@ export function Model(props) {
           position={[1.17, -0.4, 0.27]}
           rotation={[Math.PI / 2, 0, -1.63]}
           scale={0.26}
-          onClick={props?.star_office.onClick}
+          onClick={(e) => (e.stopPropagation(), e.delta <= 2 && bound.refresh(e.object).fit())} 
+          // onPointerLeave={(e)=>alert("leave")}
+          // onDoubleClick={(e) => bound.refresh(ref.current).fit()}
+          onDoubleClick={(e)=> {bound.to({position: [8, 0, 2], target: [0, 0, 0]})}}//done
+          // onClick={props?.star_office.onClick}
         />
       </mesh>
       <mesh
@@ -84,7 +91,6 @@ export function Model(props) {
         geometry={nodes.Star_Logo_1.geometry}
         material={materials.Star_Logo}
         position={[-0.11, 2, 0]}
-        onClick={(e) => (e.stopPropagation(), e.delta <= 2 && api.refresh(e.object).fit())} 
       >
         <mesh
           castShadow
@@ -92,7 +98,9 @@ export function Model(props) {
           geometry={nodes.Star_Arena.geometry}
           material={materials["Star Arena"]}
           position={[-0.03, -0.1, 1.27]}
-          onClick={props.star_arena.onClick}
+          onClick={(e) => (e.stopPropagation(), e.delta <= 2 && bound.refresh(e.object).fit())} 
+          onDoubleClick={(e)=> {bound.to({position: [-8, 0, 50], target: [0, 0, 0]})}}
+          // onClick={props.star_arena.onClick}
         />
       </mesh>
       <mesh
@@ -101,7 +109,7 @@ export function Model(props) {
         geometry={nodes.Star_Logo_2.geometry}
         material={materials.Star_Logo}
         position={[-0.11, 2, 0]}
-        onClick={(e) => (e.stopPropagation(), e.delta <= 2 && api.refresh(e.object).fit())} 
+        // onClick={(e) => (e.stopPropagation(), e.delta <= 2 && bound.refresh(e.object).fit())} 
       >
         <mesh
           castShadow
@@ -109,7 +117,9 @@ export function Model(props) {
           geometry={nodes.Star_Stadium.geometry}
           material={materials.Star_Stadium}
           position={[-0.9, 0.48, 0.37]}
-          onClick={props?.star_stadium?.onClick}
+          onClick={(e) => (e.stopPropagation(), e.delta <= 2 && bound.refresh(e.object).fit())} 
+          onDoubleClick={(e)=> {bound.to({position: [-8, 0, 1], target: [0, 0, 0]})}} //done
+          // onClick={props?.star_stadium?.onClick}
         />
       </mesh>
       <mesh
@@ -118,7 +128,6 @@ export function Model(props) {
         geometry={nodes.Star_Logo_3.geometry}
         material={materials.Star_Logo}
         position={[-0.11, 2, 0]}
-        onClick={(e) => (e.stopPropagation(), e.delta <= 2 && api.refresh(e.object).fit())} 
       >
         <mesh
           castShadow
@@ -126,7 +135,9 @@ export function Model(props) {
           geometry={nodes.Star_Jewerly_Store.geometry}
           material={materials.Star_Jewerly_Store}
           position={[-0.65, -0.41, -1.02]}
-          onClick={props?.star_jewellery.onClick}
+          onClick={(e) => (e.stopPropagation(), e.delta <= 2 && bound.refresh(e.object).fit())} 
+          onDoubleClick={(e)=> {bound.to({position: [-8, 0, -7], target: [0, 0, 0]})}}
+          // onClick={props?.star_jewellery.onClick}
           onPointerOver={props.star_jewellery.onPointerOver}
           onPointerOut={props.star_jewellery.onPointerOut}
         />

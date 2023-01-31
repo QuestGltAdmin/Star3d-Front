@@ -7,7 +7,7 @@ export default function StarStage({ onStarHovered, onStarClicked, sliderVal, ...
   // Hold state for hovered and clicked events
   const [hovered, hover] = useState(false);
   const [clicked, click] = useState(false);
-  const [rotate, setRotate] = useState({speed:0.5,reverse:false})
+  const [rotate, setRotate] = useState({speed:0,reverse:false})
 
   useEffect(() => {
     if(onStarHovered){
@@ -42,11 +42,12 @@ export default function StarStage({ onStarHovered, onStarClicked, sliderVal, ...
 
       {<Canvas
         className=""
+        // camera={{ position: [0, -10, 80], fov: 50 }}
         camera={{
-          position: [8, 0, 0],
-          fov: 50,
-          // near: 0.1,
-          // far: 100,
+          position: [8, 0, 2],
+          fov: 75,
+          near: 0.1,
+          far: 100,
         }}
         dpr={[1, 2]}
       >
@@ -60,7 +61,7 @@ export default function StarStage({ onStarHovered, onStarClicked, sliderVal, ...
           penumbra={1}
         />
         {/* <Lights/> */}
-        <Bounds observe margin={1.2}>
+        <Bounds position={[0,0,0]} observe margin={1.2}>
         <StarCube
           star_art_gallery={{ onClick: () => console.log("star gallery") }}
           star_office={{ onClick: () => console.log("star office") }}
@@ -78,19 +79,21 @@ export default function StarStage({ onStarHovered, onStarClicked, sliderVal, ...
         {/* <StarEvent position={[-1.2, 0, 0]} /> */}
         {/* <StarEvent position={[1.2, 0, 0]} /> */}
         <OrbitControls
-          // makeDefault
+          makeDefault
           // minDistance={6}
           maxDistance={8}
           autoRotate={true}
+          enableRotate={true}
+          rotateSpeed={rotate.speed}
           autoRotateSpeed={rotate.speed}
-          enableDamping={true}
-          dampingFactor={0.05}
+          // enableDamping={true}
+          // dampingFactor={0.05}
           reverseOrbit={rotate.reverse}
           // minAzimuthAngle={-Math.PI}
           // maxAzimuthAngle={Math.PI}
-          minPolarAngle={0} maxPolarAngle={Math.PI / 1.75}
-          // minPolarAngle={Math.PI - Math.PI / 1.6}
-          // maxPolarAngle={Math.PI - Math.PI / 1.6}
+          // minPolarAngle={0} maxPolarAngle={Math.PI / 1.6}
+          minPolarAngle={Math.PI - Math.PI / 1.6}
+          maxPolarAngle={Math.PI - Math.PI / 1.6}
         />
       </Canvas>}
     </Suspense>
