@@ -299,7 +299,7 @@ const LayerButton = (props) => {
 };
 
 const SliderButton = memo(({ className, label, onChange, value, ...sliderProps }) => {
-  const [sliderVal, setSliderVal] = useState(50);
+  const [sliderVal, setSliderVal] = useState(0);
     const [mouseState, setMouseState] = useState(null);
 
     // useEffect(() => {
@@ -307,13 +307,23 @@ const SliderButton = memo(({ className, label, onChange, value, ...sliderProps }
     // }, [value]);
 
     const changeCallback = e => {
-      setSliderVal(e.target.value);
-      onChange(sliderVal);
+      setSliderVal(e.target.valueAsNumber);
+      // onChange(sliderVal);
     };
 
     useEffect(() => {
-      onChange(50);
-      setSliderVal(50);
+      let t = setTimeout(()=>{
+        onChange(sliderVal);
+      },200)
+
+      return ()=>{
+        clearTimeout(t)
+      }
+    }, [sliderVal]);
+
+    useEffect(() => {
+      onChange(0);
+      setSliderVal(0);
       // if (mouseState === "up") {
       //   onChange(50);
       //   setSliderVal(50);

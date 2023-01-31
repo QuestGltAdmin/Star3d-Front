@@ -85,7 +85,7 @@ export default function App() {
   // directional_light_shadow.camera.right = 7;
   // directional_light_shadow.camera.bottom = -7;
 
-  const [parentVal, setParentVal] = useState(50);
+  const [parentVal, setParentVal] = useState(0);
 
   const sliderValueChanged = useCallback(val => {
     // console.log("NEW VALUE", val);
@@ -94,8 +94,8 @@ export default function App() {
 
   const sliderProps = useMemo(
     () => ({
-      min: 0,
-      max: 100,
+      min: -50,
+      max: 50,
       value: parentVal,
       step: 2,
       label: "This is star stage rotate range",
@@ -104,6 +104,7 @@ export default function App() {
     [parentVal]
   );
 
+  console.log("parent",parentVal)
   return (
     <div className="flex flex-col overflow-hidden bg-black">
       {/* <MiniApp /> */}

@@ -1,4 +1,4 @@
-import { OrbitControls } from "@react-three/drei";
+import { Bounds, OrbitControls } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import React, { Suspense, useEffect, useState } from "react";
 import { Model as StarCube } from "../StarCube";
@@ -22,11 +22,17 @@ export default function StarStage({ onStarHovered, onStarClicked, sliderVal, ...
   }, [clicked]);
 
   useEffect(()=>{
-    if(sliderVal>50){
+    if(sliderVal > 0){
+      console.log("greater",typeof sliderVal,sliderVal/10, sliderVal/10)
       setRotate({speed:sliderVal/10,reverse:false})
     }
-    if(sliderVal<50){
-      setRotate({speed:sliderVal/20,reverse:true})
+    if(sliderVal===0){
+      console.log("equal",typeof sliderVal, sliderVal)
+      setRotate({speed:0.5, reverse:false});
+    }
+    if(sliderVal < 0){
+      console.log("less",typeof sliderVal,sliderVal, Math.abs(sliderVal/10))
+      setRotate({speed:Math.abs(sliderVal/10),reverse:true})
     }
   },[sliderVal])
   // console.log("model");
@@ -34,14 +40,15 @@ export default function StarStage({ onStarHovered, onStarClicked, sliderVal, ...
     <>
     <Suspense fallback={<></>}>
 
-      <Canvas
+      {<Canvas
         className=""
         camera={{
           position: [8, 0, 0],
-          fov: 75,
-          near: 0.1,
-          far: 100,
+          fov: 50,
+          // near: 0.1,
+          // far: 100,
         }}
+        dpr={[1, 2]}
       >
         {/* <perspectiveCamera position={[2,3,4]} /> */}
         <ambientLight intensity={0.5} />
@@ -53,6 +60,7 @@ export default function StarStage({ onStarHovered, onStarClicked, sliderVal, ...
           penumbra={1}
         />
         {/* <Lights/> */}
+        <Bounds observe margin={1.2}>
         <StarCube
           star_art_gallery={{ onClick: () => console.log("star gallery") }}
           star_office={{ onClick: () => console.log("star office") }}
@@ -64,12 +72,14 @@ export default function StarStage({ onStarHovered, onStarClicked, sliderVal, ...
             onPointerOut: () => hover("DEFAULT"),
           }}
         />
+        </Bounds>
         <pointLight position={[1, 1, 1]} />
         {/* <Star position={[4, 1, 0]} /> */}
         {/* <StarEvent position={[-1.2, 0, 0]} /> */}
         {/* <StarEvent position={[1.2, 0, 0]} /> */}
         <OrbitControls
-          minDistance={6}
+          // makeDefault
+          // minDistance={6}
           maxDistance={8}
           autoRotate={true}
           autoRotateSpeed={rotate.speed}
@@ -78,10 +88,11 @@ export default function StarStage({ onStarHovered, onStarClicked, sliderVal, ...
           reverseOrbit={rotate.reverse}
           // minAzimuthAngle={-Math.PI}
           // maxAzimuthAngle={Math.PI}
-          minPolarAngle={Math.PI - Math.PI / 1.6}
-          maxPolarAngle={Math.PI - Math.PI / 1.6}
+          minPolarAngle={0} maxPolarAngle={Math.PI / 1.75}
+          // minPolarAngle={Math.PI - Math.PI / 1.6}
+          // maxPolarAngle={Math.PI - Math.PI / 1.6}
         />
-      </Canvas>
+      </Canvas>}
     </Suspense>
     </>
   );
