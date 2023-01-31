@@ -104,7 +104,7 @@ export default function App() {
     [parentVal]
   );
 
-  console.log("parent",parentVal)
+  console.log("parent",hoveredStar)
   return (
     <div className="flex flex-col overflow-hidden bg-black">
       {/* <MiniApp /> */}
@@ -112,7 +112,7 @@ export default function App() {
       <Link to={"/"}>
 
         <h1 className="z-10 text-3xl font-bold text-center text-white underline">
-          Star Arena
+          Star Stage
         </h1>
       </Link>
       </div>
@@ -131,7 +131,7 @@ export default function App() {
 
         
         {/* Stars Info */}
-        <div className="absolute z-10 p-3 right-28 top-48">
+        <div className="absolute left-0 z-10 w-full p-3 bottom-5">
           {hoveredStar==="JEWELLERY"&&<StarJewelleryDetail/>}
           {hoveredStar==="GALLERY"&&<StarArtGalleryDetail/>}
           {hoveredStar==="STADIUM"&&<StarStadiumDetail/>}
@@ -140,7 +140,7 @@ export default function App() {
         </div>
         {/* <StarStage sliderVal={parentVal} /> */}
         <Routes>
-          <Route path="/" element={<StarStage sliderVal={parentVal} />}/>
+          <Route path="/" element={<StarStage sliderVal={parentVal} onStarHovered={(e)=>hoverStar(e)} />}/>
           <Route path="/star-stadium" element={<StarStadium/>} />
           <Route path="/star-art-gallery" element={<StarArtGallery/>}/>
           <Route path="/star-office" element={<StarOffice/>}/>
