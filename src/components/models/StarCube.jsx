@@ -6,17 +6,19 @@ import React, { useRef } from "react";
 import { useGLTF, Bounds, useBounds } from "@react-three/drei";
 import { KTX2Loader } from "three/examples/jsm/loaders/KTX2Loader";
 import { useThree } from "@react-three/fiber";
-
+import * as THREE from 'three'
 
 export function Model(props) {
   const ref = useRef();
   const gl = useThree((state) => state.gl)
   const bound = useBounds();
 
-  const { nodes, materials } = useGLTF("/models/Star_Web_3.glb", true, true,(loader)=>{
+  const { nodes, materials } = useGLTF("/models/Star_Web_3c.glb", true, true,(loader)=>{
+    const THREE_PATH = `https://unpkg.com/three@0.${THREE.REVISION}.x`;
     const KTX2_LOADER = new KTX2Loader(loader.manager).setTranscoderPath(
-      // `three/examples/jsm/libs/basis/`
-      `/basis/`
+      "https://star3d.netlify.app/basis/"
+      //  `${THREE_PATH}/examples/js/libs/basis/`
+      // `/basis/`
     ).detectSupport(gl).dispose();
     loader.setKTX2Loader(KTX2_LOADER)
   });
