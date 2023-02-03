@@ -13,11 +13,11 @@ export function Model(props) {
   const gl = useThree((state) => state.gl)
   const bound = useBounds();
 
-  const { nodes, materials } = useGLTF("/models/Star_Web_3c.glb", true, true,(loader)=>{
+  const { nodes, materials } = useGLTF("/models/Star_Web_3.glb", true, true,(loader)=>{
     const KTX2_LOADER = new KTX2Loader(loader.manager).setTranscoderPath(
-      // `${THREE_PATH}/examples/js/libs/basis/`
+      // `three/examples/jsm/libs/basis/`
       `/basis/`
-    ).detectSupport(gl);
+    ).detectSupport(gl).dispose();
     loader.setKTX2Loader(KTX2_LOADER)
   });
 
@@ -224,4 +224,4 @@ export function Model(props) {
   );
 }
 
-// useGLTF.preload("/models/Star_Web_3c.glb", true);
+// useGLTF.preload("/models/Star_Web_3c.glb", true, true);

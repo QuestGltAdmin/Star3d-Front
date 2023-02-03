@@ -8,6 +8,7 @@ import {
   useGLTF,
 } from "@react-three/drei";
 import * as THREE from "three";
+
 import MiniApp, { Lights } from "./components/Lights";
 import Buttons from "./components/star_stage/Buttons";
 import StarJewelleryDetail from "./components/star_jewellery/StarJewelleryDetail";
@@ -24,6 +25,8 @@ import StarArena from "./components/star_arena";
 import StarJewellery from "./components/star_jewellery";
 import StarLoader from "./components/loaders/StarLoader";
 import { Switch } from "./components/ui/Switch";
+
+
 
 function Star(props) {
   // This reference gives us direct access to the THREE.Mesh object
@@ -119,6 +122,7 @@ export default function App() {
     checked:isChecked,
     onCheckedChange:(e)=>switchValueChanged(e)
   }),[isChecked])
+
 
   console.log("parent", hoveredStar,isChecked);
   return (

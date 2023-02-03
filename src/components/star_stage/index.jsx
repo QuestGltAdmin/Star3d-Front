@@ -10,7 +10,7 @@ export default function StarStage({
   onStarHovered,
   onStarClicked,
   sliderVal,
-  checked,
+  checked=false,
   ...starStageProps
 }) {
   // Hold state for hovered and clicked events
