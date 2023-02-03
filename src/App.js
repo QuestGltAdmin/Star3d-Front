@@ -1,10 +1,14 @@
-import { useCallback, useMemo, useRef, useState } from "react";
+import { Suspense, useCallback, useMemo, useRef, useState } from "react";
 import "./styles/index.css";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { OrbitControls, Stars, useCubeTexture } from "@react-three/drei";
+import {
+  OrbitControls,
+  Stars,
+  useCubeTexture,
+  useGLTF,
+} from "@react-three/drei";
 import * as THREE from "three";
 import MiniApp, { Lights } from "./components/Lights";
-import { Model as StarCube } from "./components/StarCube";
 import Buttons from "./components/star_stage/Buttons";
 import StarJewelleryDetail from "./components/star_jewellery/StarJewelleryDetail";
 import StarArtGalleryDetail from "./components/star_art_gallery/StarArtGalleryDetail";
@@ -18,6 +22,8 @@ import StarArtGallery from "./components/star_art_gallery";
 import StarOffice from "./components/star_office";
 import StarArena from "./components/star_arena";
 import StarJewellery from "./components/star_jewellery";
+import StarLoader from "./components/loaders/StarLoader";
+import { Switch } from "./components/ui/Switch";
 
 function Star(props) {
   // This reference gives us direct access to the THREE.Mesh object
@@ -87,7 +93,7 @@ export default function App() {
 
   const [parentVal, setParentVal] = useState(0);
 
-  const sliderValueChanged = useCallback(val => {
+  const sliderValueChanged = useCallback((val) => {
     // console.log("NEW VALUE", val);
     setParentVal(val);
   });
@@ -99,55 +105,81 @@ export default function App() {
       value: parentVal,
       step: 2,
       label: "This is star stage rotate range",
-      onChange: e => sliderValueChanged(e)
+      onChange: (e) => sliderValueChanged(e),
     }),
     [parentVal]
   );
 
-  console.log("parent",hoveredStar)
+  //Switch
+  const [isChecked, check] = useState(false);
+  const switchValueChanged = useCallback((val)=>{
+    check(val)
+  })
+  const SwitchProps =useMemo(()=>({
+    checked:isChecked,
+    onCheckedChange:(e)=>switchValueChanged(e)
+  }),[isChecked])
+
+  console.log("parent", hoveredStar,isChecked);
   return (
     <div className="flex flex-col overflow-hidden bg-black">
       {/* <MiniApp /> */}
-      <div className="fixed z-10 flex justify-center w-full py-3 bg-black">
-      <Link to={"/"}>
-
-        <h1 className="z-10 text-3xl font-bold text-center text-white underline">
-          Star Stage
-        </h1>
-      </Link>
-      </div>
+      {/* <div className="fixed z-10 flex justify-center w-full py-3 bg-black">
+        <Link to={"/"}>
+          <h1 className="z-10 text-3xl font-bold text-center text-white underline">
+            Star Stage
+          </h1>
+        </Link>
+      </div> */}
       <div className="relative h-screen max-w-full ">
         {/* Music Button */}
-        <Buttons className="absolute left-5 top-20" component="MUSIC"/>
-      
-        {/* Help Button */}
-        <Buttons className="absolute right-5 top-20" component="HELP"/>
-      
-        {/* Layer Button */}
-        <Buttons className="absolute left-5 bottom-5" component="LAYER"/>
-      
-        {/* Slider Button */}
-        <Buttons {...sliderProps} className="absolute right-5 bottom-5" component="SLIDER"/>
+        <Buttons className="absolute left-5 top-5" component="MUSIC" />
 
-        
+        {/* Switch Button */}
+
+        <Switch {...SwitchProps} className="absolute z-10 w-20 h-10 border-orange-100 right-20 top-5 hover:border-orange-200" />
+
+        {/* Help Button */}
+        <Buttons className="absolute right-5 top-5" component="HELP" />
+
+        {/* Layer Button */}
+        <Buttons className="absolute left-5 bottom-5" component="LAYER" />
+
+        {/* Slider Button */}
+        <Buttons
+          {...sliderProps}
+          className="absolute right-5 bottom-5"
+          component="SLIDER"
+        />
+
         {/* Stars Info */}
         <div className="absolute left-0 z-10 w-full p-3 bottom-5">
-          {hoveredStar==="JEWELLERY"&&<StarJewelleryDetail/>}
-          {hoveredStar==="GALLERY"&&<StarArtGalleryDetail/>}
-          {hoveredStar==="STADIUM"&&<StarStadiumDetail/>}
-          {hoveredStar==="OFFICE"&&<StarOfficeDetail/>}
-          {hoveredStar==="ARENA"&&<StarArenaDetail/>}
+          {hoveredStar === "JEWELLERY" && <StarJewelleryDetail />}
+          {hoveredStar === "GALLERY" && <StarArtGalleryDetail />}
+          {hoveredStar === "STADIUM" && <StarStadiumDetail />}
+          {hoveredStar === "OFFICE" && <StarOfficeDetail />}
+          {hoveredStar === "ARENA" && <StarArenaDetail />}
         </div>
         {/* <StarStage sliderVal={parentVal} /> */}
         <Routes>
-          <Route path="/" element={<StarStage sliderVal={parentVal} onStarHovered={(e)=>hoverStar(e)} />}/>
-          <Route path="/star-stadium" element={<StarStadium/>} />
-          <Route path="/star-art-gallery" element={<StarArtGallery/>}/>
-          <Route path="/star-office" element={<StarOffice/>}/>
-          <Route path="/star-arena" element={<StarArena/>}/>
-          <Route path="/star-jewellery" element={<StarJewellery/>}/>
+          <Route
+            path="/"
+            element={
+              <Suspense fallback={<StarLoader/>}>
+                <StarStage
+                  sliderVal={parentVal}
+                  checked={isChecked}
+                  onStarHovered={(e) => hoverStar(e)}
+                />
+              </Suspense>
+            }
+          />
+          <Route path="/star-stadium" element={<StarStadium />} />
+          <Route path="/star-art-gallery" element={<StarArtGallery />} />
+          <Route path="/star-office" element={<StarOffice />} />
+          <Route path="/star-arena" element={<StarArena />} />
+          <Route path="/star-jewellery" element={<StarJewellery />} />
         </Routes>
-
       </div>
     </div>
   );
