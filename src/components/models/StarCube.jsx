@@ -13,10 +13,12 @@ export function Model(props) {
   const gl = useThree((state) => state.gl)
   const bound = useBounds();
 
-  const { nodes, materials } = useGLTF("/models/Star_Web_3.glb", true, true,(loader)=>{
-    const THREE_PATH = `https://unpkg.com/three@0.${THREE.REVISION}.x`;
+  const model_url=`https://cychat-storage-bucket.s3.us-east-2.amazonaws.com/star/Star_Web_3.glb`
+  const { nodes, materials } = useGLTF(model_url, true, true,(loader)=>{
+    const THREE_PATH = `https://cychat-storage-bucket.s3.us-east-2.amazonaws.com/star/basis/`;
     const KTX2_LOADER = new KTX2Loader(loader.manager).setTranscoderPath(
-      "https://star3d.netlify.app/basis/"
+      THREE_PATH
+      // "https://star3d.netlify.app/basis/"
       //  `${THREE_PATH}/examples/js/libs/basis/`
       // `/basis/`
     ).detectSupport(gl).dispose();
