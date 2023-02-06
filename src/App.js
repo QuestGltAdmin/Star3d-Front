@@ -26,8 +26,6 @@ import StarJewellery from "./components/star_jewellery";
 import StarLoader from "./components/loaders/StarLoader";
 import { Switch } from "./components/ui/Switch";
 
-
-
 function Star(props) {
   // This reference gives us direct access to the THREE.Mesh object
   const ref = useRef();
@@ -115,16 +113,18 @@ export default function App() {
 
   //Switch
   const [isChecked, check] = useState(false);
-  const switchValueChanged = useCallback((val)=>{
-    check(val)
-  })
-  const SwitchProps =useMemo(()=>({
-    checked:isChecked,
-    onCheckedChange:(e)=>switchValueChanged(e)
-  }),[isChecked])
+  const switchValueChanged = useCallback((val) => {
+    check(val);
+  });
+  const SwitchProps = useMemo(
+    () => ({
+      checked: isChecked,
+      onCheckedChange: (e) => switchValueChanged(e),
+    }),
+    [isChecked]
+  );
 
-
-  console.log("parent", hoveredStar,isChecked);
+  console.log("parent", hoveredStar, isChecked);
   return (
     <div className="flex flex-col overflow-hidden bg-black">
       {/* <MiniApp /> */}
@@ -141,7 +141,10 @@ export default function App() {
 
         {/* Switch Button */}
 
-        <Switch {...SwitchProps} className="absolute z-10 w-20 h-10 border-orange-100 right-20 top-5 hover:border-orange-200" />
+        <Switch
+          {...SwitchProps}
+          className="absolute z-10 w-20 h-10 border-orange-100 right-20 top-5 hover:border-orange-200"
+        />
 
         {/* Help Button */}
         <Buttons className="absolute right-5 top-5" component="HELP" />
@@ -169,7 +172,7 @@ export default function App() {
           <Route
             path="/"
             element={
-              <Suspense fallback={<StarLoader/>}>
+              <Suspense fallback={<StarLoader />}>
                 <StarStage
                   sliderVal={parentVal}
                   checked={isChecked}
@@ -181,7 +184,14 @@ export default function App() {
           <Route path="/star-stadium" element={<StarStadium />} />
           <Route path="/star-art-gallery" element={<StarArtGallery />} />
           <Route path="/star-office" element={<StarOffice />} />
-          <Route path="/star-arena" element={<StarArena />} />
+          <Route
+            path="/star-arena"
+            element={
+              <Suspense fallback={<StarLoader />}>
+                <StarArena />
+              </Suspense>
+            }
+          />
           <Route path="/star-jewellery" element={<StarJewellery />} />
         </Routes>
       </div>
