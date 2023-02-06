@@ -13,7 +13,7 @@ export function Model(props) {
   const ref = useRef();
   const gl = useThree((state) => state.gl)
   
-  const { nodes, materials } = useGLTF("/models/Star_Web_7_etc1s.glb",true,true,(loader)=>{
+  const { nodes, materials } = useGLTF("/models/Star_Web_7.glb",true,true,(loader)=>{
     const THREE_PATH = `https://unpkg.com/three@0.${THREE.REVISION}.x`;
     const KTX2_LOADER = new KTX2Loader(loader.manager).setTranscoderPath(
       "https://star3d.netlify.app/basis/"
