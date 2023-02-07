@@ -34,7 +34,7 @@ const MusicButton = (props) => {
           viewBox="0 0 24 24"
           strokeWidth={1.5}
           stroke="currentColor"
-          className=" text-white "
+          className="text-white "
         >
           <path
             strokeLinecap="round"
@@ -49,7 +49,7 @@ const MusicButton = (props) => {
           viewBox="0 0 24 24"
           strokeWidth={1.5}
           stroke="currentColor"
-          className=" text-white"
+          className="text-white "
         >
           <path
             strokeLinecap="round"
@@ -150,7 +150,7 @@ const LayerButton = (props) => {
           <div className="flex flex-col justify-between">
             <button
               id="layers_menu_close"
-              className="flex justify-center self-center h-5 w-5 py-2 text-white cursor-pointer hover:text-orange-200"
+              className="flex self-center justify-center w-5 h-5 py-2 text-white cursor-pointer hover:text-orange-200"
               onClick={() => click(false)}
             >
               <svg
@@ -169,127 +169,146 @@ const LayerButton = (props) => {
               </svg>
             </button>
             <Link to={"/star-arena"}>
-
-            <div className="flex items-center justify-between p-3 text-white cursor-pointer gap-x-3 hover:text-orange-200 hover:underline">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="m14 5-3 3 2 7 8-8-7-2Z"></path>
-                <path d="m14 5-3 3-3-3 3-3 3 3Z"></path>
-                <path d="M9.5 6.5 4 12l3 6"></path>
-                <path d="M3 22v-2c0-1.1.9-2 2-2h4a2 2 0 0 1 2 2v2H3Z"></path>
-              </svg>
-              <h2 className="text-xl font-normal">STAR ARENA</h2>
-              {/* <p className="text-xl font-normal">-1</p> */}
-            </div>
+              <div className="flex items-center justify-between p-3 text-white cursor-pointer gap-x-3 hover:text-orange-200 hover:underline">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="m14 5-3 3 2 7 8-8-7-2Z"></path>
+                  <path d="m14 5-3 3-3-3 3-3 3 3Z"></path>
+                  <path d="M9.5 6.5 4 12l3 6"></path>
+                  <path d="M3 22v-2c0-1.1.9-2 2-2h4a2 2 0 0 1 2 2v2H3Z"></path>
+                </svg>
+                <h2 className="text-xl font-normal">STAR ARENA</h2>
+                {/* <p className="text-xl font-normal">-1</p> */}
+              </div>
             </Link>
 
             <Link to={"/star-stadium"}>
+              <div className="flex items-center justify-between p-3 text-white cursor-pointer gap-x-3 hover:text-orange-200 hover:underline">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="m14 5-3 3 2 7 8-8-7-2Z"></path>
+                  <path d="m14 5-3 3-3-3 3-3 3 3Z"></path>
+                  <path d="M9.5 6.5 4 12l3 6"></path>
+                  <path d="M3 22v-2c0-1.1.9-2 2-2h4a2 2 0 0 1 2 2v2H3Z"></path>
+                </svg>
 
-            <div className="flex items-center justify-between p-3 text-white cursor-pointer gap-x-3 hover:text-orange-200 hover:underline">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="m14 5-3 3 2 7 8-8-7-2Z"></path>
-                <path d="m14 5-3 3-3-3 3-3 3 3Z"></path>
-                <path d="M9.5 6.5 4 12l3 6"></path>
-                <path d="M3 22v-2c0-1.1.9-2 2-2h4a2 2 0 0 1 2 2v2H3Z"></path>
-              </svg>
+                <h2 className="text-xl font-normal">STAR STADIUM</h2>
+                {/* <p className="text-xl font-normal">0</p> */}
+              </div>
+            </Link>
 
-              <h2 className="text-xl font-normal">STAR STADIUM</h2>
-              {/* <p className="text-xl font-normal">0</p> */}
-            </div>
+            <Link to={"/"}>
+              <div className="flex items-center justify-between p-3 text-white cursor-pointer gap-x-3 hover:text-orange-200 hover:underline">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="m14 5-3 3 2 7 8-8-7-2Z"></path>
+                  <path d="m14 5-3 3-3-3 3-3 3 3Z"></path>
+                  <path d="M9.5 6.5 4 12l3 6"></path>
+                  <path d="M3 22v-2c0-1.1.9-2 2-2h4a2 2 0 0 1 2 2v2H3Z"></path>
+                </svg>
+
+                <h2 className="text-xl font-normal">STAR STAGE</h2>
+                {/* <p className="text-xl font-normal">1</p> */}
+              </div>
             </Link>
 
             <Link to={"/star-jewellery"}>
+              <div className="flex items-center justify-between p-3 text-white cursor-pointer gap-x-3 hover:text-orange-200 hover:underline">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="m14 5-3 3 2 7 8-8-7-2Z"></path>
+                  <path d="m14 5-3 3-3-3 3-3 3 3Z"></path>
+                  <path d="M9.5 6.5 4 12l3 6"></path>
+                  <path d="M3 22v-2c0-1.1.9-2 2-2h4a2 2 0 0 1 2 2v2H3Z"></path>
+                </svg>
 
-            <div className="flex items-center justify-between p-3 text-white cursor-pointer gap-x-3 hover:text-orange-200 hover:underline">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="m14 5-3 3 2 7 8-8-7-2Z"></path>
-                <path d="m14 5-3 3-3-3 3-3 3 3Z"></path>
-                <path d="M9.5 6.5 4 12l3 6"></path>
-                <path d="M3 22v-2c0-1.1.9-2 2-2h4a2 2 0 0 1 2 2v2H3Z"></path>
-              </svg>
-
-              <h2 className="text-xl font-normal">STAR JEWELLERY</h2>
-              {/* <p className="text-xl font-normal">1</p> */}
-            </div>
+                <h2 className="text-xl font-normal">STAR JEWELLERY</h2>
+                {/* <p className="text-xl font-normal">1</p> */}
+              </div>
             </Link>
 
             <Link to={"/star-office"}>
+              <div className="flex items-center justify-between p-3 text-white cursor-pointer gap-x-3 hover:text-orange-200 hover:underline">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="m14 5-3 3 2 7 8-8-7-2Z"></path>
+                  <path d="m14 5-3 3-3-3 3-3 3 3Z"></path>
+                  <path d="M9.5 6.5 4 12l3 6"></path>
+                  <path d="M3 22v-2c0-1.1.9-2 2-2h4a2 2 0 0 1 2 2v2H3Z"></path>
+                </svg>
 
-            <div className="flex items-center justify-between p-3 text-white cursor-pointer gap-x-3 hover:text-orange-200 hover:underline">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="m14 5-3 3 2 7 8-8-7-2Z"></path>
-                <path d="m14 5-3 3-3-3 3-3 3 3Z"></path>
-                <path d="M9.5 6.5 4 12l3 6"></path>
-                <path d="M3 22v-2c0-1.1.9-2 2-2h4a2 2 0 0 1 2 2v2H3Z"></path>
-              </svg>
-
-              <h2 className="text-xl font-normal">STAR OFFICE</h2>
-              {/* <p className="text-xl font-normal">2</p> */}
-            </div>
+                <h2 className="text-xl font-normal">STAR OFFICE</h2>
+                {/* <p className="text-xl font-normal">2</p> */}
+              </div>
             </Link>
 
             <Link to={"/star-art-gallery"}>
+              <div className="flex items-center justify-between p-3 text-white cursor-pointer gap-x-3 hover:text-orange-200 hover:underline">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="m14 5-3 3 2 7 8-8-7-2Z"></path>
+                  <path d="m14 5-3 3-3-3 3-3 3 3Z"></path>
+                  <path d="M9.5 6.5 4 12l3 6"></path>
+                  <path d="M3 22v-2c0-1.1.9-2 2-2h4a2 2 0 0 1 2 2v2H3Z"></path>
+                </svg>
 
-            <div className="flex items-center justify-between p-3 text-white cursor-pointer gap-x-3 hover:text-orange-200 hover:underline">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="m14 5-3 3 2 7 8-8-7-2Z"></path>
-                <path d="m14 5-3 3-3-3 3-3 3 3Z"></path>
-                <path d="M9.5 6.5 4 12l3 6"></path>
-                <path d="M3 22v-2c0-1.1.9-2 2-2h4a2 2 0 0 1 2 2v2H3Z"></path>
-              </svg>
-
-              <h2 className="text-xl font-normal">STAR ART GALLERY</h2>
-              {/* <p className="text-xl font-normal">3</p> */}
-            </div>
+                <h2 className="text-xl font-normal">STAR ART GALLERY</h2>
+                {/* <p className="text-xl font-normal">3</p> */}
+              </div>
             </Link>
           </div>
         </div>
@@ -298,27 +317,28 @@ const LayerButton = (props) => {
   );
 };
 
-const SliderButton = memo(({ className, label, onChange, value, ...sliderProps }) => {
-  const [sliderVal, setSliderVal] = useState(0);
+const SliderButton = memo(
+  ({ className, label, onChange, value, ...sliderProps }) => {
+    const [sliderVal, setSliderVal] = useState(0);
     const [mouseState, setMouseState] = useState(null);
 
     // useEffect(() => {
     //   setSliderVal(value);
     // }, [value]);
 
-    const changeCallback = e => {
+    const changeCallback = (e) => {
       setSliderVal(e.target.valueAsNumber);
       // onChange(sliderVal);
     };
 
     useEffect(() => {
-      let t = setTimeout(()=>{
+      let t = setTimeout(() => {
         onChange(sliderVal);
-      },200)
+      }, 200);
 
-      return ()=>{
-        clearTimeout(t)
-      }
+      return () => {
+        clearTimeout(t);
+      };
     }, [sliderVal]);
 
     useEffect(() => {
@@ -330,62 +350,62 @@ const SliderButton = memo(({ className, label, onChange, value, ...sliderProps }
       // }
     }, [mouseState]);
 
+    return (
+      <div
+        className={cn(
+          "z-10 p-3 border-2 border-orange-100 rounded-full hover:border-orange-200",
+          className
+        )}
+      >
+        <div className="flex items-center justify-between gap-x-3">
+          <span className="">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              className="text-white"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+          </span>
 
-  return (
-    <div
-      className={cn(
-        "z-10 p-3 border-2 border-orange-100 rounded-full hover:border-orange-200",
-        className
-      )}
-    >
-      <div className="flex items-center justify-between gap-x-3">
-        <span className="">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            className="text-white"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <polyline points="15 18 9 12 15 6"></polyline>
-          </svg>
-        </span>
+          <input
+            id="range_slider"
+            type="range"
+            value={sliderVal}
+            onChange={changeCallback}
+            onClick={() => setMouseState("click")}
+            onMouseUp={() => setMouseState("up")}
+            onMouseDown={() => setMouseState("down")}
+            // className="bg-orange-100 rounded-lg cursor-pointer  dark:bg-gray-200"
+            className="slider w-24 h-[1px] bg-orange-100 rounded-lg appearance-none cursor-pointer dark:bg-gray-200"
+            {...sliderProps}
+          />
 
-        <input
-          id="range_slider"
-          type="range"
-          value={sliderVal}
-          onChange={changeCallback}
-          onClick={()=>setMouseState("click")}
-          onMouseUp={()=>setMouseState("up")}
-          onMouseDown={()=>setMouseState("down")}
-          // className=" bg-orange-100 rounded-lg cursor-pointer dark:bg-gray-200"
-          className="slider w-24 h-[1px] bg-orange-100 rounded-lg appearance-none cursor-pointer dark:bg-gray-200"
-          {...sliderProps}
-        />
-
-        <span className="">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            className="text-white"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <polyline points="9 18 15 12 9 6"></polyline>
-          </svg>
-        </span>
+          <span className="">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              className="text-white"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </span>
+        </div>
       </div>
-    </div>
-  );
-});
+    );
+  }
+);
