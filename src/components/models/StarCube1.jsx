@@ -11,7 +11,7 @@ import * as THREE from 'three'
 
 export function Model(props) {
   const ref = useRef();
-  const gl = useThree((state) => state.gl)
+  const gl = useThree((state) => state.gl);
   
   const model_url=`https://cychat-storage-bucket.s3.us-east-2.amazonaws.com/star/Star_Web_7.glb`
   const { nodes, materials } = useGLTF(model_url,true,true,(loader)=>{

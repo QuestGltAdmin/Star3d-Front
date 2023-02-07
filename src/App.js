@@ -192,7 +192,14 @@ export default function App() {
               </Suspense>
             }
           />
-          <Route path="/star-jewellery" element={<StarJewellery />} />
+          <Route
+            path="/star-jewellery"
+            element={
+              <Suspense fallback={<StarLoader />}>
+                <StarJewellery />
+              </Suspense>
+            }
+          />
         </Routes>
       </div>
     </div>
