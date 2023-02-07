@@ -13,7 +13,7 @@ export function Model(props) {
   const ref = useRef();
   const gl = useThree((state) => state.gl);
 
-  const model_url=`https://cychat-storage-bucket.s3.us-east-2.amazonaws.com/star/jewellery_d.glb`
+  const model_url=`https://cychat-storage-bucket.s3.us-east-2.amazonaws.com/star/models/jewellery/star_jewellery_draco.glb`
   const { nodes, materials } = useGLTF(model_url,true,true,(loader)=>{
     const THREE_PATH = `https://cychat-storage-bucket.s3.us-east-2.amazonaws.com/star/basis/`;
     const KTX2_LOADER = new KTX2Loader(loader.manager).setTranscoderPath(
