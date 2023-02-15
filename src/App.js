@@ -196,7 +196,9 @@ export default function App() {
             path="/star-jewellery"
             element={
               <Suspense fallback={<StarLoader />}>
-                <StarJewellery />
+                <StarJewellery
+                sliderVal={parentVal}
+                />
               </Suspense>
             }
           />

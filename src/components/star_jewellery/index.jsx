@@ -1,12 +1,32 @@
 import { Bounds, OrbitControls } from '@react-three/drei'
 import { Canvas } from '@react-three/fiber'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Model as StarJewelleryStore } from '../models/StarJewelleryStore'
 
 
-export default function Index() {
+export default function Index({sliderVal}) {
   const [rotate, setRotate] = useState({ speed: 0, reverse: false });
-
+  
+  useEffect(() => {
+    if (sliderVal > 0) {
+      console.log("greater", typeof sliderVal, sliderVal / 10, sliderVal / 10);
+      setRotate({ speed: sliderVal / 10, reverse: false });
+    }
+    if (sliderVal === 0) {
+      console.log("equal", typeof sliderVal, sliderVal);
+      setRotate({ speed: 0.5, reverse: false });
+    }
+    if (sliderVal < 0) {
+      console.log(
+        "less",
+        typeof sliderVal,
+        sliderVal,
+        Math.abs(sliderVal / 10)
+      );
+      setRotate({ speed: Math.abs(sliderVal / 10), reverse: true });
+    }
+  }, [sliderVal])
+  
   return (
     <Canvas
     className=""
