@@ -1,24 +1,25 @@
-import { Suspense, useCallback, useMemo, useState, lazy } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
-import Buttons from './components/Buttons';
-import { Route, Routes } from 'react-router-dom';
-import StarLoader from './components/StarLoader';
-const StarDomePage =lazy(()=>import('./pages/stardome'));
-const StarGalleryPage =lazy(()=>import('./pages/stargallery')) ;
-const StarOfficePage =lazy(()=>import('./pages/staroffice')) ;
-const StarArenaPage =lazy(()=>import('./pages/stararena')) ;
-const StarJewelleryPage =lazy(()=>import('./pages/starjewellerystore')) ;
+import { Suspense, useCallback, useMemo, useState, lazy } from "react";
+import reactLogo from "./assets/react.svg";
+import "./App.css";
+import Buttons from "./components/Buttons";
+import { Route, Routes } from "react-router-dom";
+import StarLoader from "./components/StarLoader";
+const StarStadiumPage = lazy(() => import("./pages/starstadium"));
+const StarDomePage = lazy(() => import("./pages/stardome"));
+const StarGalleryPage = lazy(() => import("./pages/stargallery"));
+const StarOfficePage = lazy(() => import("./pages/staroffice"));
+const StarArenaPage = lazy(() => import("./pages/stararena"));
+const StarJewelleryPage = lazy(() => import("./pages/starjewellerystore"));
 
 function App() {
   const [hoveredStar, hoverStar] = useState("DEFAULT");
-  
+
   const [parentVal, setParentVal] = useState(0);
 
-  const sliderValueChanged = useCallback((val:number) => {
+  const sliderValueChanged = useCallback((val: number) => {
     // console.log("NEW VALUE", val);
     setParentVal(val);
-  },[]);
+  }, []);
 
   const sliderProps = useMemo(
     () => ({
@@ -27,7 +28,7 @@ function App() {
       value: parentVal,
       step: 2,
       label: "This is star stage rotate range",
-      onChange: (e:number) => sliderValueChanged(e),
+      onChange: (e: number) => sliderValueChanged(e),
     }),
     [parentVal]
   );
@@ -75,7 +76,7 @@ function App() {
           {hoveredStar === "ARENA" && <StarArenaDetail />}
         </div> */}
         {/* <StarStage sliderVal={parentVal} /> */}
-        
+
         <Routes>
           <Route
             path="/"
@@ -84,7 +85,7 @@ function App() {
                 <StarDomePage
                   sliderVal={parentVal}
                   // checked={isChecked}
-                  onStarClicked={(e)=>{}}
+                  onStarClicked={(e) => {}}
                   onStarHovered={(e) => hoverStar(e)}
                 />
               </Suspense>
@@ -94,9 +95,7 @@ function App() {
             path="/star-gallery"
             element={
               <Suspense fallback={<StarLoader />}>
-                <StarGalleryPage
-                  sliderVal={parentVal}
-                />
+                <StarGalleryPage sliderVal={parentVal} />
               </Suspense>
             }
           />
@@ -104,9 +103,7 @@ function App() {
             path="/star-office"
             element={
               <Suspense fallback={<StarLoader />}>
-                <StarOfficePage
-                  sliderVal={parentVal}
-                />
+                <StarOfficePage sliderVal={parentVal} />
               </Suspense>
             }
           />
@@ -114,9 +111,7 @@ function App() {
             path="/star-arena"
             element={
               <Suspense fallback={<StarLoader />}>
-                <StarArenaPage
-                  sliderVal={parentVal}
-                />
+                <StarArenaPage sliderVal={parentVal} />
               </Suspense>
             }
           />
@@ -124,16 +119,22 @@ function App() {
             path="/star-jewellery"
             element={
               <Suspense fallback={<StarLoader />}>
-                <StarJewelleryPage
-                  sliderVal={parentVal}
-                />
+                <StarJewelleryPage sliderVal={parentVal} />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/star-stadium"
+            element={
+              <Suspense fallback={<StarLoader />}>
+                <StarStadiumPage sliderVal={parentVal} />
               </Suspense>
             }
           />
         </Routes>
       </div>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
