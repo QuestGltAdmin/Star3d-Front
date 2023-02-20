@@ -1,7 +1,9 @@
 import { Bounds, OrbitControls } from '@react-three/drei'
 import { Canvas } from '@react-three/fiber'
-import React, { useEffect, useState } from 'react'
-import { Model as StarOffice } from '../../components/models/StarOffice'
+import React, { useEffect, useState, lazy } from 'react'
+// import StarOffice from '../../components/models/StarOffice'
+
+const StarOffice = lazy(()=>import("../../components/models/StarOffice"))
 
 type StarOfficePageProps = {
   sliderVal:number

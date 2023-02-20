@@ -1,14 +1,14 @@
-import { Suspense, useCallback, useMemo, useState } from 'react'
+import { Suspense, useCallback, useMemo, useState, lazy } from 'react'
 import reactLogo from './assets/react.svg'
 import './App.css'
 import Buttons from './components/Buttons';
 import { Route, Routes } from 'react-router-dom';
 import StarLoader from './components/StarLoader';
-import StarDomePage from './pages/stardome';
-import StarGalleryPage from './pages/stargallery';
-import StarOfficePage from './pages/staroffice';
-import StarArenaPage from './pages/stararena';
-import StarJewelleryPage from './pages/starjewellerystore';
+const StarDomePage =lazy(()=>import('./pages/stardome'));
+const StarGalleryPage =lazy(()=>import('./pages/stargallery')) ;
+const StarOfficePage =lazy(()=>import('./pages/staroffice')) ;
+const StarArenaPage =lazy(()=>import('./pages/stararena')) ;
+const StarJewelleryPage =lazy(()=>import('./pages/starjewellerystore')) ;
 
 function App() {
   const [hoveredStar, hoverStar] = useState("DEFAULT");

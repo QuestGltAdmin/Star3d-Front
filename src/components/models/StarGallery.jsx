@@ -13,7 +13,7 @@ const MODEL_URL=`https://cychat-storage-bucket.s3.us-east-2.amazonaws.com/star/m
 const THREE_PATH = `https://cychat-storage-bucket.s3.us-east-2.amazonaws.com/star/basis/`;
 const KTX2_LOADER = new KTX2Loader().setTranscoderPath(THREE_PATH)
 
-export function Model(props) {
+export default function Model(props) {
   const ref = useRef();
   const gl = useThree((state)=>state.gl)
 

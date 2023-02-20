@@ -1,7 +1,9 @@
 import { Bounds, OrbitControls } from '@react-three/drei'
 import { Canvas } from '@react-three/fiber'
-import React, { useEffect, useState } from 'react'
-import { Model as StarJewellery } from '../../components/models/StarJewelleryStore'
+import React, { useEffect, useState, lazy } from 'react'
+// import StarJewellery from '../../components/models/StarJewelleryStore'
+
+const StarJewellery = lazy(()=>import("../../components/models/StarJewelleryStore"))
 
 type StarJewelleryPageProps = {
   sliderVal:number
