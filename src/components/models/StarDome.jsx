@@ -22,7 +22,7 @@ const THREE_PATH = `https://cychat-storage-bucket.s3.us-east-2.amazonaws.com/sta
 const KTX2_LOADER = new KTX2Loader().setTranscoderPath(THREE_PATH)
 
 
-export function Model(props) {
+export default function Model(props) {
   const ref = useRef();
   const [start, setStart] = useState(true)
   const vec = new THREE.Vector3()

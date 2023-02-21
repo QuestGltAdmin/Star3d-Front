@@ -1,7 +1,11 @@
 import { Bounds, OrbitControls } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
-import React, { useEffect, useState, useRef } from "react";
-import {Model as StarDome} from "../../components/models/StarDome"
+
+import React, { useEffect, useState,useRef, lazy } from "react";
+// import StarDome from "../../components/models/StarDome"
+
+const StarDome = lazy(()=>import("../../components/models/StarDome"))
+
 
 type StarDomePageProps = {
   onStarHovered?:(type:string)=>void,
