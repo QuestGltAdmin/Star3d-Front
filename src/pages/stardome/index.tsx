@@ -1,9 +1,11 @@
 import { Bounds, OrbitControls } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
-import React, { useEffect, useState, lazy } from "react";
+
+import React, { useEffect, useState,useRef, lazy } from "react";
 // import StarDome from "../../components/models/StarDome"
 
 const StarDome = lazy(()=>import("../../components/models/StarDome"))
+
 
 type StarDomePageProps = {
   onStarHovered?:(type:string)=>void,
@@ -22,7 +24,9 @@ export default function StarDomePage({
   // Hold state for hovered and clicked events
   const [hovered, hover] = useState("DEFAULT");
   const [clicked, click] = useState(false);
+  const meshRef = useRef();
   const [rotate, setRotate] = useState({ speed: 0, reverse: false });
+
 
   useEffect(() => {
     if (onStarHovered) {
@@ -80,7 +84,7 @@ export default function StarDomePage({
       {/* <Lights/> */}
       <Bounds position={[0, 0, 0]} observe margin={1.2}>
         {/* <Model model_path={"/models/Star_Web_7_etc1s.glb"} /> */}
-        <StarDome/>
+        <StarDome ref= {meshRef} />
         {/* <StarCube
           star_art_gallery={{
             onClick: () => hover("GALLERY"),

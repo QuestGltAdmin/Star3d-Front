@@ -33,6 +33,8 @@ function App() {
     [parentVal]
   );
 
+  
+
   return (
     <div className="flex flex-col overflow-hidden bg-black">
       {/* <MiniApp /> */}
