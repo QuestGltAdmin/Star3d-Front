@@ -3,7 +3,7 @@ import { Canvas } from '@react-three/fiber'
 import React, { useEffect, useState, lazy } from 'react'
 // import StarJewellery from '../../components/models/StarJewelleryStore'
 
-const StarJewellery = lazy(()=>import("../../components/models/StarJewelleryStore"))
+const StarJewellery = lazy(()=>import("../../components/models/StarJewellery"))
 
 type StarJewelleryPageProps = {
   sliderVal:number

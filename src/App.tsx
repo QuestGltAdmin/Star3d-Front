@@ -4,15 +4,17 @@ import "./App.css";
 import Buttons from "./components/Buttons";
 import { Route, Routes } from "react-router-dom";
 import StarLoader from "./components/StarLoader";
+import ModelDetail from "./components/ModelDetail";
 const StarStadiumPage = lazy(() => import("./pages/starstadium"));
 const StarDomePage = lazy(() => import("./pages/stardome"));
 const StarGalleryPage = lazy(() => import("./pages/stargallery"));
 const StarOfficePage = lazy(() => import("./pages/staroffice"));
 const StarArenaPage = lazy(() => import("./pages/stararena"));
-const StarJewelleryPage = lazy(() => import("./pages/starjewellerystore"));
+const StarJewelleryPage = lazy(() => import("./pages/starjewellery"));
 
 function App() {
   const [hoveredStar, hoverStar] = useState("DEFAULT");
+  const [clickedStar, clickStar] = useState("DEFAULT");
 
   const [parentVal, setParentVal] = useState(0);
 
@@ -70,13 +72,13 @@ function App() {
         />
 
         {/* Stars Info */}
-        {/* <div className="absolute left-0 z-10 w-full p-3 bottom-5">
-          {hoveredStar === "JEWELLERY" && <StarJewelleryDetail />}
-          {hoveredStar === "GALLERY" && <StarArtGalleryDetail />}
-          {hoveredStar === "STADIUM" && <StarStadiumDetail />}
-          {hoveredStar === "OFFICE" && <StarOfficeDetail />}
-          {hoveredStar === "ARENA" && <StarArenaDetail />}
-        </div> */}
+        <div className="absolute left-0 z-10 w-full p-3 bottom-5">
+          {clickedStar === "JEWELLERY" && <ModelDetail title={"Star Jewellery"} subtitle={"One stop shop for any jewellery!"} />}
+          {clickedStar === "GALLERY" && <ModelDetail title={"Star Art Gallery"} subtitle={"One stop shop for any art!"} />}
+          {clickedStar === "STADIUM" && <ModelDetail title={"Star Stadium"} subtitle={"One stop place for any game!"} />}
+          {clickedStar === "OFFICE" && <ModelDetail title={"Star Office"} subtitle={"One and only quest workplace!"} />}
+          {clickedStar === "ARENA" && <ModelDetail title={"Star Arena"} subtitle={"One stop destination for any event!"} />}
+        </div>
         {/* <StarStage sliderVal={parentVal} /> */}
 
         <Routes>
@@ -87,7 +89,7 @@ function App() {
                 <StarDomePage
                   sliderVal={parentVal}
                   // checked={isChecked}
-                  onStarClicked={(e) => {}}
+                  onStarClicked={(e) => clickStar(e)}
                   onStarHovered={(e) => hoverStar(e)}
                 />
               </Suspense>

@@ -9,7 +9,7 @@ const StarDome = lazy(()=>import("../../components/models/StarDome"))
 
 type StarDomePageProps = {
   onStarHovered?:(type:string)=>void,
-  onStarClicked:(type:boolean)=>void,
+  onStarClicked:(type:string)=>void,
   sliderVal:number
 }
 
@@ -23,7 +23,7 @@ export default function StarDomePage({
 }:StarDomePageProps) {
   // Hold state for hovered and clicked events
   const [hovered, hover] = useState("DEFAULT");
-  const [clicked, click] = useState(false);
+  const [clicked, click] = useState("DEFAULT");
   const meshRef = useRef();
   const [rotate, setRotate] = useState({ speed: 0, reverse: false });
 
@@ -84,31 +84,31 @@ export default function StarDomePage({
       {/* <Lights/> */}
       <Bounds position={[0, 0, 0]} observe margin={1.2}>
         {/* <Model model_path={"/models/Star_Web_7_etc1s.glb"} /> */}
-        <StarDome ref= {meshRef} />
-        {/* <StarCube
+        {/* <StarDome ref= {meshRef} /> */}
+        <StarDome
           star_art_gallery={{
-            onClick: () => hover("GALLERY"),
-            onDoubleClick: () => hover("DEFAULT"),
+            onClick: () => click("GALLERY",),
+            onDoubleClick: () => click("DEFAULT"),
           }}
           star_office={{
-            onClick: () => hover("OFFICE"),
-            onDoubleClick: () => hover("DEFAULT"),
+            onClick: () => click("OFFICE"),
+            onDoubleClick: () => click("DEFAULT"),
           }}
           star_arena={{
-            onClick: () => hover("ARENA"),
-            onDoubleClick: () => hover("DEFAULT"),
+            onClick: () => click("ARENA"),
+            onDoubleClick: () => click("DEFAULT"),
           }}
           star_stadium={{
-            onClick: () => hover("STADIUM"),
-            onDoubleClick: () => hover("DEFAULT"),
+            onClick: () => click("STADIUM"),
+            onDoubleClick: () => click("DEFAULT"),
           }}
           star_jewellery={{
-            onClick: () => hover("JEWELLERY"),
-            onDoubleClick: () => hover("DEFAULT"),
+            onClick: () => click("JEWELLERY"),
+            onDoubleClick: () => click("DEFAULT"),
             // onPointerOver: () => hover("JEWELLERY"),
             // onPointerOut: () => hover("DEFAULT"),
           }}
-        /> */}
+        />
       </Bounds>
       <pointLight position={[1, 1, 1]} />
       {/* <Star position={[4, 1, 0]} /> */}
