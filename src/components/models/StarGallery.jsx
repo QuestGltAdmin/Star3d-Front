@@ -24,21 +24,21 @@ export default function Model(props) {
     loader.setKTX2Loader(KTX2_LOADER)
   });
 
-  useEffect(() => {
-    setTimeout(() => {
-      setStart(false)
-    },2500)
-  },[])
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     setStart(false)
+  //   },2500)
+  // },[])
 
-  useFrame((state ) => {
-    if(start){
-      state.camera.lookAt(ref.current.position)
-    state.camera.position.lerp(vec.set(0,0,10), 0.03)
-    state.camera.updateProjectionMatrix()
-    // setStart(false)
-  }
-    return null
-   });
+  // useFrame((state ) => {
+  //   if(start){
+  //     state.camera.lookAt(ref.current.position)
+  //   state.camera.position.lerp(vec.set(0,0,10), 0.03)
+  //   state.camera.updateProjectionMatrix()
+  //   // setStart(false)
+  // }
+  //   return null
+  //  });
 
   return (
     <group ref={ref} {...props} dispose={null}>
@@ -91,13 +91,13 @@ export default function Model(props) {
         material={materials.Photo_Baked}
         position={[3.65, 1.52, -1.03]}
       />
-      <mesh
+      {/* <mesh
         castShadow
         receiveShadow
         geometry={nodes.Sky_Baked.geometry}
         material={materials.Sky_Baked}
         position={[0, 110.11, 30.71]}
-      />
+      /> */}
       <mesh
         castShadow
         receiveShadow

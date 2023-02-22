@@ -23,21 +23,21 @@ export default function Model(props) {
   const [start, setStart] = useState(true)
   const vec = new THREE.Vector3()
 
-  useEffect(() => {
-    setTimeout(() => {
-      setStart(false)
-    },2500)
-  },[])
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     setStart(false)
+  //   },2500)
+  // },[])
 
-  useFrame((state ) => {
-    if(start){
-      state.camera.lookAt(ref.current.position)
-    state.camera.position.lerp(vec.set(0,0,10), 0.03)
-    state.camera.updateProjectionMatrix()
-    // setStart(false)
-  }
-    return null
-   });
+  // useFrame((state ) => {
+  //   if(start){
+  //     state.camera.lookAt(ref.current.position)
+  //   state.camera.position.lerp(vec.set(0,0,10), 0.03)
+  //   state.camera.updateProjectionMatrix()
+  //   // setStart(false)
+  // }
+  //   return null
+  //  });
 
   return (
     <group ref={ref} {...props} dispose={null}>

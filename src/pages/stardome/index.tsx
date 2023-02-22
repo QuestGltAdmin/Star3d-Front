@@ -9,7 +9,7 @@ const StarDome = lazy(()=>import("../../components/models/StarDome"))
 
 type StarDomePageProps = {
   onStarHovered?:(type:string)=>void,
-  onStarClicked:(type:string)=>void,
+  onStarClicked?:(type:string)=>void,
   sliderVal:number
 }
 
@@ -59,19 +59,9 @@ export default function StarDomePage({
       setRotate({ speed: Math.abs(sliderVal / 10), reverse: true });
     }
   }, [sliderVal]);
-  // console.log("model");
+  console.log("model", sliderVal);
   return (
-    <Canvas
-      className=""
-      // camera={{ position: [0, -10, 80], fov: 50 }}
-      camera={{
-        position: [8, 0, 2],
-        fov: 75,
-        near: 0.1,
-        far: 100,
-      }}
-      dpr={[1, 2]}
-    >
+    <>
       {/* <perspectiveCamera position={[2,3,4]} /> */}
       <ambientLight intensity={0.5} />
       {/* <directionalLight castShadow={true} /> */}
@@ -131,6 +121,6 @@ export default function StarDomePage({
         minPolarAngle={Math.PI - Math.PI / 1.6}
         maxPolarAngle={Math.PI - Math.PI / 1.6}
       />
-    </Canvas>
+    </>
   );
 }

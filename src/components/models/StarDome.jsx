@@ -34,21 +34,21 @@ export default function Model(props) {
     loader.setKTX2Loader(KTX2_LOADER)
   });
 
-  useEffect(() => {
-    setTimeout(() => {
-      setStart(false)
-    },2500)
-  },[])
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     setStart(false)
+  //   },2500)
+  // },[])
 
-  useFrame((state ) => {
-    if(start){
-      state.camera.lookAt(ref.current.position)
-      state.camera.position.lerp(vec.set(0,0,10), 0.03)
-      state.camera.updateProjectionMatrix()
-      // setStart(false)
-    }
-    return null
-   });
+  // useFrame((state ) => {
+  //   if(start){
+  //     state.camera.lookAt(ref.current.position)
+  //     state.camera.position.lerp(vec.set(0,0,10), 0.03)
+  //     state.camera.updateProjectionMatrix()
+  //     // setStart(false)
+  //   }
+  //   return null
+  //  });
 
   return (
     
@@ -94,11 +94,11 @@ export default function Model(props) {
         onClick={(e) => {
             e.stopPropagation();
             e.delta <= 2 && bound.refresh(e.object).fit();
-            props.star_arena.onClick(e);
+            props?.star_arena?.onClick(e);
           }}
           onDoubleClick={(e) => {
             bound.to({ position: [-8, 0, 50], target: [0, 0, 0] });
-            props.star_arena.onDoubleClick(e);
+            props?.star_arena?.onDoubleClick(e);
           }}
       />
       <mesh
@@ -132,8 +132,8 @@ export default function Model(props) {
             bound.to({ position: [-8, 0, -7], target: [0, 0, 0] });
             props?.star_jewellery?.onDoubleClick(e);
           }}
-          onPointerOver={props.star_jewellery.onPointerOver}
-          onPointerOut={props.star_jewellery.onPointerOut}
+          onPointerOver={props?.star_jewellery?.onPointerOver}
+          onPointerOut={props?.star_jewellery?.onPointerOut}
       />
       <mesh
         castShadow
