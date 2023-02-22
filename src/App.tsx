@@ -5,12 +5,17 @@ import Buttons from "./components/Buttons";
 import { Route, Routes } from "react-router-dom";
 import StarLoader from "./components/StarLoader";
 import ModelDetail from "./components/ModelDetail";
+import StarMetaverse from "./pages/starmetaverse";
 const StarStadiumPage = lazy(() => import("./pages/starstadium"));
 const StarDomePage = lazy(() => import("./pages/stardome"));
 const StarGalleryPage = lazy(() => import("./pages/stargallery"));
 const StarOfficePage = lazy(() => import("./pages/staroffice"));
 const StarArenaPage = lazy(() => import("./pages/stararena"));
 const StarJewelleryPage = lazy(() => import("./pages/starjewellery"));
+
+
+
+
 
 function App() {
   const [hoveredStar, hoverStar] = useState("DEFAULT");
@@ -34,8 +39,6 @@ function App() {
     }),
     [parentVal]
   );
-
-  
 
   return (
     <div className="flex flex-col overflow-hidden bg-black">
@@ -73,17 +76,49 @@ function App() {
 
         {/* Stars Info */}
         <div className="absolute left-0 z-10 w-full p-3 bottom-5">
-          {clickedStar === "JEWELLERY" && <ModelDetail title={"Star Jewellery"} subtitle={"One stop shop for any jewellery!"} />}
-          {clickedStar === "GALLERY" && <ModelDetail title={"Star Art Gallery"} subtitle={"One stop shop for any art!"} />}
-          {clickedStar === "STADIUM" && <ModelDetail title={"Star Stadium"} subtitle={"One stop place for any game!"} />}
-          {clickedStar === "OFFICE" && <ModelDetail title={"Star Office"} subtitle={"One and only quest workplace!"} />}
-          {clickedStar === "ARENA" && <ModelDetail title={"Star Arena"} subtitle={"One stop destination for any event!"} />}
+          {clickedStar === "JEWELLERY" && (
+            <ModelDetail
+              title={"Star Jewellery"}
+              subtitle={"One stop shop for any jewellery!"}
+            />
+          )}
+          {clickedStar === "GALLERY" && (
+            <ModelDetail
+              title={"Star Art Gallery"}
+              subtitle={"One stop shop for any art!"}
+            />
+          )}
+          {clickedStar === "STADIUM" && (
+            <ModelDetail
+              title={"Star Stadium"}
+              subtitle={"One stop place for any game!"}
+            />
+          )}
+          {clickedStar === "OFFICE" && (
+            <ModelDetail
+              title={"Star Office"}
+              subtitle={"One and only quest workplace!"}
+            />
+          )}
+          {clickedStar === "ARENA" && (
+            <ModelDetail
+              title={"Star Arena"}
+              subtitle={"One stop destination for any event!"}
+            />
+          )}
         </div>
         {/* <StarStage sliderVal={parentVal} /> */}
 
+        
         <Routes>
           <Route
             path="/"
+            element={
+              <StarMetaverse />
+            }
+          />
+          <Route
+            path="/star-stage"
             element={
               <Suspense fallback={<StarLoader />}>
                 <StarDomePage
