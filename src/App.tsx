@@ -17,10 +17,7 @@ import {
 } from "@react-three/drei";
 import { useTransition } from "@react-spring/core";
 import { a } from "@react-spring/three";
-import StarDomeModel from "./components/models/StarDome";
-import StarGalleryModel from "./components/models/StarGallery";
-import StarJewelleryModel from "./components/models/StarJewellery";
-import StarOfficeModel from "./components/models/StarOffice";
+
 
 const StarStadiumPage = lazy(() => import("./pages/starstadium"));
 const StarDomePage = lazy(() => import("./pages/stardome"));
@@ -30,7 +27,7 @@ const StarArenaPage = lazy(() => import("./pages/stararena"));
 const StarJewelleryPage = lazy(() => import("./pages/starjewellery"));
 
 function Metaverse({ transition, parentVal, ...metaverseProps }: any) {
-  return transition(({ opacity, ...props }: any, location: any) => (
+  return transition(({ opacity, ...props }: any) => (
     <a.group {...props}>
       <Routes>
         <Route
@@ -60,40 +57,6 @@ function Metaverse({ transition, parentVal, ...metaverseProps }: any) {
     </a.group>
   ));
 }
-
-const StarDome = ({ ...props }) => {
-  return (
-    <Bounds position={[8, 0, 0]} observe margin={1.2}>
-      <StarDomeModel />
-      <OrbitControls
-        // enabled={false}
-        // enableZoom={false}
-        minDistance={5}
-        maxDistance={20}
-        // autoRotate={true}
-        enableRotate={true}
-        minPolarAngle={Math.PI - Math.PI / 1.6}
-        maxPolarAngle={Math.PI - Math.PI / 1.6}
-      />
-    </Bounds>
-  );
-};
-
-const StarJewellery = ({ ...props }) => {
-  return (
-    <>
-      <StarJewelleryModel />
-    </>
-  );
-};
-
-const StarOffice = ({ ...props }) => {
-  return (
-    <>
-      <StarOfficeModel />
-    </>
-  );
-};
 
 function App() {
   const [hoveredStar, hoverStar] = useState("DEFAULT");
