@@ -26,8 +26,8 @@ const StarOfficePage = lazy(() => import("./pages/staroffice"));
 const StarArenaPage = lazy(() => import("./pages/stararena"));
 const StarJewelleryPage = lazy(() => import("./pages/starjewellery"));
 
-function Metaverse({ transition, parentVal, ...metaverseProps }: any) {
-  return transition(({ opacity, ...props }: any) => (
+function Metaverse({ transition, parentVal, ...metaverseProps }) {
+  return transition(({ opacity, ...props }) => (
     <a.group {...props}>
       <Routes>
         <Route
@@ -68,7 +68,7 @@ function App() {
   const location = useLocation();
   const [ortho, setOrtho] = useState(false);
   // Animated shape props
-  const transition = useTransition(location.pathname, {
+  const transition = useTransition(location.pathname,{
     from: {
       position: [0, 0, -20],
       rotation: [0, Math.PI, 0],
@@ -90,7 +90,7 @@ function App() {
     config: () => (n) => n === "opacity" && { friction: 60 },
   });
 
-  const sliderValueChanged = useCallback((val: number) => {
+  const sliderValueChanged = useCallback((val) => {
     // console.log("NEW VALUE", val);
     setParentVal(val);
   }, []);
@@ -102,7 +102,7 @@ function App() {
       value: parentVal,
       step: 2,
       label: "This is star stage rotate range",
-      onChange: (e: number) => sliderValueChanged(e),
+      onChange: (e) => sliderValueChanged(e),
     }),
     [parentVal]
   );
