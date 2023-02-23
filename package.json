@@ -20,7 +20,8 @@
     "sort-by": "^1.2.0",
     "tailwind-merge": "^1.9.1",
     "three": "^0.149.0",
-    "use-sound": "^4.0.1"
+    "use-sound": "^4.0.1",
+    "zustand": "^4.3.3"
   },
   "devDependencies": {
     "@types/react": "^18.0.27",

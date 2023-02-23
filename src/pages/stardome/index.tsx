@@ -7,11 +7,11 @@ import React, { useEffect, useState,useRef, lazy } from "react";
 const StarDome = lazy(()=>import("../../components/models/StarDome"))
 
 
-type StarDomePageProps = {
-  onStarHovered?:(type:string)=>void,
-  onStarClicked?:(type:string)=>void,
-  sliderVal:number
-}
+// type StarDomePageProps = {
+//   onStarHovered?:(type:string)=>void,
+//   onStarClicked?:(type:string)=>void,
+//   sliderVal:number
+// }
 
 
 export default function StarDomePage({
@@ -19,8 +19,8 @@ export default function StarDomePage({
   onStarClicked,
   sliderVal,
   // checked=false,
-  ...starDomePageProps
-}:StarDomePageProps) {
+  ...props
+}:any) {
   // Hold state for hovered and clicked events
   const [hovered, hover] = useState("DEFAULT");
   const [clicked, click] = useState("DEFAULT");
