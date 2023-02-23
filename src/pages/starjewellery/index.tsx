@@ -1,4 +1,4 @@
-import { Bounds, FirstPersonControls, OrbitControls } from '@react-three/drei'
+import { Bounds, FirstPersonControls, OrbitControls, ScrollControls } from '@react-three/drei'
 import { Canvas } from '@react-three/fiber'
 import React, { useEffect, useState, lazy } from 'react'
 // import StarJewellery from '../../components/models/StarJewelleryStore'
@@ -52,15 +52,15 @@ export default function StarJewelleryPage({sliderVal}:StarJewelleryPageProps) {
     />
     {/* <Lights/> */}
     <Bounds position={[0, 0, 0]} observe margin={1.2}>
-  
-      <StarJewellery />
+    <ScrollControls pages={3}>
+        <StarJewellery />
+      </ScrollControls>
     </Bounds>
     <pointLight position={[1, 1, 1]} />
     {/* <Star position={[4, 1, 0]} /> */}
     {/* <StarEvent position={[-1.2, 0, 0]} /> */}
     {/* <StarEvent position={[1.2, 0, 0]} /> */}
-    {
-control ? (      
+     
         <OrbitControls
           makeDefault
           minDistance={0.5}
@@ -77,14 +77,7 @@ control ? (
           // minPolarAngle={0} maxPolarAngle={Math.PI / 1.6}
           minPolarAngle={Math.PI - Math.PI / 1.6}
           maxPolarAngle={Math.PI - Math.PI / 1.6}
-        />) : (      
-        <FirstPersonControls
-          // heightMax={1}
-          constrainVertical={true}
-          verticalMax={Math.PI}
-          verticalMin={0}
-          />)
-      }
+        />
   </>
   )
 }
