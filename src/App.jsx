@@ -12,6 +12,7 @@ import { Canvas } from "@react-three/fiber";
 import Buttons from "./components/Buttons";
 import { Route, Routes, useLocation } from "react-router-dom";
 import { gsap } from "gsap";
+import * as THREE from "three";
 import { ScrollToPlugin, ScrollTrigger } from "gsap/all";
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 // import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -35,6 +36,9 @@ import { useSpringRef, useTransition } from "@react-spring/core";
 import { a } from "@react-spring/three";
 import StarJewellery from "./components/models/StarJewellery";
 import Overlay from "./components/Overlay";
+import Effects from "./components/Effects";
+import Stars from "./components/Stars";
+import useStore from "./store";
 
 const StarStadiumPage = lazy(() => import("./pages/starstadium"));
 const StarDomePage = lazy(() => import("./pages/stardome"));
@@ -44,12 +48,10 @@ const StarArenaPage = lazy(() => import("./pages/stararena"));
 const StarJewelleryPage = lazy(() => import("./pages/starjewellery"));
 
 function App() {
-  const [hoveredStar, hoverStar] = useState("DEFAULT");
-  const [clickedStar, clickStar] = useState("DEFAULT");
-
+  const { fov } = useStore((state) => state.mutation);
+  const actions = useStore((state) => state.actions);
   // Current route
   const location = useLocation();
-  const [ortho, setOrtho] = useState(false);
   // Animated shape props
 
   const transition = useTransition(location.pathname, {
@@ -85,73 +87,78 @@ function App() {
   });
 
   return (
-    <div className="flex flex-col overflow-hidden bg-black">
-      {/* <MiniApp /> */}
-      {/* <div className="fixed z-10 flex justify-center w-full py-3 bg-black">
-        <Link to={"/"}>
-          <h1 className="z-10 text-3xl font-bold text-center text-white underline">
-            Star Stage
-          </h1>
-        </Link>
-      </div> */}
-      <div className="relative h-screen max-w-full ">
-        <Overlay />
-        <Canvas dpr={[1, 2]}>
-          <PerspectiveCamera
+    <div
+      onPointerMove={actions.updateMouse}
+      onClick={actions.shoot}
+      className="overflow-hidden bg-black relative h-screen max-w-full"
+    >
+      <Canvas
+        dpr={[1, 1.5]}
+        camera={{ position: [10, 0, 10], near: 0.01, far: 10000, fov }}
+        onCreated={({ gl, camera }) => {
+          actions.init(camera);
+          // gl.toneMapping = THREE.Uncharted2ToneMapping;
+          // gl.setClearColor(new THREE.Color("#020209"));
+        }}
+      >
+      {/* <Stars/> */}
+        {/* <PerspectiveCamera
             position={[8, 0, 2]}
             fov={75}
             makeDefault={!ortho}
-          />
-          <OrthographicCamera
+          /> */}
+        {/* <OrthographicCamera
             position={[8, 0, 2]}
             zoom={75}
             makeDefault={ortho}
-          />
+          /> */}
 
-          <Suspense
-            fallback={null}
-            // fallback={
-            //   <>
-            //     <fog attach="fog" args={["#17171b", 30, 40]} />
-            //     <color attach="background" args={["#17171b"]} />
-            //     <ambientLight intensity={0.25} />
-            //     <PerspectiveCamera shadows camera={{ position: [-15, 15, 18], fov: 35 }} />
-            //     <directionalLight
-            //       castShadow
-            //       intensity={2}
-            //       position={[10, 6, 6]}
-            //       shadow-mapSize={[1024, 1024]}
-            //     >
-            //       <orthographicCamera
-            //         attach="shadow-camera"
-            //         left={-20}
-            //         right={20}
-            //         top={20}
-            //         bottom={-20}
-            //       />
-            //     </directionalLight>
-            //     <mesh position={[0, -1.5, 0]} rotation={[-Math.PI / 2, 0, 0]}>
-            //       <planeGeometry args={[50, 50]} />
-            //       <MeshReflectorMaterial
-            //         blur={[400, 100]}
-            //         resolution={1024}
-            //         mixBlur={1}
-            //         mixStrength={15}
-            //         depthScale={1}
-            //         minDepthThreshold={0.85}
-            //         color="#151515"
-            //         metalness={0.6}
-            //         roughness={1}
-            //       />
-            //     </mesh>
-            //     <Environment preset="dawn" />
-            //   </>
-            // }
-          >
-            <Router transition={transition} />
-          </Suspense>
-        </Canvas>
-      </div>
+        <Suspense
+          fallback={null}
+          // fallback={
+          //   <>
+          //     <fog attach="fog" args={["#17171b", 30, 40]} />
+          //     <color attach="background" args={["#17171b"]} />
+          //     <ambientLight intensity={0.25} />
+          //     <PerspectiveCamera shadows camera={{ position: [-15, 15, 18], fov: 35 }} />
+          //     <directionalLight
+          //       castShadow
+          //       intensity={2}
+          //       position={[10, 6, 6]}
+          //       shadow-mapSize={[1024, 1024]}
+          //     >
+          //       <orthographicCamera
+          //         attach="shadow-camera"
+          //         left={-20}
+          //         right={20}
+          //         top={20}
+          //         bottom={-20}
+          //       />
+          //     </directionalLight>
+          //     <mesh position={[0, -1.5, 0]} rotation={[-Math.PI / 2, 0, 0]}>
+          //       <planeGeometry args={[50, 50]} />
+          //       <MeshReflectorMaterial
+          //         blur={[400, 100]}
+          //         resolution={1024}
+          //         mixBlur={1}
+          //         mixStrength={15}
+          //         depthScale={1}
+          //         minDepthThreshold={0.85}
+          //         color="#151515"
+          //         metalness={0.6}
+          //         roughness={1}
+          //       />
+          //     </mesh>
+          //     <Environment preset="dawn" />
+          //   </>
+          // }
+        >
+          <Router transition={transition} />
+        </Suspense>
+        {/* <Stars/> */}
+        {/* <Effects/> */}
+      </Canvas>
+      <Overlay />
     </div>
   );
 }

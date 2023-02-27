@@ -52,6 +52,7 @@ const useStore = create((set, get) => {
 
     actions: {
       init(camera) {
+        console.log("init",camera)
         const { mutation, actions } = get()
 
         set({ camera })
@@ -105,6 +106,7 @@ const useStore = create((set, get) => {
         set({hovered:{event,label:hovered, status:status??!get().hovered.status}})
       },
       shoot() {
+        console.log("shoot")
         set((state) => ({ lasers: [...state.lasers, Date.now()] }))
         clearTimeout(cancelLaserTO)
         cancelLaserTO = setTimeout(() => set((state) => ({ lasers: state.lasers.filter((t) => Date.now() - t <= 1000) })), 1000)

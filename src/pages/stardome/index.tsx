@@ -1,7 +1,8 @@
-import { Bounds, OrbitControls } from "@react-three/drei";
+import { Bounds, OrbitControls, ScrollControls } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 
 import React, { useEffect, useState, useRef, lazy } from "react";
+import Stars from "../../components/Stars";
 import useStore from "../../store";
 // import StarDome from "../../components/models/StarDome"
 
@@ -14,29 +15,11 @@ const StarDome = lazy(() => import("../../components/models/StarDome"));
 // }
 
 export default function StarDomePage({
-  onStarHovered,
-  onStarClicked,
-  // checked=false,
   ...props
 }: any) {
   const sliderVal = useStore<any>((state: any) => state.sliderVal) as number;
-  // Hold state for hovered and clicked events
-  const [hovered, hover] = useState("DEFAULT");
-  const [clicked, click] = useState("DEFAULT");
   const meshRef = useRef();
   const [rotate, setRotate] = useState({ speed: 0, reverse: false });
-
-  useEffect(() => {
-    if (onStarHovered) {
-      onStarHovered(hovered);
-    }
-  }, [hovered]);
-
-  useEffect(() => {
-    if (onStarClicked) {
-      onStarClicked(clicked);
-    }
-  }, [clicked]);
 
   useEffect(() => {
     if (sliderVal > 0) {
@@ -55,50 +38,40 @@ export default function StarDomePage({
   // console.log("model", sliderVal);
   return (
     <>
-      {/* <perspectiveCamera position={[2,3,4]} /> */}
-      <ambientLight intensity={0.5} />
-      {/* <directionalLight castShadow={true} /> */}
-      <spotLight
+      <Stars />
+      <fog attach="fog" args={["#17171b", 30, 40]} />
+      <color attach="background" args={["#17171b"]} />
+      <ambientLight intensity={0.25} />
+      <directionalLight
+        castShadow
+        intensity={0.8}
+        position={[10, 6, 6]}
+        shadow-mapSize={[1024, 1024]}
+      >
+        <orthographicCamera
+          attach="shadow-camera"
+          left={-20}
+          right={20}
+          top={20}
+          bottom={-20}
+        />
+      </directionalLight>
+      {/* <spotLight
         // map={envMap}
         position={[1, 10, 1]}
         angle={0.15}
         penumbra={1}
-      />
-      {/* <Lights/> */}
-      <Bounds position={[0, 0, 0]} observe margin={1.2}>
-        {/* <Model model_path={"/models/Star_Web_7_etc1s.glb"} /> */}
-        {/* <StarDome ref= {meshRef} /> */}
-        <StarDome
-          star_art_gallery={{
-            onClick: () => click("GALLERY"),
-            onDoubleClick: () => click("DEFAULT"),
-          }}
-          star_office={{
-            onClick: () => click("OFFICE"),
-            onDoubleClick: () => click("DEFAULT"),
-          }}
-          star_arena={{
-            onClick: () => click("ARENA"),
-            onDoubleClick: () => click("DEFAULT"),
-          }}
-          star_stadium={{
-            onClick: () => click("STADIUM"),
-            onDoubleClick: () => click("DEFAULT"),
-          }}
-          star_jewellery={{
-            onClick: () => click("JEWELLERY"),
-            onDoubleClick: () => click("DEFAULT"),
-            // onPointerOver: () => hover("JEWELLERY"),
-            // onPointerOut: () => hover("DEFAULT"),
-          }}
-        />
-      </Bounds>
+      /> */}
       <pointLight position={[1, 1, 1]} />
-      {/* <Star position={[4, 1, 0]} /> */}
-      {/* <StarEvent position={[-1.2, 0, 0]} /> */}
-      {/* <StarEvent position={[1.2, 0, 0]} /> */}
+      <ScrollControls pages={4}>
+
+      {/* <Bounds position={[0, 0, 0]} observe margin={1.2}> */}
+        <StarDome />
+      {/* </Bounds> */}
+      </ScrollControls>
       <OrbitControls
         makeDefault
+        enableZoom={false}
         minDistance={0.5}
         maxDistance={8}
         autoRotate={true}
