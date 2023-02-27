@@ -1,11 +1,11 @@
 import { Bounds, OrbitControls } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 
-import React, { useEffect, useState,useRef, lazy } from "react";
+import React, { useEffect, useState, useRef, lazy } from "react";
+import useStore from "../../store";
 // import StarDome from "../../components/models/StarDome"
 
-const StarDome = lazy(()=>import("../../components/models/StarDome"))
-
+const StarDome = lazy(() => import("../../components/models/StarDome"));
 
 // type StarDomePageProps = {
 //   onStarHovered?:(type:string)=>void,
@@ -13,20 +13,18 @@ const StarDome = lazy(()=>import("../../components/models/StarDome"))
 //   sliderVal:number
 // }
 
-
 export default function StarDomePage({
   onStarHovered,
   onStarClicked,
-  sliderVal,
   // checked=false,
   ...props
-}:any) {
+}: any) {
+  const sliderVal = useStore<any>((state: any) => state.sliderVal) as number;
   // Hold state for hovered and clicked events
   const [hovered, hover] = useState("DEFAULT");
   const [clicked, click] = useState("DEFAULT");
   const meshRef = useRef();
   const [rotate, setRotate] = useState({ speed: 0, reverse: false });
-
 
   useEffect(() => {
     if (onStarHovered) {
@@ -42,24 +40,19 @@ export default function StarDomePage({
 
   useEffect(() => {
     if (sliderVal > 0) {
-      console.log("greater", typeof sliderVal, sliderVal / 10, sliderVal / 10);
+      // console.log("greater", typeof sliderVal, sliderVal / 10, sliderVal / 10);
       setRotate({ speed: sliderVal / 10, reverse: false });
     }
     if (sliderVal === 0) {
-      console.log("equal", typeof sliderVal, sliderVal);
+      // console.log("equal", typeof sliderVal, sliderVal);
       setRotate({ speed: 0.5, reverse: false });
     }
     if (sliderVal < 0) {
-      console.log(
-        "less",
-        typeof sliderVal,
-        sliderVal,
-        Math.abs(sliderVal / 10)
-      );
+      // console.log("less",typeof sliderVal,sliderVal,Math.abs(sliderVal / 10));
       setRotate({ speed: Math.abs(sliderVal / 10), reverse: true });
     }
   }, [sliderVal]);
-  console.log("model", sliderVal);
+  // console.log("model", sliderVal);
   return (
     <>
       {/* <perspectiveCamera position={[2,3,4]} /> */}
@@ -77,7 +70,7 @@ export default function StarDomePage({
         {/* <StarDome ref= {meshRef} /> */}
         <StarDome
           star_art_gallery={{
-            onClick: () => click("GALLERY",),
+            onClick: () => click("GALLERY"),
             onDoubleClick: () => click("DEFAULT"),
           }}
           star_office={{
