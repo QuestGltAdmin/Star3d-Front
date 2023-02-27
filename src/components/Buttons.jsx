@@ -2,7 +2,8 @@ import React, { memo, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import useSound from "use-sound";
 import { cn } from "../utilities/classname";
-import music from "../assets/ambient_inspiration.mp3"
+import music from "../assets/audio/ambient_inspiration.mp3"
+import useStore from "../store";
 
 export default function Buttons(props) {
   switch (props.component) {
@@ -332,22 +333,21 @@ const LayerButton = (props) => {
 
 const SliderButton = memo(
   ({ className, label, onChange, value, ...sliderProps }) => {
-    const [sliderVal, setSliderVal] = useState(0);
+
+    const actions = useStore((state)=>state.actions)
+    const [sliderVal, setSliderVal] = useState(value);
     const [mouseState, setMouseState] = useState(null);
-
-    // useEffect(() => {
-    //   setSliderVal(value);
-    // }, [value]);
-
+    
     const changeCallback = (e) => {
       setSliderVal(e.target.valueAsNumber);
       // onChange(sliderVal);
     };
-
+    
     useEffect(() => {
       let t = setTimeout(() => {
+        actions.updateSliderValue(sliderVal);
         onChange(sliderVal);
-      }, 200);
+      }, 50);
 
       return () => {
         clearTimeout(t);
@@ -355,6 +355,7 @@ const SliderButton = memo(
     }, [sliderVal]);
 
     useEffect(() => {
+      actions.updateSliderValue(0);
       onChange(0);
       setSliderVal(0);
       // if (mouseState === "up") {

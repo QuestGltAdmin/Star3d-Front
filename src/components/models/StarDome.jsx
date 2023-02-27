@@ -6,33 +6,41 @@ import React, { useEffect, useRef, useState } from "react";
 import { useBounds, useGLTF } from "@react-three/drei";
 import { useThree, useFrame } from "@react-three/fiber";
 import { KTX2Loader } from "three/examples/jsm/loaders/KTX2Loader";
-import * as THREE from 'three'
+import * as THREE from "three";
+import useStore from "../../store";
 
-
-const MODEL_URLS =[
+const MODEL_URLS = [
   `https://cychat-storage-bucket.s3.us-east-2.amazonaws.com/star/models/dome/star_dome_etc1s.glb`,
   `https://cychat-storage-bucket.s3.us-east-2.amazonaws.com/star/models/office/star_office_etc1s.glb`,
   `https://cychat-storage-bucket.s3.us-east-2.amazonaws.com/star/models/jewellery/star_jewellery_etc1s.glb`,
   `https://cychat-storage-bucket.s3.us-east-2.amazonaws.com/star/models/gallery/star_gallery_etc1s_1.glb`,
-  `https://cychat-storage-bucket.s3.us-east-2.amazonaws.com/star/models/arena/star_arena_etc1s.glb`
-]
-const MODEL_URL=`https://cychat-storage-bucket.s3.us-east-2.amazonaws.com/star/models/dome/star_dome_etc1s.glb`
+  `https://cychat-storage-bucket.s3.us-east-2.amazonaws.com/star/models/arena/star_arena_etc1s.glb`,
+];
+const MODEL_URL = `https://cychat-storage-bucket.s3.us-east-2.amazonaws.com/star/models/dome/star_dome_etc1s.glb`;
 
 const THREE_PATH = `https://cychat-storage-bucket.s3.us-east-2.amazonaws.com/star/basis/`;
-const KTX2_LOADER = new KTX2Loader().setTranscoderPath(THREE_PATH)
+const KTX2_LOADER = new KTX2Loader().setTranscoderPath(THREE_PATH);
 
-
-export default function Model({...props}) {
+export default function Model({ ...props }) {
   const ref = useRef();
-  const [start, setStart] = useState(true)
-  const vec = new THREE.Vector3()
+  const [start, setStart] = useState(true);
+  const vec = new THREE.Vector3();
   const gl = useThree((state) => state.gl);
   const bound = useBounds();
-  
-  const { nodes, materials } = useGLTF(MODEL_URL,true,true,(loader)=>{
+  const actions = useStore((state) => state.actions);
+
+  const { nodes, materials } = useGLTF(MODEL_URL, true, true, (loader) => {
     KTX2_LOADER.detectSupport(gl).dispose();
-    loader.setKTX2Loader(KTX2_LOADER)
+    loader.setKTX2Loader(KTX2_LOADER);
   });
+
+  useFrame((state)=>{
+    console.log("frame",state);
+
+    state.events.handlers.onClick((e)=>{
+      console.log(e,"CLICK=================")
+    })
+  })
 
   // useEffect(() => {
   //   setTimeout(() => {
@@ -50,14 +58,16 @@ export default function Model({...props}) {
   //   return null
   //  });
 
+  const factor = 3;
+  const scale ={min:[1,1,1],max:[15,15,15]}
+
   return (
-    
-    <group {...props}
-    ref={ref}
-    // onClick={(e) => (e.stopPropagation(), e.delta <= 2 && bound.refresh(e.object).fit())}
-    onPointerMissed={(e) => e.button === 0 && bound.refresh().fit()}
-    dispose={null}
-    
+    <group
+      {...props}
+      ref={ref}
+      // onClick={(e) => (e.stopPropagation(), e.delta <= 2 && bound.refresh(e.object).fit())}
+      onPointerMissed={(e) => e.button === 0 && bound.refresh(e.object).fit()}
+      dispose={null}
     >
       <mesh
         castShadow
@@ -94,14 +104,28 @@ export default function Model({...props}) {
         material={materials["Star Arena"]}
         position={[-0.14, 1.89, 1.26]}
         onClick={(e) => {
-            e.stopPropagation();
-            e.delta <= 2 && bound.refresh(e.object).fit();
-            props?.star_arena?.onClick(e);
-          }}
-          onDoubleClick={(e) => {
-            bound.to({ position: [-8, 0, 50], target: [0, 0, 0] });
-            props?.star_arena?.onDoubleClick(e);
-          }}
+          e.stopPropagation();
+          
+          // console.log(e)
+          e.delta <= 2 && bound.refresh(e.object).fit();
+          actions.click(e, "ARENA");
+          // props?.star_arena?.onClick(e);
+        }}
+        onPointerOver={(e)=>{
+          // e.object.position.z*=factor;
+          // e.object.scale.set(...scale.max)
+          actions.hover(e,"ARENA",true);
+        }}
+        onPointerOut={(e)=>{
+          // e.object.position.z=1.26
+          // e.object.scale.set(...scale.min)
+          actions.hover(e,"ARENA",false)
+        }}
+        onDoubleClick={(e) => {
+          bound.to({ position: [-8, 0, 50], target: [0, 0, 0] });
+          actions.click(e, "ARENA");
+          // props?.star_arena?.onDoubleClick(e);
+        }}
       />
       <mesh
         castShadow
@@ -110,14 +134,26 @@ export default function Model({...props}) {
         material={materials.Star_Art_Gallery}
         position={[0.3, 2.29, -0.92]}
         onClick={(e) => {
-            e.stopPropagation();
-            e.delta <= 2 && bound.refresh(e.object).fit();
-            props?.star_art_gallery?.onClick(e);
-          }}
-          onDoubleClick={(e) => {
-            bound.to({ position: [8, 0, -30], target: [0, 0, 0] });
-            props?.star_art_gallery?.onDoubleClick(e);
-          }}
+          e.stopPropagation();
+          e.delta <= 2 && bound.refresh(e.object).fit();
+          actions.click(e, "GALLERY");
+          // props?.star_art_gallery?.onClick(e);
+        }}
+        onDoubleClick={(e) => {
+          bound.to({ position: [8, 0, -30], target: [0, 0, 0] });
+          actions.click(e, "GALLERY");
+          // props?.star_art_gallery?.onDoubleClick(e);
+        }}
+        onPointerOver={(e)=>{
+          // e.object.position.z*=factor
+          // e.object.scale.set(...scale.max)
+          actions.hover(e,"GALLERY",true);
+        }}
+        onPointerOut={(e)=>{
+          // e.object.position.z=-0.92
+          // e.object.scale.set(...scale.min)
+          actions.hover(e,"GALLERY",false)
+        }}
       />
       <mesh
         castShadow
@@ -126,16 +162,25 @@ export default function Model({...props}) {
         material={materials.Star_Jewerly_Store}
         position={[-0.77, 1.61, -1.02]}
         onClick={(e) => {
-            e.stopPropagation();
-            e.delta <= 2 && bound.refresh(e.object).fit();
-            props?.star_jewellery?.onClick(e);
-          }}
-          onDoubleClick={(e) => {
-            bound.to({ position: [-8, 0, -7], target: [0, 0, 0] });
-            props?.star_jewellery?.onDoubleClick(e);
-          }}
-          onPointerOver={props?.star_jewellery?.onPointerOver}
-          onPointerOut={props?.star_jewellery?.onPointerOut}
+          e.stopPropagation();
+          e.delta <= 2 && bound.refresh(e.object).fit();
+          actions.click(e, "JEWELLERY");
+          // props?.star_jewellery?.onClick(e);
+        }}
+        onDoubleClick={(e) => {
+          bound.to({ position: [-8, 0, -7], target: [0, 0, 0] });
+          props?.star_jewellery?.onDoubleClick(e);
+        }}
+        onPointerOver={(e)=>{
+          // e.object.position.z*=factor
+          // e.object.scale.set(...scale.max)
+          actions.hover(e,"JEWELLERY",true);
+        }}
+        onPointerOut={(e)=>{
+          // e.object.position.z=-1.02
+          // e.object.scale.set(...scale.min)
+          actions.hover(e,"JEWELLERY",false)
+        }}
       />
       <mesh
         castShadow
@@ -144,14 +189,25 @@ export default function Model({...props}) {
         material={materials.Star_Stadium}
         position={[-1.01, 2.51, 0.37]}
         onClick={(e) => {
-            e.stopPropagation(); 
-            e.delta <= 2 && bound.refresh(e.object).fit();
-            props?.star_stadium?.onClick(e);
-          }}
-          onDoubleClick={(e) => {
-            bound.to({ position: [-8, 0, 1], target: [0, 0, 0] });
-            props?.star_stadium?.onDoubleClick(e);
-          }}
+          e.stopPropagation();
+          e.delta <= 2 && bound.refresh(e.object).fit();
+          actions.click(e, "STADIUM");
+          // props?.star_stadium?.onClick(e);
+        }}
+        onDoubleClick={(e) => {
+          bound.to({ position: [-8, 0, 1], target: [0, 0, 0] });
+          props?.star_stadium?.onDoubleClick(e);
+        }}
+        onPointerOver={(e)=>{
+          // e.object.position.z*=factor
+          // e.object.scale.set(...scale.max)
+          actions.hover(e,"STADIUM",true);
+        }}
+        onPointerOut={(e)=>{
+          // e.object.position.z=0.37
+          // e.object.scale.set(...scale.min)
+          actions.hover(e,"STADIUM",false)
+        }}
       />
       <mesh
         castShadow
@@ -160,16 +216,27 @@ export default function Model({...props}) {
         material={materials.Star_Office}
         position={[1.06, 1.57, 0.27]}
         onClick={(e) => {
-            e.stopPropagation();
-            e.delta <= 2 && bound.refresh(e.object).fit();
-            props?.star_office?.onClick(e);
-          }}
-          // onPointerLeave={(e)=>alert("leave")}
-          // onDoubleClick={(e) => bound.refresh(ref.current).fit()}
-          onDoubleClick={(e) => {
-            bound.to({ position: [8, 0, 2], target: [0, 0, 0] });
-            props?.star_office?.onDoubleClick(e);
-          }}
+          e.stopPropagation();
+          e.delta <= 2 && bound.refresh(e.object).fit();
+          actions.click(e, "OFFICE");
+          // props?.star_office?.onClick(e);
+        }}
+        // onPointerLeave={(e)=>alert("leave")}
+        // onDoubleClick={(e) => bound.refresh(ref.current).fit()}
+        onDoubleClick={(e) => {
+          bound.to({ position: [8, 0, 2], target: [0, 0, 0] });
+          props?.star_office?.onDoubleClick(e);
+        }}
+        onPointerOver={(e)=>{
+          // e.object.position.z*=factor
+          // e.object.scale.set(...scale.max)
+          actions.hover(e,"OFFICE",true);
+        }}
+        onPointerOut={(e)=>{
+          // e.object.position.z=0.27
+          // e.object.scale.set(...scale.min)
+          actions.hover(e,"OFFICE",false)
+        }}
       />
       <mesh
         castShadow
@@ -189,7 +256,7 @@ export default function Model({...props}) {
   );
 }
 
-useGLTF.preload(MODEL_URL, true, true, (loader)=>{
+useGLTF.preload(MODEL_URL, true, true, (loader) => {
   KTX2_LOADER.detectSupport(new THREE.WebGLRenderer()).dispose();
-  loader.setKTX2Loader(KTX2_LOADER)
+  loader.setKTX2Loader(KTX2_LOADER);
 });
