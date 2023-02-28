@@ -101,6 +101,7 @@ function App() {
           // gl.setClearColor(new THREE.Color("#020209"));
         }}
       >
+       <Stars />
       {/* <Stars/> */}
         {/* <PerspectiveCamera
             position={[8, 0, 2]}

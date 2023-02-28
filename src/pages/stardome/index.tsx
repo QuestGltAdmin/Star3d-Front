@@ -38,7 +38,7 @@ export default function StarDomePage({
   // console.log("model", sliderVal);
   return (
     <>
-      <Stars />
+     
       <fog attach="fog" args={["#17171b", 30, 40]} />
       <color attach="background" args={["#17171b"]} />
       <ambientLight intensity={0.25} />

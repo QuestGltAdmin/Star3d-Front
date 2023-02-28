@@ -32,23 +32,11 @@ export default function Model(props) {
     console.log(camera.position, camera.rotation,camera);
     camera.position.set(0.6,1,3)
     camera.rotation.set(0,-0.1,0)
-    // rotateCamera({y:-2.6},"first")
-    // moveCamera({x:-43,z:3},"first")
-    // rotateCamera({y:-3.14},">-1")
-    // moveCamera({z:8.5},">-2")
     
-    // rotateCamera({y:-1.9},"second")
-    // moveCamera({x:-40})
-    // rotateCamera({y:-1})
-
-
-    // rotateCamera({y:-2},"second")
-    // moveCamera({z:6},"first")
+    
 
 
 
-    // moveCamera({x:-45},"0")
-    // camera_three.lookAt(0,0,0)
     return ()=>{
       tl.clear(true)
     }
