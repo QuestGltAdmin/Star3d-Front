@@ -28,9 +28,9 @@ export default function Model(props) {
 
   const tl = gsap.timeline({repeat:1000})
   useEffect(()=>{
-    console.log(camera.position);
     camera.position.set(-50,2,-2)
-    camera.rotation.y=-2
+    camera.rotation.set(-0,-2,-0)
+    console.log(camera.position, camera.rotation);
     rotateCamera({y:-2.6},"first")
     moveCamera({x:-43,z:3},"first")
     rotateCamera({y:-3.14},">-1")

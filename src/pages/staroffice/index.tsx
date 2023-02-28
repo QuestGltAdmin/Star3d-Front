@@ -32,11 +32,6 @@ export default function StarOfficePage() {
       setRotate({ speed: Math.abs(sliderVal / 10), reverse: true });
     }
   }, [sliderVal])
-  
-
-  useEffect(()=>{
-    console.log("oFFICE CAMERA:",camera.position)
-  },[camera])
 
   return (
     <>
