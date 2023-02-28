@@ -43,7 +43,7 @@ export default function Stars({ count = 2000 }) {
       <bufferGeometry>
         <bufferAttribute attach={'attributes-position'} {...positions} />
       </bufferGeometry>
-      <pointsMaterial size={35} color={0xff00ff} sizeAttenuation={true} />
+      <pointsMaterial size={35} color={0xffffff} sizeAttenuation={true} />
       {/* <bufferGeometry>
         <bufferAttribute attachObject={['attributes', 'position']} count={positions.length / 3} array={positions} itemSize={5} />
       </bufferGeometry>

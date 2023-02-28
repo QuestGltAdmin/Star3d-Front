@@ -38,6 +38,18 @@ export default function Model(props) {
     loader.setKTX2Loader(KTX2_LOADER);
   });
 
+
+  const camera = useThree((state)=>state.camera);
+
+  useEffect(()=>{
+    console.log("dome",camera.position, camera.rotation)
+    camera.position.set(9.2,5.4,9.2);
+    // camera.position.set(6.8,5.4,11.1);
+
+    camera.rotation.set(0.5,0.7,0.3)
+    // camera.lookAt(10,10,10)
+  },[])
+
   return (
     <group ref={ref} {...props} dispose={null}>
       {/* <spotLight

@@ -30,7 +30,10 @@ export default function Model(props) {
 
   useEffect(()=>{
     console.log(camera.position, camera.rotation)
-    camera.position.set(1,1.5,1.5)
+    // camera.position.set(1,1.5,1.5)
+    camera.position.set(0.6,1,3)
+    camera.rotation.set(0,-0.1,0)
+
     rotateCamera({y:-0.15},"first") 
     moveCamera({ x:1, y:1, z:2 },"first")
 
@@ -51,7 +54,11 @@ export default function Model(props) {
     rotateCamera({y: 4},"sixth")
 
     moveCamera({  x:9, z:-15 },"seventh")
-  })
+
+    return ()=>{
+      tl.clear(true);
+    }
+  },[])
 
   function moveCamera(values,time){
     tl.to(camera.position,{

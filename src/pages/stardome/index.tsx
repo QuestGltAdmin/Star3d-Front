@@ -72,8 +72,8 @@ export default function StarDomePage({
       <OrbitControls
         makeDefault
         enableZoom={false}
-        minDistance={0.5}
-        maxDistance={8}
+        // minDistance={2}
+        // maxDistance={8}
         autoRotate={true}
         enableRotate={true}
         rotateSpeed={rotate.speed}
