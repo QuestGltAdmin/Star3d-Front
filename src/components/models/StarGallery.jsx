@@ -24,21 +24,15 @@ export default function Model(props) {
     loader.setKTX2Loader(KTX2_LOADER)
   });
 
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     setStart(false)
-  //   },2500)
-  // },[])
+  const camera = useThree((state)=>state.camera);
 
-  // useFrame((state ) => {
-  //   if(start){
-  //     state.camera.lookAt(ref.current.position)
-  //   state.camera.position.lerp(vec.set(0,0,10), 0.03)
-  //   state.camera.updateProjectionMatrix()
-  //   // setStart(false)
-  // }
-  //   return null
-  //  });
+  useEffect(()=>{
+    console.log(camera.position, camera.rotation)
+    camera.position.set(1,3,2.4)
+    // camera.rotation.set(1,3,1)
+  })
+
+
 
   return (
     <group ref={ref} {...props} dispose={null}>

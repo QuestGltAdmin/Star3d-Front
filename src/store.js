@@ -3,6 +3,7 @@ import { GrannyKnot } from 'three/examples/jsm/curves/CurveExtras'
 import { addEffect } from '@react-three/fiber'
 import { create } from 'zustand'
 import * as audio from './assets/audio'
+import gsap from 'gsap';
 
 let guid = 1
 
@@ -123,6 +124,13 @@ const useStore = create((set, get) => {
       },
       updateMouse({ clientX: x, clientY: y }) {
         get().mutation.mouse.set(x - window.innerWidth / 2, y - window.innerHeight / 2)
+      },
+
+      moveCamera(values,delay){
+        gsap.to({duration:3,...values},delay)
+      },
+      rotateCamera(values,delay){
+        gsap.to({duration:3,...values},delay)
       },
       test(data) {
         box.min.copy(data.offset)

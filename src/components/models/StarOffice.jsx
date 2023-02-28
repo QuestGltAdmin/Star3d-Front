@@ -7,6 +7,8 @@ import { useGLTF } from "@react-three/drei";
 import { KTX2Loader } from "three/examples/jsm/loaders/KTX2Loader";
 import { useFrame, useThree } from "@react-three/fiber";
 import * as THREE from 'three'
+import gsap from 'gsap';
+import useStore from "../../store";
 
 const MODEL_URL =`https://cychat-storage-bucket.s3.us-east-2.amazonaws.com/star/models/office/star_office_etc1s.glb`
 
@@ -15,30 +17,53 @@ const KTX2_LOADER = new KTX2Loader().setTranscoderPath(THREE_PATH)
 
 
 export default function Model(props) {
-  const ref= useRef();
+  const ref = useRef();
+  // const camera = useStore((state)=>state.camera)
+  const actions = useStore((state)=>state.actions)
   const { nodes, materials } = useGLTF(MODEL_URL, true, true, (loader)=>{
     KTX2_LOADER.detectSupport(gl).dispose();
     loader.setKTX2Loader(KTX2_LOADER)
   });
-  const [start, setStart] = useState(true)
-  const vec = new THREE.Vector3()
+  const camera = useThree((state)=>state.camera);
 
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     setStart(false)
-  //   },2500)
-  // },[])
+  const tl = gsap.timeline({repeat:1000})
+  useEffect(()=>{
+    console.log(camera.position);
+    camera.position.set(-50,2,-2)
+    camera.rotation.y=-2
+    rotateCamera({y:-2.6},"first")
+    moveCamera({x:-43,z:3},"first")
+    rotateCamera({y:-3.14},">-1")
+    moveCamera({z:8.5},">-2")
+    
+    rotateCamera({y:-1.9},"second")
+    moveCamera({x:-40})
+    rotateCamera({y:-1})
 
-  // useFrame((state ) => {
-  //   if(start){
-  //     state.camera.lookAt(ref.current.position)
-  //   state.camera.position.lerp(vec.set(0,0,10), 0.03)
-  //   state.camera.updateProjectionMatrix()
-  //   // setStart(false)
-  // }
-  //   return null
-  //  });
 
+    // rotateCamera({y:-2},"second")
+    // moveCamera({z:6},"first")
+
+
+
+    // moveCamera({x:-45},"0")
+    // camera_three.lookAt(0,0,0)
+  },[])
+
+  function moveCamera(values,time){
+    tl.to(camera.position,{
+      duration:3,
+      ...values
+    },time)
+  }
+
+  function rotateCamera(values, time){
+    tl.to(camera.rotation,{
+      duration:3,
+      ...values
+    },time)
+  }
+    
   return (
     <group ref={ref} {...props} dispose={null}>
       <mesh

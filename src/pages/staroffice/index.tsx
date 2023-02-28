@@ -1,15 +1,16 @@
-import { Bounds, OrbitControls } from '@react-three/drei'
+import { Bounds, FirstPersonControls, OrbitControls } from '@react-three/drei'
 import { Canvas } from '@react-three/fiber'
 import React, { useEffect, useState, lazy } from 'react'
+import useStore from '../../store'
 // import StarOffice from '../../components/models/StarOffice'
 
 const StarOffice = lazy(()=>import("../../components/models/StarOffice"))
 
-type StarOfficePageProps = {
-  sliderVal:number
-}
 
-export default function StarOfficePage({sliderVal}:StarOfficePageProps) {
+export default function StarOfficePage() {
+  const sliderVal = useStore((state)=>state.sliderVal);
+  const camera = useStore((state)=>state.camera);
+
   const [rotate, setRotate] = useState({ speed: 0, reverse: false });
   
   useEffect(() => {
@@ -32,6 +33,11 @@ export default function StarOfficePage({sliderVal}:StarOfficePageProps) {
     }
   }, [sliderVal])
   
+
+  useEffect(()=>{
+    console.log("oFFICE CAMERA:",camera.position)
+  },[camera])
+
   return (
     <>
     {/* <perspectiveCamera position={[2,3,4]} /> */}
@@ -44,18 +50,17 @@ export default function StarOfficePage({sliderVal}:StarOfficePageProps) {
       penumbra={1}
     />
     {/* <Lights/> */}
-    <Bounds position={[0, 0, 0]} observe margin={1.2}>
-  
-      <StarOffice />
-    </Bounds>
+    <StarOffice />
+   
     <pointLight position={[1, 1, 1]} />
-    {/* <Star position={[4, 1, 0]} /> */}
-    {/* <StarEvent position={[-1.2, 0, 0]} /> */}
-    {/* <StarEvent position={[1.2, 0, 0]} /> */}
-    <OrbitControls
+   
+   {/* <FirstPersonControls
+    object={camera}
+   /> */}
+    {/* <OrbitControls
       makeDefault
       minDistance={0.5}
-      maxDistance={8}
+      // maxDistance={8}
       autoRotate={true}
       enableRotate={true}
       rotateSpeed={rotate.speed}
@@ -68,7 +73,7 @@ export default function StarOfficePage({sliderVal}:StarOfficePageProps) {
       // minPolarAngle={0} maxPolarAngle={Math.PI / 1.6}
       minPolarAngle={Math.PI - Math.PI / 1.6}
       maxPolarAngle={Math.PI - Math.PI / 1.6}
-    />
+    /> */}
   </>
   )
 }
