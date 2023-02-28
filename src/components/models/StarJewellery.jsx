@@ -31,7 +31,7 @@ export default function Model(props) {
     console.log(camera.position);
     console.log(camera.position);
     camera.position.set(11,2.5,10)
-    camera.rotation.y= 0
+    camera.rotation.set(0,0,0)
 
     rotateCamera({y:3.25},"first")
     moveCamera({x:-4,z:5},"first")
