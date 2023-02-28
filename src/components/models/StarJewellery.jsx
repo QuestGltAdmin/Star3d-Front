@@ -76,14 +76,14 @@ export default function Model(props) {
 
   function moveCamera(values,time){
     tl.to(camera.position,{
-      duration:3,
+      duration:5,
       ...values
     },time)
   }
 
   function rotateCamera(values, time){
     tl.to(camera.rotation,{
-      duration:3,
+      duration:5,
       ...values
     },time)
   }

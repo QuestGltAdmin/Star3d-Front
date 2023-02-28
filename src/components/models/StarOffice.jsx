@@ -28,17 +28,54 @@ export default function Model(props) {
 
   const tl = gsap.timeline({repeat:1000})
   useEffect(()=>{
-    camera.position.set(-50,2,-2)
-    camera.rotation.set(-0,-2,-0)
+    camera.position.set(-32.5,2,-8)
+    camera.rotation.set(-0,-2.3,-0)
     console.log(camera.position, camera.rotation);
+
     rotateCamera({y:-2.6},"first")
     moveCamera({x:-43,z:3},"first")
     rotateCamera({y:-3.14},">-1")
     moveCamera({z:8.5},">-2")
     
     rotateCamera({y:-1.9},"second")
-    moveCamera({x:-40})
+    moveCamera({x:-40},"second")
     rotateCamera({y:-1})
+
+    rotateCamera({y:0},"third")
+    moveCamera({x:-38,z:7},"third")
+    rotateCamera({y:-2.2})
+
+rotateCamera({y:-2.4},"fourth")
+    moveCamera({x:-36.8,z:2.6},"fourth")
+    rotateCamera({y:-2.5})
+
+rotateCamera({y:-2.5},"fiveth")
+    moveCamera({x:-36.8,z:-8.3},"fiveth")
+    rotateCamera({y:-1})
+
+rotateCamera({y:0},"seven")
+    moveCamera({x:-38,z:10},"seven")
+    rotateCamera({y:-1})
+
+rotateCamera({y:0},"eight")
+    moveCamera({x:-32,z:10},"eight")
+    rotateCamera({y:-0})
+
+rotateCamera({y:-1},"nine")
+    moveCamera({x:-29.7,z:4},"nine")
+    rotateCamera({y:-1.9})
+
+rotateCamera({y:-1},"ten")
+    moveCamera({x:-29.5,z:-2.5},"ten")
+    rotateCamera({y:-2.1})
+
+    
+
+    
+    
+
+	
+    
 
 
     // rotateCamera({y:-2},"second")
