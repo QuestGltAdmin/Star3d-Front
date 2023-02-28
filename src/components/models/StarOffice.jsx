@@ -48,6 +48,10 @@ export default function Model(props) {
 
     // moveCamera({x:-45},"0")
     // camera_three.lookAt(0,0,0)
+
+    return ()=>{
+      tl.clear(true)
+    }
   },[])
 
   function moveCamera(values,time){
