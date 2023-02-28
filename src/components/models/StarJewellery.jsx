@@ -7,6 +7,9 @@ import { useGLTF, useScroll } from "@react-three/drei";
 import { KTX2Loader } from "three/examples/jsm/loaders/KTX2Loader";
 import { useFrame, useThree } from "@react-three/fiber";
 import * as THREE from 'three'
+import gsap from 'gsap';
+import useStore from "../../store";
+
 
 const MODEL_URL=`https://cychat-storage-bucket.s3.us-east-2.amazonaws.com/star/models/jewellery/star_jewellery_etc1s.glb`
 
@@ -15,37 +18,75 @@ const KTX2_LOADER = new KTX2Loader().setTranscoderPath(THREE_PATH)
 
 export default function Model(props) {
   const ref = useRef();
-  const gl = useThree((state) => state.gl);
-  const [start, setStart] = useState(true)
-  const vec = new THREE.Vector3()
-  const scroll = useScroll()
-
-  const { nodes, materials } = useGLTF(MODEL_URL,true,true,(loader)=>{
+  // const camera = useStore((state)=>state.camera)
+  const actions = useStore((state)=>state.actions)
+  const { nodes, materials } = useGLTF(MODEL_URL, true, true, (loader)=>{
     KTX2_LOADER.detectSupport(gl).dispose();
     loader.setKTX2Loader(KTX2_LOADER)
   });
+  const camera = useThree((state)=>state.camera);
 
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     setStart(false)
-  //   },2500)
-  // },[])
+  const tl = gsap.timeline({repeat:1000})
+  useEffect(()=>{
+    console.log(camera.position);
+    console.log(camera.position);
+    camera.position.set(11,2.5,10)
+    camera.rotation.y= 0
 
-  // useFrame((state ) => {
-  //   if(start){
-  //     state.camera.lookAt(ref.current.position)
-  //   state.camera.position.lerp(vec.set(0,0,10), 0.03)
-  //   state.camera.updateProjectionMatrix()
-  //   // setStart(false)
-  // }
-  //   return null
-  //  });
+    rotateCamera({y:3.25},"first")
+    moveCamera({x:-4,z:5},"first")
 
-  useFrame((state ) => {
-    const offset = 1 - scroll.offset
-    state.camera.position.set(Math.cos(offset), Math.cos(offset * Math.PI) * 5, Math.cos((offset * Math.PI) / 3) * -10)
-    state.camera.lookAt(0, 0, 0)
-   });
+    rotateCamera({y:1.6},"second")
+    moveCamera({x:-7,z:5},"second")
+
+    rotateCamera({y:1.6},"third")
+    moveCamera({x:-4,z:0},"third")
+
+    rotateCamera({y:0},"fourth")
+    moveCamera({x:-8,z:-4},"fourth")
+
+    rotateCamera({y:0},"fifth")
+    moveCamera({x:0,z:-4},"fifth")
+
+    rotateCamera({y:-0.8},"sixth")
+    moveCamera({x:6,z:-4},"sixth")
+
+    rotateCamera({y:-1.6},"seventh")
+    moveCamera({x:6,z:0},"seventh")
+
+    rotateCamera({y:-4.7},"eighrth")
+    moveCamera({x:6,z:0},"eighrth")
+
+    rotateCamera({y:0},"ninght")
+    moveCamera({x:0,z:7},"ninght")
+
+
+    // rotateCamera({y:-2},"second")
+    // moveCamera({z:6},"first")
+
+
+
+    // moveCamera({x:-45},"0")
+    // camera_three.lookAt(0,0,0)
+
+    return ()=>{
+      tl.clear(true)
+    }
+  },[])
+
+  function moveCamera(values,time){
+    tl.to(camera.position,{
+      duration:3,
+      ...values
+    },time)
+  }
+
+  function rotateCamera(values, time){
+    tl.to(camera.rotation,{
+      duration:3,
+      ...values
+    },time)
+  }
 
 
   return (
