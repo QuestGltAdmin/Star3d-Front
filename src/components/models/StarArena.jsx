@@ -8,8 +8,7 @@ import { KTX2Loader } from "three/examples/jsm/loaders/KTX2Loader";
 import { useThree } from "@react-three/fiber";
 import * as THREE from 'three'
 
-const MODEL_URL = `https://cychat-storage-bucket.s3.us-east-2.amazonaws.com/star/models/arena/star_arena_etc1s.glb`
-
+let MODEL_URL=`https://cychat-storage-bucket.s3.us-east-2.amazonaws.com/star/models/arena/star_arena_draco.glb`
 const THREE_PATH = `https://cychat-storage-bucket.s3.us-east-2.amazonaws.com/star/basis/`;
 const KTX2_LOADER = new KTX2Loader().setTranscoderPath(THREE_PATH);
 
@@ -25,11 +24,14 @@ export default function Model(props) {
   });
 
   return (
-    <group 
-      {...props}
-      ref={ref}
-      onPointerMissed={(e) => e.button === 0 && bound.refresh().fit()}
-      dispose={null}>
+    <group {...props} dispose={null}>
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={nodes.Top.geometry}
+        material={materials.Top}
+        position={[-0.88, 34.16, -3.73]}
+      />
       <mesh
         castShadow
         receiveShadow
@@ -63,13 +65,6 @@ export default function Model(props) {
       <mesh
         castShadow
         receiveShadow
-        geometry={nodes.Top.geometry}
-        material={materials.Top}
-        position={[-0.88, 34.16, -3.73]}
-      />
-      <mesh
-        castShadow
-        receiveShadow
         geometry={nodes.Glass.geometry}
         material={materials.Glass}
         position={[-1.43, 16.97, 1.2]}
@@ -91,13 +86,6 @@ export default function Model(props) {
       <mesh
         castShadow
         receiveShadow
-        geometry={nodes.Roof_Light.geometry}
-        material={materials["Material.006"]}
-        position={[-0.66, 22.07, -0.02]}
-      />
-      <mesh
-        castShadow
-        receiveShadow
         geometry={nodes.Roof_Rof.geometry}
         material={materials["Material.007"]}
         position={[-0.61, 25.54, -0.05]}
@@ -105,8 +93,22 @@ export default function Model(props) {
       <mesh
         castShadow
         receiveShadow
+        geometry={nodes.Roof_Light.geometry}
+        material={materials["Material.006"]}
+        position={[-0.66, 22.07, -0.02]}
+      />
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={nodes.Seat.geometry}
+        material={materials["Material.008"]}
+        position={[-0.6, 12.96, -1.04]}
+      />
+      <mesh
+        castShadow
+        receiveShadow
         geometry={nodes.Stage.geometry}
-        material={materials["Material.010"]}
+        material={materials.Stage}
         position={[-0.63, 0.58, 29.38]}
       />
       <mesh
@@ -140,14 +142,6 @@ export default function Model(props) {
       <mesh
         castShadow
         receiveShadow
-        geometry={nodes.Sky.geometry}
-        material={materials.Sky}
-        position={[0, -1.49, 30.71]}
-        scale={213.75}
-      />
-      <mesh
-        castShadow
-        receiveShadow
         geometry={nodes.Plane004.geometry}
         material={materials.Floor_3}
       />
@@ -174,13 +168,6 @@ export default function Model(props) {
         receiveShadow
         geometry={nodes.Plane004_4.geometry}
         material={materials.Floor_5}
-      />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.Seat.geometry}
-        material={materials["Material.008"]}
-        position={[-0.6, 12.96, -1.04]}
       />
     </group>
   );

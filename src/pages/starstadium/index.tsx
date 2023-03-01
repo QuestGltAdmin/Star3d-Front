@@ -1,15 +1,14 @@
 import { Bounds, OrbitControls } from '@react-three/drei'
 import { Canvas } from '@react-three/fiber'
 import React, { useEffect, useState, lazy } from 'react'
+import useStore from '../../store'
 // import StarStadium from '../../components/models/StarStadium'
 
 const StarStadium = lazy(()=>import("../../components/models/StarStadium"))
 
-type StarGalleryPageProps = {
-  sliderVal:number
-}
 
-export default function StarStadiumPage({sliderVal}:StarGalleryPageProps) {
+export default function StarStadiumPage() {
+  const sliderVal = useStore((state)=>state.sliderVal)
   const [rotate, setRotate] = useState({ speed: 0, reverse: false });
   
   useEffect(() => {
@@ -33,17 +32,7 @@ export default function StarStadiumPage({sliderVal}:StarGalleryPageProps) {
   }, [sliderVal])
   
   return (
-    <Canvas
-    className=""
-    // camera={{ position: [0, -10, 80], fov: 50 }}
-    camera={{
-      position: [8, 0, 2],
-      fov: 75,
-      near: 0.1,
-      far: 100,
-    }}
-    dpr={[1, 2]}
-  >
+    <>
     {/* <perspectiveCamera position={[2,3,4]} /> */}
     <ambientLight intensity={0.5} />
     {/* <directionalLight castShadow={true} /> */}
@@ -65,7 +54,7 @@ export default function StarStadiumPage({sliderVal}:StarGalleryPageProps) {
     <OrbitControls
       makeDefault
       minDistance={0.5}
-      maxDistance={8}
+      // maxDistance={8}
       autoRotate={true}
       enableRotate={true}
       rotateSpeed={rotate.speed}
@@ -79,6 +68,6 @@ export default function StarStadiumPage({sliderVal}:StarGalleryPageProps) {
       minPolarAngle={Math.PI - Math.PI / 1.6}
       maxPolarAngle={Math.PI - Math.PI / 1.6}
     />
-  </Canvas>
+  </>
   )
 }

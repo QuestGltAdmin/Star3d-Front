@@ -1,14 +1,13 @@
 import { Bounds, OrbitControls } from '@react-three/drei'
 import { Canvas } from '@react-three/fiber'
 import React, { useEffect, useState, lazy } from 'react'
+import useStore from '../../store'
 // import StarArena from '../../components/models/StarArena'
 
 const StarArena = lazy(()=> import('../../components/models/StarArena'))
-type StarArenaPageProps = {
-  sliderVal:number
-}
 
-export default function StarArenaPage({sliderVal}:StarArenaPageProps) {
+export default function StarArenaPage() {
+  const sliderVal = useStore((state)=>state.sliderVal);
   const [rotate, setRotate] = useState({ speed: 0, reverse: false });
   
   useEffect(() => {
@@ -32,17 +31,7 @@ export default function StarArenaPage({sliderVal}:StarArenaPageProps) {
   }, [sliderVal])
   
   return (
-    <Canvas
-    className=""
-    // camera={{ position: [0, -10, 80], fov: 50 }}
-    camera={{
-      position: [8, 0, 2],
-      fov: 75,
-      near: 0.1,
-      far: 100,
-    }}
-    dpr={[1, 2]}
-  >
+    <>
     {/* <perspectiveCamera position={[2,3,4]} /> */}
     <ambientLight intensity={0.5} />
     {/* <directionalLight castShadow={true} /> */}
@@ -64,7 +53,7 @@ export default function StarArenaPage({sliderVal}:StarArenaPageProps) {
     <OrbitControls
       makeDefault
       minDistance={0.5}
-      maxDistance={8}
+      // maxDistance={8}
       autoRotate={true}
       enableRotate={true}
       rotateSpeed={rotate.speed}
@@ -78,6 +67,6 @@ export default function StarArenaPage({sliderVal}:StarArenaPageProps) {
       minPolarAngle={Math.PI - Math.PI / 1.6}
       maxPolarAngle={Math.PI - Math.PI / 1.6}
     />
-  </Canvas>
+  </>
   )
 }
