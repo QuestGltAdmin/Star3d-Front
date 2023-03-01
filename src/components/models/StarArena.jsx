@@ -30,7 +30,7 @@ export default function Model(props) {
 
   useEffect(()=>{
     console.log(camera.position, camera.rotation)
-    camera.position.set(-10,3.5,50)
+    camera.position.set(-10,3.5,45)
     moveCamera({ x:-5,z:40 },"first")
 
     moveCamera({ x:5, z:20 },"second")
