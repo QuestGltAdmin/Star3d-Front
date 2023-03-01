@@ -101,8 +101,8 @@ function App() {
           // gl.setClearColor(new THREE.Color("#020209"));
         }}
       >
-       <Stars />
-      {/* <Stars/> */}
+        <Stars />
+        {/* <Stars/> */}
         {/* <PerspectiveCamera
             position={[8, 0, 2]}
             fov={75}
@@ -115,7 +115,20 @@ function App() {
           /> */}
 
         <Suspense
-          fallback={null}
+          fallback={
+            <>
+              <OrbitControls
+                // makeDefault
+                minDistance={0.5}
+                maxDistance={8}
+                autoRotate={true}
+                autoRotateSpeed={10}
+               
+                minPolarAngle={Math.PI - Math.PI / 1.6}
+                maxPolarAngle={Math.PI - Math.PI / 1.6}
+              />
+            </>
+          }
           // fallback={
           //   <>
           //     <fog attach="fog" args={["#17171b", 30, 40]} />

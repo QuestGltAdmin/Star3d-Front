@@ -17,6 +17,8 @@ import {
   TrackballControls,
 } from "@react-three/drei";
 import { Star, StarGroup } from "../components/Star";
+import StarStadiumPage from "../pages/starstadium";
+import StarArenaPage from "../pages/stararena";
 
 export default function Router({ transition, ...routerProps }) {
   return transition(({ opacity, ...props }) => (
@@ -69,6 +71,8 @@ export default function Router({ transition, ...routerProps }) {
         <Route path="/star-jewellery" element={<StarJewelleryPage />} />
         <Route path="/star-office" element={<StarOfficePage />} />
         <Route path="/star-gallery" element={<StarGalleryPage />} />
+        <Route path="/star-stadium" element={<StarStadiumPage/>} />
+        <Route path="/star-arena" element={<StarArenaPage/>} />
       </Routes>
     </a.group>
   ));
