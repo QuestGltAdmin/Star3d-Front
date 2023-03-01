@@ -50,7 +50,7 @@ export default function StarArenaPage() {
     {/* <Star position={[4, 1, 0]} /> */}
     {/* <StarEvent position={[-1.2, 0, 0]} /> */}
     {/* <StarEvent position={[1.2, 0, 0]} /> */}
-    <OrbitControls
+    {/* <OrbitControls
       makeDefault
       minDistance={0.5}
       // maxDistance={8}
@@ -66,7 +66,7 @@ export default function StarArenaPage() {
       // minPolarAngle={0} maxPolarAngle={Math.PI / 1.6}
       minPolarAngle={Math.PI - Math.PI / 1.6}
       maxPolarAngle={Math.PI - Math.PI / 1.6}
-    />
+    /> */}
   </>
   )
 }
