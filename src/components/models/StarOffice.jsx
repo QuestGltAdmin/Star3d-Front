@@ -28,8 +28,8 @@ export default function Model(props) {
 
   const tl = gsap.timeline({repeat:1000})
   useEffect(()=>{
-    camera.position.set(-32.5,2,-8)
-    camera.rotation.set(-0,-2.3,-0)
+    camera.position.set(-50,2,-2)
+    camera.rotation.set(-0,-2,-0)
     console.log(camera.position, camera.rotation);
 
     rotateCamera({y:-2.6},"first")
@@ -43,31 +43,125 @@ export default function Model(props) {
 
     rotateCamera({y:0},"third")
     moveCamera({x:-38,z:7},"third")
-    rotateCamera({y:-2.2})
 
-rotateCamera({y:-2.4},"fourth")
+    rotateCamera({y:-2.4},"fourth")
     moveCamera({x:-36.8,z:2.6},"fourth")
     rotateCamera({y:-2.5})
 
-rotateCamera({y:-2.5},"fiveth")
+    rotateCamera({y:-2.4},"fourthh")
+    moveCamera({x:-36.8,z:-1.5},"fourthh")
+    rotateCamera({y:-2.5})
+
+    rotateCamera({y:-2.5},"fiveth")
     moveCamera({x:-36.8,z:-8.3},"fiveth")
     rotateCamera({y:-1})
 
-rotateCamera({y:0},"seven")
+    rotateCamera({y:0},"seven")
     moveCamera({x:-38,z:10},"seven")
     rotateCamera({y:-1})
 
-rotateCamera({y:0},"eight")
+    rotateCamera({y:0},"eight")
     moveCamera({x:-32,z:10},"eight")
     rotateCamera({y:-0})
 
-rotateCamera({y:-1},"nine")
+    rotateCamera({y:-1},"nine")
     moveCamera({x:-29.7,z:4},"nine")
     rotateCamera({y:-1.9})
 
-rotateCamera({y:-1},"ten")
+    rotateCamera({y:-1},"ten")
     moveCamera({x:-29.5,z:-2.5},"ten")
     rotateCamera({y:-2.1})
+
+    rotateCamera({y:0},"ten1")
+    moveCamera({x:-32,z:10},"ten1")
+    rotateCamera({y:-1.7})
+
+    rotateCamera({y:-1.7},"ten2")
+    moveCamera({x:-27,z:10},"ten2")
+    rotateCamera({y:-1.7})
+
+    rotateCamera({y:1},"ten3")
+    moveCamera({x:-22.5,z:-1},"ten3")
+    rotateCamera({y:1.55})
+
+    rotateCamera({y:-1.5},"ten5")
+    moveCamera({x:-26,z:-1},"ten5")
+    rotateCamera({y:-1.55})
+
+    rotateCamera({y:0.9},"ten6")
+    moveCamera({x:-20,z:-14},"ten6")
+    rotateCamera({y:1})
+
+    rotateCamera({y:0},"ten8")
+    moveCamera({x:-13,z:-13},"ten8")
+    rotateCamera({y:-1})
+
+    rotateCamera({y:0},"ten9")
+    moveCamera({x:-7,z:-13},"ten9")
+    rotateCamera({y:-1})
+
+    rotateCamera({y:-1},"tenn1")
+    moveCamera({x:-3,z:-13},"tenn1")
+    rotateCamera({y:-1})
+
+    rotateCamera({y:0},"tenn2")
+    moveCamera({x:-2.5,z:-11.5},"tenn2")
+    rotateCamera({y:0})
+
+    rotateCamera({y:0},"tenn3")
+    moveCamera({x:2,z:-11.5},"tenn3")
+    rotateCamera({y:0})
+
+    rotateCamera({y:0},"tenn4")
+    moveCamera({x:3,z:-9},"tenn4")
+    rotateCamera({y:-1})
+
+    rotateCamera({y:-1},"tenn5")
+    moveCamera({x:10.5,z:0},"tenn5")
+    rotateCamera({y:-1.5})
+
+    rotateCamera({y:-1.9},"tenn6")
+    moveCamera({x:10.5,z:4},"tenn6")
+    rotateCamera({y:-2})
+
+    rotateCamera({y:-0.5},"tenn7")
+    moveCamera({x:16.5,z:7},"tenn7")
+    rotateCamera({y:0})
+
+    rotateCamera({y:-3},"tenn88")
+    moveCamera({x:3,z:4},"tenn88")
+    rotateCamera({y:-3.2})
+
+    rotateCamera({y:-3.2},"tenn9")
+    moveCamera({x:-10,z:6},"tenn9")
+    rotateCamera({y:-3.1})
+
+    rotateCamera({y:-3.2},"eleven")
+    moveCamera({x:-3.5,z:0},"eleven")
+    rotateCamera({y:-4.5})
+
+
+    
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+    
+
+    
+    
 
     
 
