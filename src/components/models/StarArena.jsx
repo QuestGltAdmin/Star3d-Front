@@ -34,10 +34,10 @@ export default function Model(props) {
     moveCamera({ x:-5,z:40 },"first")
 
     moveCamera({ x:5, z:20 },"second")
-    moveCamera({ x:10, z:10 },"third")
+    moveCamera({ x:-10, z:10 },"third")
     moveCamera({ x:5, y:10 },"forth")
     moveCamera({ x:0, z:0 },"fifth")
-    moveCamera({ x:-15,z:-10, y:20  },"sixth")
+    moveCamera({ x:-12,z:-10, y:20  },"sixth")
     // rotateCamera({ x:-2 },"fifth")
     // rotateCamera({y:-5},"third")
     // // camera.position.set(66,3,10)
