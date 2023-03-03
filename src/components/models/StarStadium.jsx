@@ -31,31 +31,34 @@ export default function Model(props) {
     camera.rotation.set(-0,-1.6,-0)
     console.log(camera.position, camera.rotation);
 
-rotateCamera({y:-2.6},"first")
+    rotateCamera({y:-2.6},"first")
     moveCamera({x:-43,z:3},"first")
     rotateCamera({y:-3.14},">-1")
     moveCamera({z:8.5},">-2")
 
-rotateCamera({y:-1.9},"second")
+    rotateCamera({y:-1.9},"second")
     moveCamera({x:-40,z:57.5},"second")
     rotateCamera({y:-4})
 
-rotateCamera({y:-4},"third")
+    rotateCamera({y:-4},"third")
     moveCamera({x:30,z:60},"third")
     rotateCamera({y:-1})
 
-rotateCamera({y:-1},"fourth")
+    rotateCamera({y:-1},"fourth")
     moveCamera({x:40,z:60},"fourth")
     rotateCamera({y:0})
 
-rotateCamera({y:0},"six")
-    moveCamera({x:40,z:-50},"six")
-    rotateCamera({y:2})
+    rotateCamera({y:2},"eight")
+    moveCamera({x:40,z:-55},"eight")
+    rotateCamera({y:-1.5})
 
     rotateCamera({y:2},"seven")
-    moveCamera({x:-40,z:2},"seven")
-    rotateCamera({y:-2})
+    moveCamera({x:-40,z:-60},"seven")
+    rotateCamera({y:-2.5})	
 
+    rotateCamera({y:2},"nine")
+    moveCamera({x:-40,z:2},"nine")
+    rotateCamera({y:-2})
 
 
 
