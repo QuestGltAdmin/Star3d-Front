@@ -2,7 +2,7 @@ import React, { memo, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import useSound from "use-sound";
 import { cn } from "../utilities/classname";
-import music from "../assets/audio/ambient_inspiration.mp3"
+import music from "../assets/audio/ambient_inspiration.mp3";
 import useStore from "../store";
 
 export default function Buttons(props) {
@@ -15,6 +15,8 @@ export default function Buttons(props) {
       return <LayerButton {...props} />;
     case "SLIDER":
       return <SliderButton {...props} />;
+    case "NAVIGATION":
+      return <NavigationButton {...props} />;
     default:
       return <></>;
   }
@@ -22,16 +24,15 @@ export default function Buttons(props) {
 
 const MusicButton = (props) => {
   const [clicked, click] = useState(false);
-  const [play,{ pause, stop }] = useSound(music);
+  const [play, { pause, stop }] = useSound(music);
 
-  
-  useEffect(()=>{
-    if(clicked){
-      play()
-    }else{
-      stop()
+  useEffect(() => {
+    if (clicked) {
+      play();
+    } else {
+      stop();
     }
-  },[clicked])
+  }, [clicked]);
 
   return (
     <button
@@ -56,7 +57,7 @@ const MusicButton = (props) => {
             d="M19.114 5.636a9 9 0 010 12.728M16.463 8.288a5.25 5.25 0 010 7.424M6.75 8.25l4.72-4.72a.75.75 0 011.28.53v15.88a.75.75 0 01-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.507-1.938-1.354A9.01 9.01 0 012.25 12c0-.83.112-1.633.322-2.396C2.806 8.756 3.63 8.25 4.51 8.25H6.75z"
           />
         </svg>
-      ):(
+      ) : (
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -333,16 +334,15 @@ const LayerButton = (props) => {
 
 const SliderButton = memo(
   ({ className, label, onChange, value, ...sliderProps }) => {
-
-    const actions = useStore((state)=>state.actions)
+    const actions = useStore((state) => state.actions);
     const [sliderVal, setSliderVal] = useState(value);
     const [mouseState, setMouseState] = useState(null);
-    
+
     const changeCallback = (e) => {
       setSliderVal(e.target.valueAsNumber);
       // onChange(sliderVal);
     };
-    
+
     useEffect(() => {
       let t = setTimeout(() => {
         actions.updateSliderValue(sliderVal);
@@ -423,3 +423,111 @@ const SliderButton = memo(
     );
   }
 );
+
+const NavigationButton = ({ className, label, onChange, value }) => {
+  const actions = useStore((state) => state.actions);
+  const {tl} = useStore((state)=>state.mutation)
+  const [sliderVal, setSliderVal] = useState(value);
+  const [paused, pause] = useState(true);
+
+
+  const handlePause = () =>{
+    // pause(!paused)
+    if(tl.paused()){
+      tl.play()
+    }else{
+      tl.pause();
+    }
+  }
+
+  const handleFlow = (flow) => {
+    if(flow==="BACKWARD"){
+      tl.reverse()
+    }
+    if(flow==="FORWARD"){
+      tl.play()
+    }
+  }
+
+  return (
+    <div
+      className={cn(
+        "z-10 p-3 border-2 border-orange-100 rounded-full hover:border-orange-200",
+        className
+      )}
+    >
+      <div className="flex items-center justify-between gap-x-3">
+        <span className="" onClick={()=>handleFlow("BACKWARD")}>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            className="text-white"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+        </span>
+
+        {tl.paused() ? (
+          <span onClick={()=>tl.play()}>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              className="text-white"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <polygon points="5 3 19 12 5 21 5 3"></polygon>
+            </svg>
+          </span>
+        ) : (
+          <span onClick={()=>tl.pause()}>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              className="text-white"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <rect x="6" y="4" width="4" height="16"></rect>
+              <rect x="14" y="4" width="4" height="16"></rect>
+            </svg>
+          </span>
+        )}
+
+        <span className="" onClick={()=>handleFlow("FORWARD")}>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            className="text-white"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </span>
+      </div>
+    </div>
+  );
+};

@@ -18,19 +18,21 @@ const KTX2_LOADER = new KTX2Loader().setTranscoderPath(THREE_PATH)
 export default function Model(props) {
   const ref = useRef();
   // const camera = useStore((state)=>state.camera)
+  const { tl } = useStore((state)=>state.mutation);
   const actions = useStore((state)=>state.actions)
+
   const { nodes, materials } = useGLTF(MODEL_URL, true, true, (loader)=>{
     KTX2_LOADER.detectSupport(gl).dispose();
     loader.setKTX2Loader(KTX2_LOADER)
   });
   const camera = useThree((state)=>state.camera);
 
-  const tl = gsap.timeline({repeat:1000})
   useEffect(()=>{
     camera.position.set(-50,2,-2)
     camera.rotation.set(-0,-1.6,-0)
     console.log(camera.position, camera.rotation);
-
+    tl.play()
+    
     rotateCamera({y:-2.6},"first")
     moveCamera({x:-43,z:3},"first")
     rotateCamera({y:-3.14},">-1")

@@ -32,7 +32,7 @@ const useStore = create((set, get) => {
       t: 0,
       position: new THREE.Vector3(),
       startTime: Date.now(),
-
+      tl:gsap.timeline({repeat:100}),
       track,
       scale: 15,
       fov: 70,
@@ -126,11 +126,12 @@ const useStore = create((set, get) => {
         get().mutation.mouse.set(x - window.innerWidth / 2, y - window.innerHeight / 2)
       },
 
-      moveCamera(values,delay){
-        gsap.to({duration:3,...values},delay)
+      moveCamera(values,time){
+        console.log("movecamera",get().mutation.tl,get().camera.position )
+        get().mutation.tl.to(get().camera.position,{duration:3,...values},time)
       },
-      rotateCamera(values,delay){
-        gsap.to({duration:3,...values},delay)
+      rotateCamera(values,time){
+        get().mutation.tl.to(get().camera.rotation,{duration:3,...values},time)
       },
       test(data) {
         box.min.copy(data.offset)

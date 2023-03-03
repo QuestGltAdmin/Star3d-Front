@@ -40,10 +40,16 @@ export default function Overlay() {
       <Buttons className="absolute left-5 bottom-5" component="LAYER" />
 
       {/* Slider Button */}
-      <Buttons
+      {/* <Buttons
         {...sliderProps}
         className="absolute right-5 bottom-5"
         component="SLIDER"
+      /> */}
+      {/* Navigation Button */}
+      <Buttons
+        {...sliderProps}
+        className="absolute right-5 bottom-5"
+        component="NAVIGATION"
       />
 
       {/* Stars Info */}

@@ -8,6 +8,7 @@ import { KTX2Loader } from "three/examples/jsm/loaders/KTX2Loader";
 import { useThree, useFrame } from "@react-three/fiber";
 import * as THREE from 'three'
 import gsap from 'gsap';
+import useStore from "../../store";
 
 const MODEL_URL=`https://cychat-storage-bucket.s3.us-east-2.amazonaws.com/star/models/gallery/star_gallery_etc1s_1.glb`;
 
@@ -17,8 +18,8 @@ const KTX2_LOADER = new KTX2Loader().setTranscoderPath(THREE_PATH)
 export default function Model(props) {
   const ref = useRef();
   const gl = useThree((state)=>state.gl)
-  const [start, setStart] = useState(true)
-  const vec = new THREE.Vector3()
+  const { tl } = useStore((state)=>state.mutation);
+  const actions = useStore((state)=>state.actions);
 
   const { nodes, materials } = useGLTF(MODEL_URL, true, true, (loader)=>{
     KTX2_LOADER.detectSupport(gl).dispose();
@@ -26,13 +27,14 @@ export default function Model(props) {
   });
 
   const camera = useThree((state)=>state.camera);
-  const tl = gsap.timeline({repeat:1000})
+  // const tl = gsap.timeline({repeat:1000})
 
   useEffect(()=>{
-    console.log(camera.position, camera.rotation)
+    console.log(camera.position, camera.rotation,tl)
     // camera.position.set(1,1.5,1.5)
     camera.position.set(0.6,1,3)
     camera.rotation.set(0,-0.1,0)
+    tl.play()
 
     rotateCamera({y:-0.15},"first") 
     moveCamera({ x:1, y:1, z:2 },"first")
