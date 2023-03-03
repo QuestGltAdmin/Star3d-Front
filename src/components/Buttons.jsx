@@ -428,12 +428,12 @@ const NavigationButton = ({ className, label, onChange, value }) => {
   const actions = useStore((state) => state.actions);
   const {tl} = useStore((state)=>state.mutation)
   const [sliderVal, setSliderVal] = useState(value);
-  const [paused, pause] = useState(true);
+  const [paused, pause] = useState(false);
 
 
   const handlePause = () =>{
-    // pause(!paused)
-    if(tl.paused()){
+    pause(!paused)
+    if(paused){
       tl.play()
     }else{
       tl.pause();
@@ -457,7 +457,7 @@ const NavigationButton = ({ className, label, onChange, value }) => {
       )}
     >
       <div className="flex items-center justify-between gap-x-3">
-        <span className="" onClick={()=>handleFlow("BACKWARD")}>
+        <span className={cn("cursor-pointer")} onClick={()=>handleFlow("BACKWARD")} >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -474,8 +474,8 @@ const NavigationButton = ({ className, label, onChange, value }) => {
           </svg>
         </span>
 
-        {tl.paused() ? (
-          <span onClick={()=>tl.play()}>
+        {paused ? (
+          <span onClick={handlePause} className={cn("cursor-pointer")}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -484,15 +484,15 @@ const NavigationButton = ({ className, label, onChange, value }) => {
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
             >
               <polygon points="5 3 19 12 5 21 5 3"></polygon>
             </svg>
           </span>
         ) : (
-          <span onClick={()=>tl.pause()}>
+          <span onClick={handlePause} className={cn("cursor-pointer")}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -501,9 +501,9 @@ const NavigationButton = ({ className, label, onChange, value }) => {
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
             >
               <rect x="6" y="4" width="4" height="16"></rect>
               <rect x="14" y="4" width="4" height="16"></rect>
@@ -511,7 +511,7 @@ const NavigationButton = ({ className, label, onChange, value }) => {
           </span>
         )}
 
-        <span className="" onClick={()=>handleFlow("FORWARD")}>
+        <span className={cn("cursor-pointer")} onClick={()=>handleFlow("FORWARD")}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
