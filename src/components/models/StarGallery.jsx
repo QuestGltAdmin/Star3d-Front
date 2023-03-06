@@ -18,7 +18,7 @@ const KTX2_LOADER = new KTX2Loader().setTranscoderPath(THREE_PATH)
 export default function Model(props) {
   const ref = useRef();
   const gl = useThree((state)=>state.gl)
-  const { tl } = useStore((state)=>state.mutation);
+  // const { tl } = useStore((state)=>state.mutation);
   const actions = useStore((state)=>state.actions);
 
   const { nodes, materials } = useGLTF(MODEL_URL, true, true, (loader)=>{
@@ -27,14 +27,14 @@ export default function Model(props) {
   });
 
   const camera = useThree((state)=>state.camera);
-  // const tl = gsap.timeline({repeat:1000})
+  const tl = gsap.timeline({repeat:1000})
 
   useEffect(()=>{
     console.log(camera.position, camera.rotation,tl)
     // camera.position.set(1,1.5,1.5)
     camera.position.set(0.6,1,3)
     camera.rotation.set(0,-0.1,0)
-    tl.play()
+    // tl.play()
 
     rotateCamera({y:-0.15},"first") 
     moveCamera({ x:1, y:1, z:2 },"first")
