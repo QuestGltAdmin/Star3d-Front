@@ -47,7 +47,7 @@ export default function StarGalleryPage({sliderVal}:StarGalleryPageProps) {
       penumbra={1}
     />
     {/* <Lights/> */}
-    <Physics gravity={[0,-9.8,0]}>
+    <Physics gravity={[0,-36.8,0]}>
 
     <StarGallery />
       <Floor position={[-10,1.5,11]} rotation={[Math.PI / -2, 0, 0]} color="white" />
