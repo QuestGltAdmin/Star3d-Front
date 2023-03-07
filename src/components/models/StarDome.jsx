@@ -29,10 +29,7 @@ const KTX2_LOADER = new KTX2Loader().setTranscoderPath(THREE_PATH);
 
 export default function Model(props) {
   const ref= useRef();
-  useEffect(()=>{
-    console.log(ref.current)
-    // ref.current.camera.position({[-5,-4,-1]})
-  })
+  
   const { nodes, materials } = useGLTF(MODEL_URL, true, true, (loader) => {
     KTX2_LOADER.detectSupport(gl).dispose();
     loader.setKTX2Loader(KTX2_LOADER);
@@ -43,11 +40,10 @@ export default function Model(props) {
 
   useEffect(()=>{
     console.log("dome",camera.position, camera.rotation)
-    camera.position.set(9.2,5.4,9.2);
-    // camera.position.set(6.8,5.4,11.1);
+    camera.position.set(6.3, 3.1, 1.5);
+    camera.rotation.set(0,2,0)
+    
 
-    camera.rotation.set(0.5,0.7,0.3)
-    // camera.lookAt(10,10,10)
   },[])
 
   return (

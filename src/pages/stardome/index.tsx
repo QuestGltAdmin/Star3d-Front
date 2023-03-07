@@ -69,7 +69,7 @@ export default function StarDomePage({
         <StarDome />
       {/* </Bounds> */}
       </ScrollControls>
-      <OrbitControls
+      {/* <OrbitControls
         makeDefault
         enableZoom={false}
         // minDistance={2}
@@ -86,7 +86,7 @@ export default function StarDomePage({
         // minPolarAngle={0} maxPolarAngle={Math.PI / 1.6}
         minPolarAngle={Math.PI - Math.PI / 1.6}
         maxPolarAngle={Math.PI - Math.PI / 1.6}
-      />
+      /> */}
     </>
   );
 }
