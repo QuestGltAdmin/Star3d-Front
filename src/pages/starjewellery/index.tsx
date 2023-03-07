@@ -49,8 +49,10 @@ export default function StarJewelleryPage() {
     <Physics gravity={[0,-9.8,0]}>
 
         <StarJewellery />
-        <Floor position={[0,1.5,0]} rotation={[Math.PI / -2, 0, 0]} color="white" />
-    <BaseCharacter controls position={[11,2.5,10]} args={[0.5]} color="yellow" />
+
+        <Floor position={[-10,1.5,11]} rotation={[Math.PI / -2, 0, 0]} color="white" />
+    <BaseCharacter controls position={[6,2.5,10]} args={[0.5]} color="yellow" />
+
     </Physics>
     {/* </Bounds> */}
 

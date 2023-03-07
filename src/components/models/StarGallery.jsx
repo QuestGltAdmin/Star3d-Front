@@ -9,6 +9,7 @@ import { useThree, useFrame } from "@react-three/fiber";
 import * as THREE from 'three'
 import gsap from 'gsap';
 import useStore from "../../store";
+import { usePlane } from "@react-three/cannon";
 
 const MODEL_URL=`https://cychat-storage-bucket.s3.us-east-2.amazonaws.com/star/models/gallery/star_gallery_etc1s_1.glb`;
 
@@ -27,40 +28,40 @@ export default function Model(props) {
   });
 
   const camera = useThree((state)=>state.camera);
-  const tl = gsap.timeline({repeat:1000})
+  const tl = gsap.timeline({})
 
-  useEffect(()=>{
-    console.log(camera.position, camera.rotation,tl)
-    // camera.position.set(1,1.5,1.5)
-    camera.position.set(0.6,1,3)
-    camera.rotation.set(0,-0.1,0)
-    // tl.play()
+  // useEffect(()=>{
+  //   console.log(camera.position, camera.rotation,tl)
+  //   // camera.position.set(1,1.5,1.5)
+  //   camera.position.set(0.6,1,3)
+  //   camera.rotation.set(0,-0.1,0)
+  //   // tl.play()
 
-    rotateCamera({y:-0.15},"first") 
-    moveCamera({ x:1, y:1, z:2 },"first")
+  //   rotateCamera({y:-0.15},"first") 
+  //   moveCamera({ x:1, y:1, z:2 },"first")
 
-    moveCamera({ x:2, z:-2.4 },"second")
-    rotateCamera({y:1.5},"second") 
+  //   moveCamera({ x:2, z:-2.4 },"second")
+  //   rotateCamera({y:1.5},"second") 
 
-    moveCamera({ x:-0.3, z:-1.4 },"third")
-    rotateCamera({y: 0.3},"third")
+  //   moveCamera({ x:-0.3, z:-1.4 },"third")
+  //   rotateCamera({y: 0.3},"third")
     
-    moveCamera({ x:-3, z:-6  },"third")
-    rotateCamera({y: 0.1},"third")
+  //   moveCamera({ x:-3, z:-6  },"third")
+  //   rotateCamera({y: 0.1},"third")
 
-    moveCamera({  x:1,z:-12 },"fourth")
-    rotateCamera({y: 0.6},"fourth")
+  //   moveCamera({  x:1,z:-12 },"fourth")
+  //   rotateCamera({y: 0.6},"fourth")
 
-    moveCamera({  x:-2,z:-18 },"fifth")
-    rotateCamera({y: 2},"sixth")
-    rotateCamera({y: 4},"sixth")
+  //   moveCamera({  x:-2,z:-18 },"fifth")
+  //   rotateCamera({y: 2},"sixth")
+  //   rotateCamera({y: 4},"sixth")
 
-    moveCamera({  x:9, z:-15 },"seventh")
+  //   moveCamera({  x:9, z:-15 },"seventh")
 
-    return ()=>{
-      tl.clear(true);
-    }
-  },[])
+  //   return ()=>{
+  //     tl.clear(true);
+  //   }
+  // },[])
 
   function moveCamera(values,time){
     tl.to(camera.position,{
@@ -75,6 +76,26 @@ export default function Model(props) {
       ...values
     },time)
   }
+
+  const Floor = (props) => {
+    const [ref] = usePlane((index) => ({ type: 'Static', mass: 0, ...props }));
+  
+    {/* <mesh receiveShadow rotation={props.rotation} ref={ref}>
+      <planeGeometry args={[1000, 1000]} />
+      <meshStandardMaterial color={props.color} />
+    </mesh> */}
+    return (
+      <mesh
+      ref={ref}
+        castShadow
+        receiveShadow
+        geometry={nodes.Floor.geometry}
+        material={materials.Floor}
+        position={[-0.44, -0.05, 0.9]}
+        // {...props}
+      />
+    );
+  };
 
 
 
