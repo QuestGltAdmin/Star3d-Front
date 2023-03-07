@@ -50,7 +50,7 @@ export default function StarJewelleryPage() {
 
         <StarJewellery />
         <Floor position={[-10,1.5,11]} rotation={[Math.PI / -2, 0, 0]} color="white" />
-    <BaseCharacter controls position={[0, 2, 0]} args={[0.5]} color="yellow" />
+    <BaseCharacter controls position={[6,2.5,10]} args={[0.5]} color="yellow" />
     </Physics>
     {/* </Bounds> */}
 

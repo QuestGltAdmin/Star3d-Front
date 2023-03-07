@@ -1,6 +1,9 @@
-import { Bounds, OrbitControls } from '@react-three/drei'
+import { Physics } from '@react-three/cannon'
+import { Bounds, OrbitControls, PointerLockControls } from '@react-three/drei'
 import { Canvas } from '@react-three/fiber'
 import React, { useEffect, useState, lazy } from 'react'
+import Floor from '../../components/Floor'
+import BaseCharacter from '../../components/ui/BaseCharacter'
 // import StarGallery from '../../components/models/StarGallery'
 
 const StarGallery = lazy(()=>import("../../components/models/StarGallery"))
@@ -44,11 +47,12 @@ export default function StarGalleryPage({sliderVal}:StarGalleryPageProps) {
       penumbra={1}
     />
     {/* <Lights/> */}
-    <Bounds position={[0, 0, 0]} observe margin={1.2}>
-  
-      <StarGallery />
-    </Bounds>
-    <pointLight position={[1, 1, 1]} />
+    <Physics gravity={[0,-9.8,0]}>
+
+    <StarGallery />
+      <Floor position={[-10,1.5,11]} rotation={[Math.PI / -2, 0, 0]} color="white" />
+      <BaseCharacter controls position={[.5,1.5,-1]} args={[0.5]} color="yellow" />
+    </Physics>
     {/* <Star position={[4, 1, 0]} /> */}
     {/* <StarEvent position={[-1.2, 0, 0]} /> */}
     {/* <StarEvent position={[1.2, 0, 0]} /> */}
@@ -69,6 +73,8 @@ export default function StarGalleryPage({sliderVal}:StarGalleryPageProps) {
       minPolarAngle={Math.PI - Math.PI / 1.6}
       maxPolarAngle={Math.PI - Math.PI / 1.6}
     /> */}
+    <PointerLockControls/>
+    <pointLight position={[1, 1, 1]} />
   </>
   )
 }
