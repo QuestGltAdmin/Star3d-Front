@@ -1,19 +1,19 @@
-import { Bounds, FirstPersonControls, OrbitControls } from '@react-three/drei'
-import { Canvas } from '@react-three/fiber'
-import React, { useEffect, useState, lazy } from 'react'
-import useStore from '../../store'
+import { Physics } from '@react-three/cannon';
+import { Bounds, PointerLockControls, ScrollControls } from '@react-three/drei'
+import { useEffect, useState, lazy } from 'react'
+import Floor from '../../components/Floor';
+import BaseCharacter from '../../components/ui/BaseCharacter';
+import useStore from '../../store';
 // import StarOffice from '../../components/models/StarOffice'
 
 const StarOffice = lazy(()=>import("../../components/models/StarOffice"))
 
 
-export default function StarOfficePage() {
-  const sliderVal = useStore((state)=>state.sliderVal);
-  const camera = useStore((state)=>state.camera);
-
+export default function StarJewelleryPage() {
   const [rotate, setRotate] = useState({ speed: 0, reverse: false });
+  const sliderVal = useStore((state)=>state.sliderVal)
   
-  useEffect(() => {
+  {/*useEffect(() => {
     if (sliderVal > 0) {
       console.log("greater", typeof sliderVal, sliderVal / 10, sliderVal / 10);
       setRotate({ speed: sliderVal / 10, reverse: false });
@@ -31,7 +31,7 @@ export default function StarOfficePage() {
       );
       setRotate({ speed: Math.abs(sliderVal / 10), reverse: true });
     }
-  }, [sliderVal])
+  }, [sliderVal])*/}
 
   return (
     <>
@@ -45,30 +45,18 @@ export default function StarOfficePage() {
       penumbra={1}
     />
     {/* <Lights/> */}
-    <StarOffice />
-   
+    {/* <Bounds position={[0, 0, 0]} observe margin={1.2}> */}
+    <Physics gravity={[0,-9.8,0]}>
+
+        <StarOffice />
+        <Floor position={[0,1.5,0]} rotation={[Math.PI / -2, 0, 0]} color="white" />
+    <BaseCharacter controls position={[-45,2.5,10]} args={[0.5]} color="yellow" />
+    </Physics>
+    {/* </Bounds> */}
+
+    <PointerLockControls/>
     <pointLight position={[1, 1, 1]} />
-   
-   {/* <FirstPersonControls
-    object={camera}
-   /> */}
-    {/* <OrbitControls
-      makeDefault
-      minDistance={0.5}
-      // maxDistance={8}
-      autoRotate={true}
-      enableRotate={true}
-      rotateSpeed={rotate.speed}
-      autoRotateSpeed={rotate.speed}
-      // enableDamping={true}
-      // dampingFactor={0.05}
-      reverseOrbit={rotate.reverse}
-      // minAzimuthAngle={-Math.PI}
-      // maxAzimuthAngle={Math.PI}
-      // minPolarAngle={0} maxPolarAngle={Math.PI / 1.6}
-      minPolarAngle={Math.PI - Math.PI / 1.6}
-      maxPolarAngle={Math.PI - Math.PI / 1.6}
-    /> */}
+    
   </>
   )
 }

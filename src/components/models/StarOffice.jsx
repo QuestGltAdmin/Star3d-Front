@@ -30,6 +30,10 @@ export default function Model(props) {
   const tl = gsap.timeline({repeat:1000})
 
   useEffect(()=>{
+    camera.position.set(-50,-2.6,-2)
+    camera.rotation.set(0,-1.6,0)
+  },[])
+  {/*useEffect(()=>{
     camera.position.set(-50,2,-2)
     camera.rotation.set(-0,-2,-0)
     console.log(camera.position, camera.rotation);
@@ -186,7 +190,7 @@ export default function Model(props) {
     return ()=>{
       tl.clear(true)
     }
-  },[])
+  },[])*/}
 
   function moveCamera(values,time){
     tl.to(camera.position,{
