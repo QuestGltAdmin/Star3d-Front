@@ -30,6 +30,10 @@ export default function Model(props) {
   const camera = useThree((state)=>state.camera);
   const tl = gsap.timeline({repeat:1000})
 
+  useEffect(()=>{
+    camera.position.set(11,2.5,10)
+    camera.rotation.set(0,0,0)
+  },[])
   // useEffect(()=>{
   //   console.log(camera.position);
   //   console.log(camera.position);
