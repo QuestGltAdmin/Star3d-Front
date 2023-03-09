@@ -1,24 +1,45 @@
+import { Physics } from '@react-three/cannon'
 import { Bounds, OrbitControls, PointerLockControls } from '@react-three/drei'
 import { Canvas } from '@react-three/fiber'
 import React, { useEffect, useState, lazy } from 'react'
-import useStore from '../../store'
+import Floor from '../../components/Floor'
+import BaseCharacter from '../../components/ui/BaseCharacter'
 // import StarArena from '../../components/models/StarArena'
 
 const StarArena = lazy(()=> import('../../components/models/StarArena'))
 
-export default function StarArenaPage() {
-  const sliderVal = useStore((state)=>state.sliderVal);
+type StarArenaPageProps = {
+  sliderVal:number
+}
+
+export default function StarArenaPage({sliderVal}:StarArenaPageProps) {
   const [rotate, setRotate] = useState({ speed: 0, reverse: false });
-  const [lockControls, setLockControls] = useState(false)
+  const [fpc, setFpc] = useState(false)
   
   useEffect(() => {
-    // console.log(sliderVal)
+    if (sliderVal > 0) {
+      console.log("greater", typeof sliderVal, sliderVal / 10, sliderVal / 10);
+      setRotate({ speed: sliderVal / 10, reverse: false });
+    }
+    if (sliderVal === 0) {
+      console.log("equal", typeof sliderVal, sliderVal);
+      setRotate({ speed: 0.5, reverse: false });
+    }
+    if (sliderVal < 0) {
+      console.log(
+        "less",
+        typeof sliderVal,
+        sliderVal,
+        Math.abs(sliderVal / 10)
+      );
+      setRotate({ speed: Math.abs(sliderVal / 10), reverse: true });
+    }
   }, [sliderVal])
 
   useEffect(() => {
     setTimeout(() => {
-      setLockControls(true)
-    }, 3000);
+      setFpc(true)
+    }, 7000);
   },[])
   
   return (
@@ -33,15 +54,37 @@ export default function StarArenaPage() {
       penumbra={1}
     />
     {/* <Lights/> */}
-    <Bounds position={[0, 0, 0]} observe margin={1.2}>
-  
-      <StarArena/>
-    </Bounds>
-    <pointLight position={[1, 1, 1]} />
+
+    {
+      fpc ? ( 
+      <Physics gravity={[0,-36.8,0]}>
+        <StarArena />
+        <Floor position={[-10,1.5,11]} rotation={[Math.PI / -2, 0, 0]} color="white" />
+        <BaseCharacter controls position={[.5,1.5,-1]} args={[0.5]} color="yellow" />
+      </Physics>) : (<StarArena />)
+    }
     {/* <Star position={[4, 1, 0]} /> */}
     {/* <StarEvent position={[-1.2, 0, 0]} /> */}
     {/* <StarEvent position={[1.2, 0, 0]} /> */}
-    {lockControls && <PointerLockControls />}
+    {/* <OrbitControls
+      makeDefault
+      minDistance={0.5}
+      maxDistance={8}
+      autoRotate={true}
+      enableRotate={true}
+      rotateSpeed={rotate.speed}
+      autoRotateSpeed={rotate.speed}
+      // enableDamping={true}
+      // dampingFactor={0.05}
+      reverseOrbit={rotate.reverse}
+      // minAzimuthAngle={-Math.PI}
+      // maxAzimuthAngle={Math.PI}
+      // minPolarAngle={0} maxPolarAngle={Math.PI / 1.6}
+      minPolarAngle={Math.PI - Math.PI / 1.6}
+      maxPolarAngle={Math.PI - Math.PI / 1.6}
+    /> */}
+    <PointerLockControls/>
+    <pointLight position={[1, 1, 1]} />
   </>
   )
 }
