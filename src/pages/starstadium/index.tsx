@@ -1,6 +1,9 @@
-import { Bounds, OrbitControls } from '@react-three/drei'
+import { Physics } from '@react-three/cannon'
+import { Bounds, OrbitControls, PointerLockControls } from '@react-three/drei'
 import { Canvas } from '@react-three/fiber'
 import React, { useEffect, useState, lazy } from 'react'
+import Floor from '../../components/Floor'
+import BaseCharacter from '../../components/ui/BaseCharacter'
 import useStore from '../../store'
 // import StarStadium from '../../components/models/StarStadium'
 
@@ -10,6 +13,7 @@ const StarStadium = lazy(()=>import("../../components/models/StarStadium"))
 export default function StarStadiumPage() {
   const sliderVal = useStore((state)=>state.sliderVal)
   const [rotate, setRotate] = useState({ speed: 0, reverse: false });
+  const [fpc, setFpc] = useState(false)
   
   useEffect(() => {
     if (sliderVal > 0) {
@@ -30,6 +34,12 @@ export default function StarStadiumPage() {
       setRotate({ speed: Math.abs(sliderVal / 10), reverse: true });
     }
   }, [sliderVal])
+
+  useEffect(() => {
+    setTimeout(() => {
+      setFpc(true)
+    }, 7000);
+  },[])
   
   return (
     <>
@@ -43,10 +53,19 @@ export default function StarStadiumPage() {
       penumbra={1}
     />
     {/* <Lights/> */}
-    <Bounds position={[0, 0, 0]} observe margin={1.2}>
-  
-      <StarStadium />
-    </Bounds>
+    {
+      fpc ? ( 
+        <>
+      <Physics gravity={[0,-36.8,0]}>
+        <StarStadium />
+        <Floor position={[-10,1.5,11]} rotation={[Math.PI / -2, 0, 0]} color="white" />
+        <BaseCharacter controls position={[.5,1.5,-1]} args={[0.5]} color="yellow" />
+      </Physics>
+    <PointerLockControls/>
+
+        </>
+      ) : (<StarStadium />)
+    }
     <pointLight position={[1, 1, 1]} />
     {/* <Star position={[4, 1, 0]} /> */}
     {/* <StarEvent position={[-1.2, 0, 0]} /> */}

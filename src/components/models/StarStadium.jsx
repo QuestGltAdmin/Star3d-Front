@@ -17,6 +17,7 @@ const KTX2_LOADER = new KTX2Loader().setTranscoderPath(THREE_PATH)
 
 export default function Model(props) {
   const ref = useRef();
+  const gl = useThree((state)=>state.gl)
   // const camera = useStore((state)=>state.camera)
   // const { tl } = useStore((state)=>state.mutation);
   const actions = useStore((state)=>state.actions)
@@ -26,7 +27,7 @@ export default function Model(props) {
     loader.setKTX2Loader(KTX2_LOADER)
   });
   const camera = useThree((state)=>state.camera);
-  const tl = gsap.timeline({repeat:1000})
+  const tl = gsap.timeline({})
 
   useEffect(()=>{
     camera.position.set(-50,2,-2)
@@ -65,17 +66,6 @@ export default function Model(props) {
 
 
 
-
-    
-
-    
-
-
-
-    
-
-    
-
     return ()=>{
       tl.clear(true)
     }
@@ -83,17 +73,38 @@ export default function Model(props) {
 
   function moveCamera(values,time){
     tl.to(camera.position,{
-      duration:3,
+      duration:1,
       ...values
     },time)
   }
 
   function rotateCamera(values, time){
     tl.to(camera.rotation,{
-      duration:3,
+      duration:1,
       ...values
     },time)
   }
+
+  const Floor = (props) => {
+    const [ref] = usePlane((index) => ({ type: 'Static', mass: 0, ...props }));
+  
+    {/* <mesh receiveShadow rotation={props.rotation} ref={ref}>
+      <planeGeometry args={[1000, 1000]} />
+      <meshStandardMaterial color={props.color} />
+    </mesh> */}
+    return (
+      <mesh
+      ref={ref}
+        castShadow
+        receiveShadow
+        geometry={nodes.Floor.geometry}
+        material={materials.Floor}
+        position={[-0.44, -0.05, 0.9]}
+        // {...props}
+      />
+    );
+  };
+
 
   return (
     <group ref={ref} {...props} dispose={null}>
