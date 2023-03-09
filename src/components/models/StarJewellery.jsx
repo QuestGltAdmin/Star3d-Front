@@ -19,79 +19,74 @@ const KTX2_LOADER = new KTX2Loader().setTranscoderPath(THREE_PATH)
 
 export default function Model(props) {
   const ref = useRef();
-  // const camera = useStore((state)=>state.camera)
-  // const { tl } = useStore((state)=>state.mutation);
-  
+
+  const gl = useThree((state)=>state.gl)
   const actions = useStore((state)=>state.actions)
   const { nodes, materials } = useGLTF(MODEL_URL, true, true, (loader)=>{
     KTX2_LOADER.detectSupport(gl).dispose();
     loader.setKTX2Loader(KTX2_LOADER)
   });
   const camera = useThree((state)=>state.camera);
-  const tl = gsap.timeline({repeat:1000})
+  const tl = gsap.timeline({})
 
   useEffect(()=>{
+    console.log(camera.position);
+    console.log(camera.position);
     camera.position.set(11,2.5,10)
     camera.rotation.set(0,0,0)
+    // tl.play()
+
+    rotateCamera({y:3.25},"first")
+    moveCamera({x:-4,z:5},"first")
+
+    rotateCamera({y:1.6},"second")
+    moveCamera({x:-7,z:5},"second")
+
+    rotateCamera({y:1.6},"third")
+    moveCamera({x:-4,z:0},"third")
+
+    rotateCamera({y:0},"fourth")
+    moveCamera({x:-8,z:-4},"fourth")
+
+    rotateCamera({y:0},"fifth")
+    moveCamera({x:0,z:-4},"fifth")
+
+    rotateCamera({y:-0.8},"sixth")
+    moveCamera({x:6,z:-4},"sixth")
+
+    rotateCamera({y:-1.6},"seventh")
+    moveCamera({x:6,z:0},"seventh")
+
+    rotateCamera({y:-4.7},"eighrth")
+    moveCamera({x:6,z:0},"eighrth")
+
+    rotateCamera({y:0},"ninght")
+    moveCamera({x:0,z:7},"ninght")
+
+
+    // rotateCamera({y:-2},"second")
+    // moveCamera({z:6},"first")
+
+
+
+    // moveCamera({x:-45},"0")
+    // camera_three.lookAt(0,0,0)
+
+    return ()=>{
+      tl.clear(true)
+    }
   },[])
-  // useEffect(()=>{
-  //   console.log(camera.position);
-  //   console.log(camera.position);
-  //   camera.position.set(11,2.5,10)
-  //   camera.rotation.set(0,0,0)
-  //   // tl.play()
-
-  //   rotateCamera({y:3.25},"first")
-  //   moveCamera({x:-4,z:5},"first")
-
-  //   rotateCamera({y:1.6},"second")
-  //   moveCamera({x:-7,z:5},"second")
-
-  //   rotateCamera({y:1.6},"third")
-  //   moveCamera({x:-4,z:0},"third")
-
-  //   rotateCamera({y:0},"fourth")
-  //   moveCamera({x:-8,z:-4},"fourth")
-
-  //   rotateCamera({y:0},"fifth")
-  //   moveCamera({x:0,z:-4},"fifth")
-
-  //   rotateCamera({y:-0.8},"sixth")
-  //   moveCamera({x:6,z:-4},"sixth")
-
-  //   rotateCamera({y:-1.6},"seventh")
-  //   moveCamera({x:6,z:0},"seventh")
-
-  //   rotateCamera({y:-4.7},"eighrth")
-  //   moveCamera({x:6,z:0},"eighrth")
-
-  //   rotateCamera({y:0},"ninght")
-  //   moveCamera({x:0,z:7},"ninght")
-
-
-  //   // rotateCamera({y:-2},"second")
-  //   // moveCamera({z:6},"first")
-
-
-
-  //   // moveCamera({x:-45},"0")
-  //   // camera_three.lookAt(0,0,0)
-
-  //   return ()=>{
-  //     tl.clear(true)
-  //   }
-  // },[])
 
   function moveCamera(values,time){
     tl.to(camera.position,{
-      duration:5,
+      duration:1,
       ...values
     },time)
   }
 
   function rotateCamera(values, time){
     tl.to(camera.rotation,{
-      duration:5,
+      duration:1,
       ...values
     },time)
   }

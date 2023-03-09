@@ -58,11 +58,16 @@ export default function StarGalleryPage({sliderVal}:StarGalleryPageProps) {
 
     {
       fpc ? ( 
+        <>
       <Physics gravity={[0,-36.8,0]}>
         <StarGallery />
         <Floor position={[-10,1.5,11]} rotation={[Math.PI / -2, 0, 0]} color="white" />
         <BaseCharacter controls position={[.5,1.5,-1]} args={[0.5]} color="yellow" />
-      </Physics>) : (<StarGallery />)
+      </Physics>
+    <PointerLockControls/>
+
+        </>
+      ) : (<StarGallery />)
     }
     {/* <Star position={[4, 1, 0]} /> */}
     {/* <StarEvent position={[-1.2, 0, 0]} /> */}
@@ -84,7 +89,6 @@ export default function StarGalleryPage({sliderVal}:StarGalleryPageProps) {
       minPolarAngle={Math.PI - Math.PI / 1.6}
       maxPolarAngle={Math.PI - Math.PI / 1.6}
     /> */}
-    <PointerLockControls/>
     <pointLight position={[1, 1, 1]} />
   </>
   )

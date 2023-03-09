@@ -12,6 +12,7 @@ const StarJewellery = lazy(()=>import("../../components/models/StarJewellery"))
 export default function StarJewelleryPage() {
   const [rotate, setRotate] = useState({ speed: 0, reverse: false });
   const sliderVal = useStore((state)=>state.sliderVal)
+  const [fpc, setFpc] = useState(false)
 
   // useEffect(() => {
   //   if (sliderVal > 0) {
@@ -32,6 +33,13 @@ export default function StarJewelleryPage() {
   //     setRotate({ speed: Math.abs(sliderVal / 10), reverse: true });
   //   }
   // }, [sliderVal])
+
+  useEffect(() => {
+    setTimeout(() => {
+      setFpc(true)
+    }, 7000);
+  },[])
+  
   
   return (
     <>
@@ -45,18 +53,19 @@ export default function StarJewelleryPage() {
       penumbra={1}
     />
     {/* <Lights/> */}
-    {/* <Bounds position={[0, 0, 0]} observe margin={1.2}> */}
-    <Physics gravity={[0,-9.8,0]}>
-
+    {
+      fpc ? ( 
+        <>
+      <Physics gravity={[0,-36.8,0]}>
         <StarJewellery />
-
         <Floor position={[-10,1.5,11]} rotation={[Math.PI / -2, 0, 0]} color="white" />
-    <BaseCharacter controls position={[6,2.5,10]} args={[0.5]} color="yellow" />
-
-    </Physics>
-    {/* </Bounds> */}
-
+        <BaseCharacter controls position={[.5,1.5,-1]} args={[0.5]} color="yellow" />
+      </Physics>
     <PointerLockControls/>
+
+        </>
+      ) : (<StarJewellery />)
+    }
     <pointLight position={[1, 1, 1]} />
     
   </>
