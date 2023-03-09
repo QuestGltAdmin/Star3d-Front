@@ -14,6 +14,7 @@ type StarGalleryPageProps = {
 
 export default function StarGalleryPage({sliderVal}:StarGalleryPageProps) {
   const [rotate, setRotate] = useState({ speed: 0, reverse: false });
+  const [fpc, setFpc] = useState(false)
   
   useEffect(() => {
     if (sliderVal > 0) {
@@ -34,6 +35,13 @@ export default function StarGalleryPage({sliderVal}:StarGalleryPageProps) {
       setRotate({ speed: Math.abs(sliderVal / 10), reverse: true });
     }
   }, [sliderVal])
+
+  useEffect(() => {
+    setTimeout(() => {
+      setFpc(true)
+    }, 7000);
+  },[])
+  
   
   return (
     <>
@@ -47,12 +55,15 @@ export default function StarGalleryPage({sliderVal}:StarGalleryPageProps) {
       penumbra={1}
     />
     {/* <Lights/> */}
-    <Physics gravity={[0,-36.8,0]}>
 
-    <StarGallery />
-      <Floor position={[-10,1.5,11]} rotation={[Math.PI / -2, 0, 0]} color="white" />
-      <BaseCharacter controls position={[.5,1.5,-1]} args={[0.5]} color="yellow" />
-    </Physics>
+    {
+      fpc ? ( 
+      <Physics gravity={[0,-36.8,0]}>
+        <StarGallery />
+        <Floor position={[-10,1.5,11]} rotation={[Math.PI / -2, 0, 0]} color="white" />
+        <BaseCharacter controls position={[.5,1.5,-1]} args={[0.5]} color="yellow" />
+      </Physics>) : (<StarGallery />)
+    }
     {/* <Star position={[4, 1, 0]} /> */}
     {/* <StarEvent position={[-1.2, 0, 0]} /> */}
     {/* <StarEvent position={[1.2, 0, 0]} /> */}

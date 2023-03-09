@@ -30,49 +30,49 @@ export default function Model(props) {
   const camera = useThree((state)=>state.camera);
   const tl = gsap.timeline({})
 
-  // useEffect(()=>{
-  //   console.log(camera.position, camera.rotation,tl)
-  //   // camera.position.set(1,1.5,1.5)
-  //   camera.position.set(0.6,1,3)
-  //   camera.rotation.set(0,-0.1,0)
-  //   // tl.play()
+  useEffect(()=>{
+    console.log(camera.position, camera.rotation,tl)
+    // camera.position.set(1,1.5,1.5)
+    camera.position.set(0.6,1,3)
+    camera.rotation.set(0,-0.1,0)
+    // tl.play()
 
-  //   rotateCamera({y:-0.15},"first") 
-  //   moveCamera({ x:1, y:1, z:2 },"first")
+    rotateCamera({y:-0.15},"first") 
+    moveCamera({ x:1, y:1, z:2 },"first")
 
-  //   moveCamera({ x:2, z:-2.4 },"second")
-  //   rotateCamera({y:1.5},"second") 
+    moveCamera({ x:2, z:-2.4 },"second")
+    rotateCamera({y:1.5},"second") 
 
-  //   moveCamera({ x:-0.3, z:-1.4 },"third")
-  //   rotateCamera({y: 0.3},"third")
+    moveCamera({ x:-0.3, z:-1.4 },"third")
+    rotateCamera({y: 0.3},"third")
     
-  //   moveCamera({ x:-3, z:-6  },"third")
-  //   rotateCamera({y: 0.1},"third")
+    moveCamera({ x:-3, z:-6  },"third")
+    rotateCamera({y: 0.1},"third")
 
-  //   moveCamera({  x:1,z:-12 },"fourth")
-  //   rotateCamera({y: 0.6},"fourth")
+    moveCamera({  x:1,z:-12 },"fourth")
+    rotateCamera({y: 0.6},"fourth")
 
-  //   moveCamera({  x:-2,z:-18 },"fifth")
-  //   rotateCamera({y: 2},"sixth")
-  //   rotateCamera({y: 4},"sixth")
+    moveCamera({  x:-2,z:-18 },"fifth")
+    rotateCamera({y: 2},"sixth")
+    rotateCamera({y: 4},"sixth")
 
-  //   moveCamera({  x:9, z:-15 },"seventh")
+    moveCamera({  x:9, z:-15 },"seventh")
 
-  //   return ()=>{
-  //     tl.clear(true);
-  //   }
-  // },[])
+    return ()=>{
+      tl.clear(true);
+    }
+  },[])
 
   function moveCamera(values,time){
     tl.to(camera.position,{
-      duration:3,
+      duration:1,
       ...values
     },time)
   }
 
   function rotateCamera(values, time){
     tl.to(camera.rotation,{
-      duration:3,
+      duration:1,
       ...values
     },time)
   }
