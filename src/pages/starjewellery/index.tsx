@@ -58,13 +58,13 @@ export default function StarJewelleryPage() {
       fpc ? (
         <>
       <Physics gravity={[0,-36.8,0]}>
-        <Debug color="black" scale={1.1}>
+        {/* <Debug color="black" scale={1.1}> */}
 
         <StarJewellery />
         <Floor position={[10,1.5,11]} rotation={[Math.PI / -2, 0, 0]} color="white" />
         <Collider/>
         <BaseCharacter controls position={[.5,1.5,-1]} args={[0.5]} color="yellow" />
-        </Debug>
+        {/* </Debug> */}
       </Physics>
     <PointerLockControls/>
 
