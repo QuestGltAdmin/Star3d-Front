@@ -15,8 +15,6 @@ import { gsap } from "gsap";
 import * as THREE from "three";
 import { ScrollToPlugin, ScrollTrigger } from "gsap/all";
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
-// import { ScrollTrigger } from 'gsap/ScrollTrigger';
-// import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
 
 import Router from "./router/Router";
 import Header from "./components/Header";
@@ -115,23 +113,7 @@ function App() {
             makeDefault={ortho}
           /> */}
 
-        <Suspense
-          fallback={
-            null
-            // <>
-            //   <OrbitControls
-            //     // makeDefault
-            //     minDistance={0.5}
-            //     maxDistance={8}
-            //     autoRotate={true}
-            //     autoRotateSpeed={10}
-               
-            //     minPolarAngle={Math.PI - Math.PI / 1.6}
-            //     maxPolarAngle={Math.PI - Math.PI / 1.6}
-            //   />
-            // </>
-          }
-        >
+        <Suspense fallback={null}>
           <Router transition={transition} />
         </Suspense>
         {/* <Stars/> */}

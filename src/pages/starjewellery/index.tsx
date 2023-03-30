@@ -4,7 +4,7 @@ import { useEffect, useState, lazy } from 'react'
 import Floor from '../../components/Floor';
 import BaseCharacter from '../../components/ui/BaseCharacter';
 import useStore from '../../store';
-import Collider from './Collider';
+import Collider, { Monkey } from './Collider';
 // import StarJewellery from '../../components/models/StarJewelleryStore'
 
 const StarJewellery = lazy(()=>import("../../components/models/StarJewellery"))
@@ -62,8 +62,8 @@ export default function StarJewelleryPage() {
 
         <StarJewellery />
         <Floor position={[10,1.5,11]} rotation={[Math.PI / -2, 0, 0]} color="white" />
-        <Collider/>
         <BaseCharacter controls position={[.5,1.5,-1]} args={[0.5]} color="yellow" />
+        <Collider/>
         {/* </Debug> */}
       </Physics>
     <PointerLockControls/>
