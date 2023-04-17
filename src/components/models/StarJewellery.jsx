@@ -22,6 +22,7 @@ export default function Model(props) {
 
   const gl = useThree((state)=>state.gl)
   const actions = useStore((state)=>state.actions)
+
   const { nodes, materials } = useGLTF(MODEL_URL, true, true, (loader)=>{
     KTX2_LOADER.detectSupport(gl).dispose();
     loader.setKTX2Loader(KTX2_LOADER)
@@ -35,46 +36,51 @@ export default function Model(props) {
     camera.position.set(11,2.5,10)
     camera.rotation.set(0,0,0)
     // tl.play()
-
+    
     rotateCamera({y:3.25},"first")
     moveCamera({x:-4,z:5},"first")
-
+    
     rotateCamera({y:1.6},"second")
     moveCamera({x:-7,z:5},"second")
-
+    
     rotateCamera({y:1.6},"third")
     moveCamera({x:-4,z:0},"third")
-
+    
     rotateCamera({y:0},"fourth")
     moveCamera({x:-8,z:-4},"fourth")
-
+    
     rotateCamera({y:0},"fifth")
     moveCamera({x:0,z:-4},"fifth")
-
+    
     rotateCamera({y:-0.8},"sixth")
     moveCamera({x:6,z:-4},"sixth")
-
+    
     rotateCamera({y:-1.6},"seventh")
     moveCamera({x:6,z:0},"seventh")
-
+    
     rotateCamera({y:-4.7},"eighrth")
     moveCamera({x:6,z:0},"eighrth")
-
+    
     rotateCamera({y:0},"ninght")
     moveCamera({x:0,z:7},"ninght")
-
-
+    
+    
     // rotateCamera({y:-2},"second")
     // moveCamera({z:6},"first")
-
-
-
+    
+    
+    
     // moveCamera({x:-45},"0")
     // camera_three.lookAt(0,0,0)
-
+    
     return ()=>{
       tl.clear(true)
     }
+  },[])
+  
+  useEffect(()=>{
+    
+    // actions.initPlayer({position:camera.position,rotation:camera.rotation})
   },[])
 
   function moveCamera(values,time){

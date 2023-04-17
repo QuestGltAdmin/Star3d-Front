@@ -73,6 +73,7 @@ export default function Router({ transition, ...routerProps }) {
         <Route path="/star-gallery" element={<StarGalleryPage />} />
         <Route path="/star-stadium" element={<StarStadiumPage/>} />
         <Route path="/star-arena" element={<StarArenaPage/>} />
+        {/* <Route  /> */}
       </Routes>
     </a.group>
   ));

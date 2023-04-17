@@ -1,19 +1,21 @@
-import { Physics } from '@react-three/cannon';
-import { Bounds, PointerLockControls, ScrollControls } from '@react-three/drei'
-import { useEffect, useState, lazy } from 'react'
-import Floor from '../../components/Floor';
-import BaseCharacter from '../../components/ui/BaseCharacter';
-import useStore from '../../store';
+import { Physics } from "@react-three/cannon";
+import { Bounds, PointerLockControls, ScrollControls } from "@react-three/drei";
+import { useEffect, useState, lazy } from "react";
+import Floor from "../../components/Floor";
+import BaseCharacter from "../../components/ui/BaseCharacter";
+import useStore from "../../store";
+import { OfficeCollider } from "../../components/Colliders";
 // import StarOffice from '../../components/models/StarOffice'
 
-const StarOffice = lazy(()=>import("../../components/models/StarOffice"))
-
+const StarOffice = lazy(() => import("../../components/models/StarOffice"));
 
 export default function StarJewelleryPage() {
   const [rotate, setRotate] = useState({ speed: 0, reverse: false });
-  const sliderVal = useStore((state)=>state.sliderVal)
-  
-  {/*useEffect(() => {
+  const sliderVal = useStore((state) => state.sliderVal);
+  const [fpc, setFpc] = useState(false);
+
+  {
+    /*useEffect(() => {
     if (sliderVal > 0) {
       console.log("greater", typeof sliderVal, sliderVal / 10, sliderVal / 10);
       setRotate({ speed: sliderVal / 10, reverse: false });
@@ -31,32 +33,47 @@ export default function StarJewelleryPage() {
       );
       setRotate({ speed: Math.abs(sliderVal / 10), reverse: true });
     }
-  }, [sliderVal])*/}
+  }, [sliderVal])*/
+  }
+
+  useEffect(() => {
+    setTimeout(() => {
+      setFpc(true);
+    }, 7000);
+  }, []);
 
   return (
     <>
-    {/* <perspectiveCamera position={[2,3,4]} /> */}
-    <ambientLight intensity={0.5} />
-    {/* <directionalLight castShadow={true} /> */}
-    <spotLight
-      // map={envMap}
-      position={[1, 10, 1]}
-      angle={0.15}
-      penumbra={1}
-    />
-    {/* <Lights/> */}
-    {/* <Bounds position={[0, 0, 0]} observe margin={1.2}> */}
-    <Physics gravity={[0,-9.8,0]}>
-
+      {/* <perspectiveCamera position={[2,3,4]} /> */}
+      <ambientLight intensity={0.5} />
+      {/* <directionalLight castShadow={true} /> */}
+      <spotLight
+        // map={envMap}
+        position={[1, 10, 1]}
+        angle={0.15}
+        penumbra={1}
+      />
+      {/* <Lights/> */}
+      {/* <Bounds position={[0, 0, 0]} observe margin={1.2}> */}
+      <Physics gravity={[0, -36.8, 0]}>
         <StarOffice />
-        <Floor position={[0,1.5,0]} rotation={[Math.PI / -2, 0, 0]} color="white" />
-    <BaseCharacter controls position={[-45,2.5,10]} args={[0.5]} color="yellow" />
-    </Physics>
-    {/* </Bounds> */}
+        <Floor
+          position={[0, 1.5, 0]}
+          rotation={[Math.PI / -2, 0, 0]}
+          color="white"
+        />
+        <BaseCharacter
+          controls
+          position={[-45, 2.5, 10]}
+          args={[0.5]}
+          color="yellow"
+        />
+        {/* <OfficeCollider /> */}
+      </Physics>
+      {/* </Bounds> */}
 
-    <PointerLockControls/>
-    <pointLight position={[1, 1, 1]} />
-    
-  </>
-  )
+      {fpc ? <PointerLockControls /> : <></>}
+      <pointLight position={[1, 1, 1]} />
+    </>
+  );
 }

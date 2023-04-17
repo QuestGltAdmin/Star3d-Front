@@ -3,6 +3,7 @@ import { useFrame, useThree } from '@react-three/fiber';
 import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 import { usePlayerControls } from '../../hooks/usePlayerControls.jsx';
+import useStore from '../../store.js';
 
 const BaseCharacter = (props) => {
   const direction = new THREE.Vector3();
@@ -10,6 +11,7 @@ const BaseCharacter = (props) => {
   const sideVector = new THREE.Vector3();
   const speed = new THREE.Vector3();
   const SPEED = 5;
+  const actions = useStore((state)=>state.actions);
 
   const { camera } = useThree();
 
@@ -35,6 +37,16 @@ const BaseCharacter = (props) => {
     api.velocity.set(direction.x, velocity.current[1], direction.z);
     if (jump && Math.abs(velocity.current[1].toFixed(2)) < 0.05) api.velocity.set(velocity.current[0], 5, velocity.current[2]);
   });
+
+  useEffect(()=>{
+    // let cameraTimeout = setTimeout(()=>{
+      console.log({position:camera.position,rotation:camera.rotation})
+      actions.updatePlayer({position:camera.position,rotation:camera.rotation});
+    // },100);
+    // return ()=>clearTimeout(cameraTimeout);
+  },[forward,backward, left, right])
+
+
 
   return (
     <group>

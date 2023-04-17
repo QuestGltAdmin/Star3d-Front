@@ -1,21 +1,22 @@
-import { Physics } from '@react-three/cannon'
-import { Bounds, OrbitControls, PointerLockControls } from '@react-three/drei'
-import { Canvas } from '@react-three/fiber'
-import React, { useEffect, useState, lazy } from 'react'
-import Floor from '../../components/Floor'
-import BaseCharacter from '../../components/ui/BaseCharacter'
+import { Debug, Physics } from "@react-three/cannon";
+import { Bounds, OrbitControls, PointerLockControls } from "@react-three/drei";
+import { Canvas } from "@react-three/fiber";
+import React, { useEffect, useState, lazy } from "react";
+import Floor from "../../components/Floor";
+import BaseCharacter from "../../components/ui/BaseCharacter";
+import { GalleryCollider } from "../../components/Colliders";
 // import StarGallery from '../../components/models/StarGallery'
 
-const StarGallery = lazy(()=>import("../../components/models/StarGallery"))
+const StarGallery = lazy(() => import("../../components/models/StarGallery"));
 
 type StarGalleryPageProps = {
-  sliderVal:number
-}
+  sliderVal: number;
+};
 
-export default function StarGalleryPage({sliderVal}:StarGalleryPageProps) {
+export default function StarGalleryPage({ sliderVal }: StarGalleryPageProps) {
   const [rotate, setRotate] = useState({ speed: 0, reverse: false });
-  const [fpc, setFpc] = useState(false)
-  
+  const [fpc, setFpc] = useState(false);
+
   useEffect(() => {
     if (sliderVal > 0) {
       console.log("greater", typeof sliderVal, sliderVal / 10, sliderVal / 10);
@@ -34,62 +35,67 @@ export default function StarGalleryPage({sliderVal}:StarGalleryPageProps) {
       );
       setRotate({ speed: Math.abs(sliderVal / 10), reverse: true });
     }
-  }, [sliderVal])
+  }, [sliderVal]);
 
   useEffect(() => {
     setTimeout(() => {
-      setFpc(true)
+      setFpc(true);
     }, 7000);
-  },[])
-  
-  
+  }, []);
+
   return (
     <>
-    {/* <perspectiveCamera position={[2,3,4]} /> */}
-    <ambientLight intensity={0.5} />
-    {/* <directionalLight castShadow={true} /> */}
-    <spotLight
-      // map={envMap}
-      position={[1, 10, 1]}
-      angle={0.15}
-      penumbra={1}
-    />
-    {/* <Lights/> */}
+      {/* <perspectiveCamera position={[2,3,4]} /> */}
+      <ambientLight intensity={0.5} />
+      {/* <directionalLight castShadow={true} /> */}
+      <spotLight
+        // map={envMap}
+        position={[1, 10, 1]}
+        angle={0.15}
+        penumbra={1}
+      />
+      {/* <Lights/> */}
 
-    {
-      fpc ? ( 
-        <>
-      <Physics gravity={[0,-36.8,0]}>
+      <Physics gravity={[0, -36.8, 0]}>
+        {/* <Debug color="black" scale={1.1}> */}
+
         <StarGallery />
-        <Floor position={[-10,1.5,11]} rotation={[Math.PI / -2, 0, 0]} color="white" />
-        <BaseCharacter controls position={[.5,1.5,-1]} args={[0.5]} color="yellow" />
+        <Floor
+          position={[-10, 1.5, 11]}
+          rotation={[Math.PI / -2, 0, 0]}
+          color="white"
+        />
+        <BaseCharacter
+          controls
+          position={[0.5, 1.5, -1]}
+          args={[0.1]}
+          color="yellow"
+        />
+        {/* <GalleryCollider /> */}
+        {/* </Debug> */}
       </Physics>
-    <PointerLockControls/>
-
-        </>
-      ) : (<StarGallery />)
-    }
-    {/* <Star position={[4, 1, 0]} /> */}
-    {/* <StarEvent position={[-1.2, 0, 0]} /> */}
-    {/* <StarEvent position={[1.2, 0, 0]} /> */}
-    {/* <OrbitControls
+      {fpc ? <PointerLockControls /> : <></>}
+      {/* <Star position={[4, 1, 0]} /> */}
+      {/* <StarEvent position={[-1.2, 0, 0]} /> */}
+      {/* <StarEvent position={[1.2, 0, 0]} /> */}
+      {/* <OrbitControls
       makeDefault
       minDistance={0.5}
-      maxDistance={8}
-      autoRotate={true}
+      // maxDistance={8}
+      // autoRotate={true}
       enableRotate={true}
-      rotateSpeed={rotate.speed}
-      autoRotateSpeed={rotate.speed}
+      // rotateSpeed={rotate.speed}
+      // autoRotateSpeed={rotate.speed}
       // enableDamping={true}
       // dampingFactor={0.05}
-      reverseOrbit={rotate.reverse}
+      // reverseOrbit={rotate.reverse}
       // minAzimuthAngle={-Math.PI}
       // maxAzimuthAngle={Math.PI}
       // minPolarAngle={0} maxPolarAngle={Math.PI / 1.6}
       minPolarAngle={Math.PI - Math.PI / 1.6}
       maxPolarAngle={Math.PI - Math.PI / 1.6}
     /> */}
-    <pointLight position={[1, 1, 1]} />
-  </>
-  )
+      <pointLight position={[1, 1, 1]} />
+    </>
+  );
 }

@@ -20,11 +20,6 @@ export default function Collider(props) {
     }),
     useRef()
   );
-  // const [ref] = usePlane((index) => ({ type: "Static", mass:0, onCollide:(e)=>console.log("Collison",e), ...props }));
-
-  // const boundaryRef = useRef();
-
-  // console.log(ref)
 
   //we can use useFrame here for action part
 
