@@ -65,6 +65,7 @@ const useStore = create((set, get) => {
     clicked: { event: null, label: "", status: false },
     hovered: { event: null, label: "", status: false },
     players: [],
+    name:"",
 
     //States for socket.io data
     ready: false,
@@ -179,10 +180,11 @@ const useStore = create((set, get) => {
       },
 
       updatePlayer({position, rotation}) {
-        const { camera } = get();
+        const { camera,name } = get();
 
         // console.log({data},camera)
         const payload = {
+          name,
           position: { 
             x: position.x, 
             y:position.y, 
@@ -203,6 +205,14 @@ const useStore = create((set, get) => {
           }
         );
       },
+      setUsername(name){
+        console.log({name})
+        set({name})
+        // playersocket.emit("p:set:user:name",{name},(cb)=>{
+        //   console.log(cb)
+        // })
+      },
+
       click(event, clicked, status = null) {
         // console.log(event,clicked, get().clicked.status);
         set({

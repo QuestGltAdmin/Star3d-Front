@@ -77,7 +77,7 @@ export default function StarJewelleryPage() {
         {players.map(({name,socket_id,position, rotation}: any) => (
           <group key={socket_id}>
           <Html position={[position.x,position.y+1,position.z]}>
-            <div>{socket_id}</div>
+            <div>{name}</div>
           </Html>
           <mesh  castShadow rotation={[rotation._x,rotation._y,rotation._z]} position={[position.x,position.y,position.z]}>
             

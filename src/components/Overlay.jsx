@@ -36,6 +36,9 @@ export default function Overlay() {
       {/* Help Button */}
       <Buttons className="absolute right-5 top-5" component="HELP" />
 
+      {/* Name Input */}
+      <Buttons className="absolute right-16 top-5" component="USERNAME" />
+
       {/* Layer Button */}
       <Buttons className="absolute left-5 bottom-5" component="LAYER" />
 

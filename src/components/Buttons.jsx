@@ -17,6 +17,8 @@ export default function Buttons(props) {
       return <SliderButton {...props} />;
     case "NAVIGATION":
       return <NavigationButton {...props} />;
+    case "USERNAME":
+      return <UsernameInput {...props} />;
     default:
       return <></>;
   }
@@ -121,6 +123,58 @@ const HelpButton = (props) => {
           />
         </svg>
       )}
+    </button>
+  );
+};
+
+const UsernameInput = (props) => {
+  // const [name, setName] = useState(false);
+  const actions = useStore((state)=>state.actions);
+  const name = useStore((state)=>state.name);
+
+
+  return (
+    <button
+      className={cn(
+        " px-2 z-10 h-10 border-2 border-orange-100 rounded-full hover:border-orange-200",
+        props.className
+      )}
+      // onClick={() => click(!clicked)}
+    >
+    <input placeholder="Enter Name" value={name} type="text" onChange={(e)=>actions.setUsername(e.target.value)} />
+      {/* {!clicked ? (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          strokeWidth={1.5}
+          stroke="currentColor"
+          className="text-white"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M 9.879 7.519 c 1.171 -1.025 3.071 -1.025 4.242 0 c 1.172 1.025 1.172 2.687 0 3.712 c -0.203 0.179 -0.43 0.326 -0.67 0.442 c -0.745 0.361 -1.45 0.999 -1.45 1.827 v 0.75 M 12 17 z m 0 0 z"
+            // d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z"
+          />
+        </svg>
+      ) : (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          strokeWidth={1.5}
+          stroke="currentColor"
+          className="text-white"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M 9.75 9.75 l 4.5 4.5 m 0 -4.5 l -4.5 4.5 M 12 12 z"
+            // d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+          />
+        </svg>
+      )} */}
     </button>
   );
 };
