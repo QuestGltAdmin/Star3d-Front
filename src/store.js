@@ -16,13 +16,13 @@ const useStore = create((set, get) => {
   const box = new THREE.Box3();
 
   // const socket = io("http://localhost:3001/",{transports:["websocket","polling"]});
-  // const playersocket = io("http://localhost:3001/player", {
-  //   transports: ["websocket", "polling"],
-  // });
+  const playersocket = io("http://localhost:3001/player", {
+    transports: ["websocket", "polling"],
+  });
   // const chatsocket = io("http://localhost:3001/chat",{transports:["websocket","polling"]});
 
   const socket = io("https://blockspace.donative.in:3001/",{transports:["websocket","polling"]});
-  const playersocket = io("https://blockspace.donative.in:3001/player",{transports:["websocket","polling"]});
+  // const playersocket = io("https://blockspace.donative.in:3001/player",{transports:["websocket","polling"]});
   const chatsocket = io("https://blockspace.donative.in:3001/chat",{transports:["websocket","polling"]});
 
   // this is enough to connect all our server events
@@ -206,7 +206,6 @@ const useStore = create((set, get) => {
         );
       },
       setUsername(name){
-        console.log({name})
         set({name})
         // playersocket.emit("p:set:user:name",{name},(cb)=>{
         //   console.log(cb)

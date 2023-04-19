@@ -7,6 +7,7 @@ import useStore from "../../store";
 import Collider, { Monkey } from "./Collider";
 import { JewelleryCollider } from "../../components/Colliders";
 import FemaleAvatar from "../../components/ui/FemaleAvatar";
+import { Avatar } from "../../components/ui/Avatar";
 // import StarJewellery from '../../components/models/StarJewelleryStore'
 
 const StarJewellery = lazy(
@@ -76,14 +77,13 @@ export default function StarJewelleryPage() {
           />
         {players.map(({name,socket_id,position, rotation}: any) => (
           <group key={socket_id}>
-          <Html position={[position.x,position.y+1,position.z]}>
-            <div>{name}</div>
+          <Html position={[position.x-0.5,position.y+1.6,position.z]}>
+            <div className=" bg-blue-500 rounded-xl p-2">{name}</div>
           </Html>
-          <mesh  castShadow rotation={[rotation._x,rotation._y,rotation._z]} position={[position.x,position.y,position.z]}>
-            
-        <sphereGeometry args={[0.5]} />
-        <meshStandardMaterial color="#FFFF00" />
-      </mesh>
+          <Avatar 
+            scale={[1.5,1.5,1.5]} 
+            // rotation={[0,rotation._y,rotation._z]}   
+            position={[position.x,position.y-2,position.z]} />
           </group>
           ))}
         {/* <FemaleAvatar position={[0.5, 1.5, -1]} /> */}
